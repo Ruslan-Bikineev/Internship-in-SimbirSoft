@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Internship-in-SimbirSoft.iml" filepath="$PROJECT_DIR$/.idea/Internship-in-SimbirSoft.iml" />
-      <module fileurl="file://$PROJECT_DIR$/UI-autotests.iml" filepath="$PROJECT_DIR$/UI-autotests.iml" />
     </modules>
   </component>
 </project>
