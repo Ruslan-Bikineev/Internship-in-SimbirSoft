@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/Users/biken/IdeaProjects/Internship-in-SimbirSoft/UI-autotests">
+        <classes>
+            <class name="Ui.FunctionalTests">
+                <methods>
+                    <include name="testLogInWithValidData"/>
+                </methods>
+            </class>
+            <class name="Ui.HomePageUITests">
+                <methods>
+                    <include name="testHomePageImgSize"/>
+                    <include name="testHomePageSupportEmailLink"/>
+                    <include name="testHomePageSupportSkypeName"/>
+                    <include name="testHomePageSupportUSANumber"/>
+                    <include name="testHomePageSupportIndiaNumber"/>
+                    <include name="testHomePageSupportIndiaNumber2"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
