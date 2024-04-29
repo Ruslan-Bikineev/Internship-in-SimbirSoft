@@ -1,30 +1,38 @@
 package PageObjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
     private final WebDriver driver;
     private final String url = "https://www.way2automation.com/";
-    private final By popup = new By.ByCssSelector(".elementor-location-popup");
-    private final By popupClose = new By.ByCssSelector(".dialog-close-button");
-    private final By buttonAllCourses = new By.ByCssSelector("#menu-item-27580");
-    private final By buttonMemberLogin = new By.ByCssSelector("#menu-item-27625 .menu-link");
-    private final By siteLogoImg = new By.ByCssSelector("#MzYwOjY4NA\\=\\=-1");
-    private final By siteSupportEmailName = new By.ByXPath(
-            "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][4]");
-    private final By siteSupportSkypeName = new By.ByXPath(
-            "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][3]");
-    private final By siteSupportUSANumber = new By.ByXPath(
-            "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][2]");
-    private final By siteSupportIndiaNumber1 = new By.ByXPath(
-            "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][1]");
-    private final By siteSupportIndiaNumber2 = new By.ByXPath(
-            "//*[@class=\"elementor-icon-list-item elementor-inline-item lazyloaded\"]");
+    @FindBy(css = ".elementor-location-popup")
+    private WebElement popup;
+    @FindBy(css = ".dialog-close-button")
+    private WebElement popupClose;
+    @FindBy(css = "#menu-item-27580")
+    private WebElement buttonAllCourses;
+    @FindBy(css = "#menu-item-27625 .menu-link")
+    private WebElement buttonMemberLogin;
+    @FindBy(css = "#MzYwOjY4NA\\=\\=-1")
+    private WebElement siteLogoImg;
+    @FindBy(xpath = "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][4]")
+    private WebElement siteSupportEmailName;
+    @FindBy(xpath = "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][3]")
+    private WebElement siteSupportSkypeName;
+    @FindBy(xpath = "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][2]")
+    private WebElement siteSupportUSANumber;
+    @FindBy(xpath = "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][1]")
+    private WebElement siteSupportIndiaNumber1;
+    @FindBy(xpath = "//*[@class=\"elementor-icon-list-item elementor-inline-item lazyloaded\"]")
+    private WebElement siteSupportIndiaNumber2;
 
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public void openHomePage() {
@@ -32,45 +40,45 @@ public class HomePage {
     }
 
     public HomePage clickAllCourses() {
-        driver.findElement(buttonAllCourses).click();
+        buttonAllCourses.click();
         return this;
     }
 
     public LoginPage clickMemberLogin() {
-        driver.findElement(buttonMemberLogin).click();
+        buttonMemberLogin.click();
         return new LoginPage(driver);
     }
 
     public void clickPopupClose() {
-        driver.findElement(popupClose).click();
+        popupClose.click();
     }
 
     public String getSiteLogoImgWidth() {
-        return driver.findElement(siteLogoImg).getAttribute("width");
+        return siteLogoImg.getAttribute("width");
     }
 
     public String getSiteLogoImgHeight() {
-        return driver.findElement(siteLogoImg).getAttribute("height");
+        return siteLogoImg.getAttribute("height");
     }
 
     public String getSiteSupportEmailName() {
-        return driver.findElement(siteSupportEmailName).getText();
+        return siteSupportEmailName.getText();
     }
 
     public String getSiteSupportSkypeName() {
-        return driver.findElement(siteSupportSkypeName).getText();
+        return siteSupportSkypeName.getText();
     }
 
     public String getSiteSupportUSANumber() {
-        return driver.findElement(siteSupportUSANumber).getText();
+        return siteSupportUSANumber.getText();
     }
 
     public String getSiteSupportIndiaNumber1() {
-        return driver.findElement(siteSupportIndiaNumber1).getText();
+        return siteSupportIndiaNumber1.getText();
     }
 
     public String getSiteSupportIndiaNumber2() {
-        return driver.findElement(siteSupportIndiaNumber2).getText();
+        return siteSupportIndiaNumber2.getText();
     }
 
 }

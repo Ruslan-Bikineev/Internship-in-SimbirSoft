@@ -32,38 +32,38 @@ public class HomePageUITests {
     @Test
     public void testHomePageImgSize() {
         Assert.assertEquals(homePage.getSiteLogoImgWidth(),
-                TestProperties.logoWight, "Logo width is not 104px");
+                TestProperties.logoWight, "Logo width is not equal");
         Assert.assertEquals(homePage.getSiteLogoImgHeight(),
-                TestProperties.logoHeight, "Logo height is not 104px");
+                TestProperties.logoHeight, "Logo height is not equal");
     }
 
     @Test
     public void testHomePageSupportEmailLink() {
         Assert.assertEquals(homePage.getSiteSupportEmailName(),
-                TestProperties.supportEmailName, "Email is not the same");
+                TestProperties.supportEmailName, "Email is not equal");
     }
 
     @Test
     public void testHomePageSupportSkypeName() {
         Assert.assertEquals(homePage.getSiteSupportSkypeName(),
-                TestProperties.supportSkypeName, "Skype is not the same");
+                TestProperties.supportSkypeName, "Skype is not equal");
     }
 
     @Test
     public void testHomePageSupportUSANumber() {
         Assert.assertEquals(homePage.getSiteSupportUSANumber(),
-                TestProperties.supportUSANumber, "USA number is not the same");
+                TestProperties.supportUSANumber, "USA number is not equal");
     }
 
     @Test
     public void testHomePageSupportIndiaNumber() {
         Assert.assertEquals(homePage.getSiteSupportIndiaNumber1(),
-                TestProperties.supportIndiaNumber1, "India number 1 is not the same");
+                TestProperties.supportIndiaNumber1, "India number 1 is not equal");
     }
 
     @Test
     public void testHomePageSupportIndiaNumber2() {
         Assert.assertEquals(homePage.getSiteSupportIndiaNumber2(),
-                TestProperties.supportIndiaNumber2, "India number 2 is not the same");
+                TestProperties.supportIndiaNumber2, "India number 2 is not equal");
     }
 }
