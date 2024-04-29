@@ -56,7 +56,7 @@ public class HomePageUITests {
     }
 
     @Test
-    public void testHomePageSupportIndiaNumber() {
+    public void testHomePageSupportIndiaNumber1() {
         Assert.assertEquals(homePage.getSiteSupportIndiaNumber1(),
                 TestProperties.supportIndiaNumber1, "India number 1 is not equal");
     }

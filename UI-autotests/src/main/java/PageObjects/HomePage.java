@@ -14,10 +14,10 @@ public class HomePage {
     private WebElement popupClose;
     @FindBy(css = "#menu-item-27580")
     private WebElement buttonAllCourses;
-    @FindBy(css = "#menu-item-27625 .menu-link")
-    private WebElement buttonMemberLogin;
     @FindBy(css = "#MzYwOjY4NA\\=\\=-1")
     private WebElement siteLogoImg;
+    @FindBy(css = "#menu-item-27625 .menu-link")
+    private WebElement buttonMemberLogin;
     @FindBy(xpath = "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][4]")
     private WebElement siteSupportEmailName;
     @FindBy(xpath = "//*[@class=\"elementor-icon-list-item elementor-inline-item\"][3]")

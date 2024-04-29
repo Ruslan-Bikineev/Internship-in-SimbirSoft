@@ -7,8 +7,18 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
     private final WebDriver driver;
+    @FindBy(xpath = "//h3")
+    private WebElement loginPageTitle;
+
     @FindBy(css = "#email")
     private WebElement emailField;
+
+    @FindBy(css = "input[type=email] + .inline-error")
+    private WebElement emailError;
+
+    @FindBy(css = "input[type=password] + .inline-error")
+    private WebElement passwordError;
+
     @FindBy(css = "#password")
     private WebElement passwordField;
     @FindBy(css = "[data-testid=\"login-button\"]")
@@ -44,5 +54,17 @@ public class LoginPage {
         return submitLogin();
     }
 
+    public String getEmailError() {
+        return emailError.getText();
+    }
+
+    public String getPasswordError() {
+        return passwordError.getText();
+    }
+
+    public LoginPage clickLoginPageTitle() {
+        loginPageTitle.click();
+        return this;
+    }
 
 }
