@@ -1,6 +1,11 @@
 package Ui;
 
 import PageObjects.HomePage;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.Story;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -9,6 +14,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+
+import static io.qameta.allure.SeverityLevel.MINOR;
 
 public class HomePageUITests {
     WebDriver driver;
@@ -29,6 +36,11 @@ public class HomePageUITests {
         driver.quit();
     }
 
+    @Severity(MINOR)
+    @Epic(value = "Домашняя страница")
+    @Feature(value = "Данные верхнего дэшборда")
+    @Story(value = "Проверка размера верхнего логотипа")
+    @Owner(value = "Ruslan Bikineev")
     @Test
     public void testHomePageImgSize() {
         Assert.assertEquals(homePage.getSiteLogoImgWidth(),

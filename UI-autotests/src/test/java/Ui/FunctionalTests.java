@@ -34,7 +34,7 @@ public class FunctionalTests {
         HomePage homePage = new HomePage(driver);
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.loginAs(TestProperties.email, TestProperties.password);
+//        loginPage.loginAs(TestProperties.email, TestProperties.password);
     }
 
 

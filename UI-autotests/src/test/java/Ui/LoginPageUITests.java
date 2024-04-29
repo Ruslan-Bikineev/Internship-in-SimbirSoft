@@ -2,6 +2,7 @@ package Ui;
 
 import PageObjects.HomePage;
 import PageObjects.LoginPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -31,6 +32,7 @@ public class LoginPageUITests {
         driver.quit();
     }
 
+    @Step("testNullInputEmail")
     @Test
     public void testNullInputEmail() {
         loginPage.typeUsername("");
