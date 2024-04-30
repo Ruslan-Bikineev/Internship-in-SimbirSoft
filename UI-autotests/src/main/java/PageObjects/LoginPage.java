@@ -36,12 +36,14 @@ public class LoginPage {
 
     @Step("Ввод логина пользователя {username}")
     public LoginPage typeUsername(String username) {
+        emailField.clear();
         emailField.sendKeys(username);
         return this;
     }
 
     @Step("Ввод пароля пользователя {password}")
     public LoginPage typePassword(String password) {
+        passwordField.clear();
         passwordField.sendKeys(password);
         return this;
     }
@@ -60,12 +62,12 @@ public class LoginPage {
         return submitLogin();
     }
 
-    @Step("Получение ошибки при вводе имени пользователя")
+    @Step("Ошибка при вводе имени пользователя")
     public String getEmailError() {
         return emailError.getText();
     }
 
-    @Step("Получение ошибки вводе пароля пользователя")
+    @Step("Ошибка при вводе пароля пользователя")
     public String getPasswordError() {
         return passwordError.getText();
     }

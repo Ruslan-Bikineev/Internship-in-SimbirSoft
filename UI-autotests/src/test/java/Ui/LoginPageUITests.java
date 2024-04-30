@@ -12,10 +12,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+import static Ui.TestProperties.emailError;
+import static Ui.TestProperties.nullFiledEmailAndPasswordError;
 import static io.qameta.allure.SeverityLevel.MINOR;
 
 public class LoginPageUITests {
@@ -39,43 +42,28 @@ public class LoginPageUITests {
     }
 
 
-    @Severity(MINOR)
-    @Epic(value = "Страница авторизации пользователя")
-    @Feature(value = "Поле ввода логина")
-    @Story(value = "Проверка отображения ошибки под полем ввода логина, при вводе пустого значения")
-    @Owner(value = "Ruslan Bikineev")
-    @Test
-    public void testNullInputEmail() {
-        loginPage.typeUsername("");
-        loginPage.clickLoginPageTitle();
-        Assert.assertEquals(loginPage.getEmailError(),
-                TestProperties.nullFiledEmailAndPasswordError, "Wrong error message in email field");
+    @DataProvider()
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"", "", nullFiledEmailAndPasswordError},
+                {"testexample.com", "", emailError}
+        };
     }
 
     @Severity(MINOR)
     @Epic(value = "Страница авторизации пользователя")
-    @Feature(value = "Поле ввода логина")
-    @Story(value = "Проверка отображения предупреждния под полем ввода логина, при вводе логина без знака @")
+    @Feature(value = "Поле ввода логина и пароля")
+    @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
     @Owner(value = "Ruslan Bikineev")
-    @Test(dependsOnMethods = "testNullInputEmail")
-    public void testInvalidInputEmail() {
-        loginPage.typeUsername("test");
+    @Test(dataProvider = "loginData")
+    public void testInvalidLoginData(String email, String password, String expectedError) {
+        loginPage.typeUsername(email);
+        loginPage.typePassword(password);
         loginPage.clickLoginPageTitle();
         Assert.assertEquals(loginPage.getEmailError(),
-                TestProperties.emailError, "Wrong error message");
-    }
-
-
-    @Severity(MINOR)
-    @Epic(value = "Страница авторизации пользователя")
-    @Feature(value = "Поле ввода пароля")
-    @Story(value = "Проверка отображения ошибки под полем ввода пароля, при вводе пустого значения")
-    @Owner(value = "Ruslan Bikineev")
-    @Test
-    public void testNullInputPassword() {
-        loginPage.typePassword("");
-        loginPage.clickLoginPageTitle();
+                expectedError, "Wrong error message in email field");
         Assert.assertEquals(loginPage.getPasswordError(),
-                TestProperties.nullFiledEmailAndPasswordError, "Wrong error message");
+                nullFiledEmailAndPasswordError, "Wrong error message in password field");
     }
+
 }
