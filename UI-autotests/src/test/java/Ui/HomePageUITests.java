@@ -37,7 +37,7 @@ public class HomePageUITests {
     }
 
     @Severity(MINOR)
-    @Epic(value = "Домашняя страница")
+    @Epic(value = "Домашняя страница UI тест")
     @Feature(value = "Данные верхнего дэшборда")
     @Story(value = "Проверка размера верхнего логотипа")
     @Owner(value = "Ruslan Bikineev")
@@ -49,30 +49,58 @@ public class HomePageUITests {
                 TestProperties.logoHeight, "Logo height is not equal");
     }
 
+    @Severity(MINOR)
+    @Epic(value = "Домашняя страница UI тест")
+    @Feature(value = "Данные верхнего дэшборда")
+    @Story(value = "Проверка отображения email'a службы поддержки сайта")
+    @Owner(value = "Ruslan Bikineev")
     @Test
     public void testHomePageSupportEmailLink() {
         Assert.assertEquals(homePage.getSiteSupportEmailName(),
                 TestProperties.supportEmailName, "Email is not equal");
     }
 
+    @Severity(MINOR)
+    @Epic(value = "Домашняя страница UI тест")
+    @Feature(value = "Данные верхнего дэшборда")
+    @Story(value = "Проверка отображения имени Skype службы поддержки сайта")
+    @Owner(value = "Ruslan Bikineev")
     @Test
     public void testHomePageSupportSkypeName() {
         Assert.assertEquals(homePage.getSiteSupportSkypeName(),
                 TestProperties.supportSkypeName, "Skype is not equal");
     }
 
+
+    @Severity(MINOR)
+    @Epic(value = "Домашняя страница UI тест")
+    @Feature(value = "Данные верхнего дэшборда")
+    @Story(value = "Проверка отображения номера USA службы поддержки сайта")
+    @Owner(value = "Ruslan Bikineev")
     @Test
     public void testHomePageSupportUSANumber() {
         Assert.assertEquals(homePage.getSiteSupportUSANumber(),
                 TestProperties.supportUSANumber, "USA number is not equal");
     }
 
+
+    @Severity(MINOR)
+    @Epic(value = "Домашняя страница UI тест")
+    @Feature(value = "Данные верхнего дэшборда")
+    @Story(value = "Проверка отображения номера India 1 службы поддержки сайта")
+    @Owner(value = "Ruslan Bikineev")
     @Test
     public void testHomePageSupportIndiaNumber1() {
         Assert.assertEquals(homePage.getSiteSupportIndiaNumber1(),
                 TestProperties.supportIndiaNumber1, "India number 1 is not equal");
     }
 
+
+    @Severity(MINOR)
+    @Epic(value = "Домашняя страница UI тест")
+    @Feature(value = "Данные верхнего дэшборда")
+    @Story(value = "Проверка отображения номера India 2 службы поддержки сайта")
+    @Owner(value = "Ruslan Bikineev")
     @Test
     public void testHomePageSupportIndiaNumber2() {
         Assert.assertEquals(homePage.getSiteSupportIndiaNumber2(),

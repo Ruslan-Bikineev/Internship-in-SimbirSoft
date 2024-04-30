@@ -1,5 +1,6 @@
 package PageObjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,16 +33,21 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
+
+    @Step("Ввод логина пользователя {username}")
     public LoginPage typeUsername(String username) {
         emailField.sendKeys(username);
         return this;
     }
 
+    @Step("Ввод пароля пользователя {password}")
     public LoginPage typePassword(String password) {
         passwordField.sendKeys(password);
         return this;
     }
 
+
+    @Step("Клик по кнопке «Вход в систему»")
     public UserHomePage submitLogin() {
         loginButton.click();
         return new UserHomePage(driver);
@@ -54,14 +60,17 @@ public class LoginPage {
         return submitLogin();
     }
 
+    @Step("Получение ошибки при вводе имени пользователя")
     public String getEmailError() {
         return emailError.getText();
     }
 
+    @Step("Получение ошибки вводе пароля пользователя")
     public String getPasswordError() {
         return passwordError.getText();
     }
 
+    @Step("Клик по логотипу")
     public LoginPage clickLoginPageTitle() {
         loginPageTitle.click();
         return this;

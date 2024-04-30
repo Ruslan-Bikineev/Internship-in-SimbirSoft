@@ -2,7 +2,11 @@ package Ui;
 
 import PageObjects.HomePage;
 import PageObjects.LoginPage;
-import io.qameta.allure.Step;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.Story;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -11,6 +15,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+
+import static io.qameta.allure.SeverityLevel.MINOR;
 
 public class LoginPageUITests {
     WebDriver driver;
@@ -32,7 +38,12 @@ public class LoginPageUITests {
         driver.quit();
     }
 
-    @Step("testNullInputEmail")
+
+    @Severity(MINOR)
+    @Epic(value = "Страница авторизации пользователя")
+    @Feature(value = "Поле ввода логина")
+    @Story(value = "Проверка отображения ошибки под полем ввода логина, при вводе пустого значения")
+    @Owner(value = "Ruslan Bikineev")
     @Test
     public void testNullInputEmail() {
         loginPage.typeUsername("");
@@ -41,6 +52,11 @@ public class LoginPageUITests {
                 TestProperties.nullFiledEmailAndPasswordError, "Wrong error message in email field");
     }
 
+    @Severity(MINOR)
+    @Epic(value = "Страница авторизации пользователя")
+    @Feature(value = "Поле ввода логина")
+    @Story(value = "Проверка отображения предупреждния под полем ввода логина, при вводе логина без знака @")
+    @Owner(value = "Ruslan Bikineev")
     @Test(dependsOnMethods = "testNullInputEmail")
     public void testInvalidInputEmail() {
         loginPage.typeUsername("test");
@@ -49,6 +65,12 @@ public class LoginPageUITests {
                 TestProperties.emailError, "Wrong error message");
     }
 
+
+    @Severity(MINOR)
+    @Epic(value = "Страница авторизации пользователя")
+    @Feature(value = "Поле ввода пароля")
+    @Story(value = "Проверка отображения ошибки под полем ввода пароля, при вводе пустого значения")
+    @Owner(value = "Ruslan Bikineev")
     @Test
     public void testNullInputPassword() {
         loginPage.typePassword("");
