@@ -1,6 +1,5 @@
-package Ui;
+package ui;
 
-import PageObjects.HomePage;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -12,6 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+import pageobject.HomePage;
 
 import java.time.Duration;
 

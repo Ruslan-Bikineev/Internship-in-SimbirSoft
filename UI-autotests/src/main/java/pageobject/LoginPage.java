@@ -1,4 +1,4 @@
-package PageObjects;
+package pageobject;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -15,10 +15,10 @@ public class LoginPage {
     private WebElement emailField;
 
     @FindBy(css = "input[type=email] + .inline-error")
-    private WebElement emailError;
+    private WebElement emailFieldError;
 
     @FindBy(css = "input[type=password] + .inline-error")
-    private WebElement passwordError;
+    private WebElement passwordFieldError;
 
     @FindBy(css = "#password")
     private WebElement passwordField;
@@ -63,13 +63,13 @@ public class LoginPage {
     }
 
     @Step("Ошибка при вводе имени пользователя")
-    public String getEmailError() {
-        return emailError.getText();
+    public String getEmailFieldError() {
+        return emailFieldError.getText();
     }
 
     @Step("Ошибка при вводе пароля пользователя")
-    public String getPasswordError() {
-        return passwordError.getText();
+    public String getPasswordFieldError() {
+        return passwordFieldError.getText();
     }
 
     @Step("Клик по логотипу")

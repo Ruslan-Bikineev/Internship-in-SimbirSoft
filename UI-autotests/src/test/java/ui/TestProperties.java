@@ -1,4 +1,4 @@
-package Ui;
+package ui;
 
 public class TestProperties {
     public static final String logoWight = "104";

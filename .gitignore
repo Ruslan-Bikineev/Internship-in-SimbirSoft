@@ -40,3 +40,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Test NG.xml ###
+testng.xml
+
+

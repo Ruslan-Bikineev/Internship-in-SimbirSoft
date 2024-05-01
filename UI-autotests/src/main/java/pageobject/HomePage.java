@@ -1,4 +1,4 @@
-package PageObjects;
+package pageobject;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;

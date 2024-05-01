@@ -1,7 +1,5 @@
-package Ui;
+package ui;
 
-import PageObjects.HomePage;
-import PageObjects.LoginPage;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -14,12 +12,14 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pageobject.HomePage;
+import pageobject.LoginPage;
 
 import java.time.Duration;
 
-import static Ui.TestProperties.emailError;
-import static Ui.TestProperties.nullFiledEmailAndPasswordError;
 import static io.qameta.allure.SeverityLevel.MINOR;
+import static ui.TestProperties.emailError;
+import static ui.TestProperties.nullFiledEmailAndPasswordError;
 
 public class LoginPageUITests {
     WebDriver driver;
@@ -43,7 +43,7 @@ public class LoginPageUITests {
 
 
     @DataProvider()
-    public Object[][] loginData() {
+    public Object[][] loginInvalidData() {
         return new Object[][]{
                 {"", "", nullFiledEmailAndPasswordError},
                 {"testexample.com", "", emailError}
@@ -55,14 +55,14 @@ public class LoginPageUITests {
     @Feature(value = "Поле ввода логина и пароля")
     @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
     @Owner(value = "Ruslan Bikineev")
-    @Test(dataProvider = "loginData")
+    @Test(dataProvider = "loginInvalidData")
     public void testInvalidLoginData(String email, String password, String expectedError) {
         loginPage.typeUsername(email);
         loginPage.typePassword(password);
         loginPage.clickLoginPageTitle();
-        Assert.assertEquals(loginPage.getEmailError(),
+        Assert.assertEquals(loginPage.getEmailFieldError(),
                 expectedError, "Wrong error message in email field");
-        Assert.assertEquals(loginPage.getPasswordError(),
+        Assert.assertEquals(loginPage.getPasswordFieldError(),
                 nullFiledEmailAndPasswordError, "Wrong error message in password field");
     }
 
