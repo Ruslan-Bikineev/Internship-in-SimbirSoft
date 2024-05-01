@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
     private final WebDriver driver;
-    private final String url = "https://www.way2automation.com/";
     @FindBy(css = ".elementor-location-popup")
     private WebElement popup;
     @FindBy(css = ".dialog-close-button")
@@ -39,7 +38,7 @@ public class HomePage {
 
     @Step("Открытие главной страницы")
     public void openHomePage() {
-        driver.get(url);
+        driver.get(PageProperties.homePageUrl);
     }
 
     @Step("Открытие вкладки «Все курсы»")

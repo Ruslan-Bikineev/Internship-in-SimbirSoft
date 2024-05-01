@@ -44,9 +44,9 @@ public class HomePageUITests {
     @Test
     public void testHomePageImgSize() {
         Assert.assertEquals(homePage.getSiteLogoImgWidth(),
-                TestProperties.logoWight, "Logo width is not equal");
+                TestProperties.logoWight, "Ширина логотипа не совпадает");
         Assert.assertEquals(homePage.getSiteLogoImgHeight(),
-                TestProperties.logoHeight, "Logo height is not equal");
+                TestProperties.logoHeight, "Высота логотипа не совпадает");
     }
 
     @Severity(MINOR)
@@ -57,7 +57,7 @@ public class HomePageUITests {
     @Test
     public void testHomePageSupportEmailLink() {
         Assert.assertEquals(homePage.getSiteSupportEmailName(),
-                TestProperties.supportEmailName, "Email is not equal");
+                TestProperties.supportEmailName, "Email службы поддержки сайта не совпадает");
     }
 
     @Severity(MINOR)
@@ -68,7 +68,7 @@ public class HomePageUITests {
     @Test
     public void testHomePageSupportSkypeName() {
         Assert.assertEquals(homePage.getSiteSupportSkypeName(),
-                TestProperties.supportSkypeName, "Skype is not equal");
+                TestProperties.supportSkypeName, "Skype службы поддержки сайта не совпадает");
     }
 
 
@@ -80,7 +80,7 @@ public class HomePageUITests {
     @Test
     public void testHomePageSupportUSANumber() {
         Assert.assertEquals(homePage.getSiteSupportUSANumber(),
-                TestProperties.supportUSANumber, "USA number is not equal");
+                TestProperties.supportUSANumber, "Номер USA службы поддержки сайта не совпадает");
     }
 
 
@@ -92,7 +92,7 @@ public class HomePageUITests {
     @Test
     public void testHomePageSupportIndiaNumber1() {
         Assert.assertEquals(homePage.getSiteSupportIndiaNumber1(),
-                TestProperties.supportIndiaNumber1, "India number 1 is not equal");
+                TestProperties.supportIndiaNumber1, "Номер India 1 службы поддержки сайта не совпадает");
     }
 
 
@@ -104,6 +104,6 @@ public class HomePageUITests {
     @Test
     public void testHomePageSupportIndiaNumber2() {
         Assert.assertEquals(homePage.getSiteSupportIndiaNumber2(),
-                TestProperties.supportIndiaNumber2, "India number 2 is not equal");
+                TestProperties.supportIndiaNumber2, "Номер India 2 службы поддержки сайта не совпадает");
     }
 }

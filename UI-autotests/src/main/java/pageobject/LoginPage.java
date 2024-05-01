@@ -25,6 +25,9 @@ public class LoginPage {
     @FindBy(css = "[data-testid=\"login-button\"]")
     private WebElement loginButton;
 
+    @FindBy(css = ".text-with-icon")
+    private WebElement invalidLoginMessage;
+
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         if (!driver.getTitle().equals("Way2Automation")) {
@@ -64,6 +67,7 @@ public class LoginPage {
 
     @Step("Ошибка при вводе имени пользователя")
     public String getEmailFieldError() {
+        String color = emailFieldError.getCssValue("color");
         return emailFieldError.getText();
     }
 
@@ -76,6 +80,26 @@ public class LoginPage {
     public LoginPage clickLoginPageTitle() {
         loginPageTitle.click();
         return this;
+    }
+
+    @Step("Сообщение об ошибке при неверном логине или пароле")
+    public String getInvalidLoginMessage() {
+        return invalidLoginMessage.getText();
+    }
+
+    @Step("Цвет сообщение об ошибке при неверном логине или пароле")
+    public String getInvalidLoginMessageColor() {
+        return invalidLoginMessage.getCssValue("color");
+    }
+
+    @Step("Получение поля логина")
+    public String getEmailField() {
+        return emailField.getAttribute("value");
+    }
+
+    @Step("Получение поля пароля")
+    public String getPasswordField() {
+        return passwordField.getAttribute("value");
     }
 
 }

@@ -8,35 +8,37 @@ import io.qameta.allure.Story;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pageobject.HomePage;
 import pageobject.LoginPage;
+import pageobject.PageProperties;
 
 import java.time.Duration;
 
+import static io.qameta.allure.SeverityLevel.BLOCKER;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.qameta.allure.SeverityLevel.MINOR;
-import static ui.TestProperties.emailError;
-import static ui.TestProperties.nullFiledEmailAndPasswordError;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 
 public class LoginPageUITests {
     WebDriver driver;
     LoginPage loginPage;
 
-    @BeforeSuite
+    @BeforeMethod
     public void setUp() {
         driver = new ChromeDriver();
         HomePage homePage = new HomePage(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePage.openHomePage();
         loginPage = homePage.clickMemberLogin();
     }
 
-    @AfterSuite
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
@@ -45,8 +47,8 @@ public class LoginPageUITests {
     @DataProvider()
     public Object[][] loginInvalidData() {
         return new Object[][]{
-                {"", "", nullFiledEmailAndPasswordError},
-                {"testexample.com", "", emailError}
+                {"", "", TestProperties.nullFiledEmailAndPasswordError},
+                {"testexample.com", "", TestProperties.emailError}
         };
     }
 
@@ -56,14 +58,67 @@ public class LoginPageUITests {
     @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
     @Owner(value = "Ruslan Bikineev")
     @Test(dataProvider = "loginInvalidData")
-    public void testInvalidLoginData(String email, String password, String expectedError) {
+    public void testInvalidLoginAndPasswordMessage(String email, String password, String expectedError) {
         loginPage.typeUsername(email);
         loginPage.typePassword(password);
         loginPage.clickLoginPageTitle();
         Assert.assertEquals(loginPage.getEmailFieldError(),
-                expectedError, "Wrong error message in email field");
+                expectedError, "Ошибка под полем ввода логина не совпадает");
         Assert.assertEquals(loginPage.getPasswordFieldError(),
-                nullFiledEmailAndPasswordError, "Wrong error message in password field");
+                TestProperties.nullFiledEmailAndPasswordError, "Ошибка под полем ввода пароля не совпадает");
     }
 
+    @Severity(BLOCKER)
+    @Epic(value = "Страница авторизации пользователя")
+    @Feature(value = "Авторизация")
+    @Story(value = "Авторизация с корректным логином и паролем")
+    @Owner(value = "Ruslan Bikineev")
+    @Test()
+    public void testValidLoginAndPassword() {
+        loginPage.loginAs(TestProperties.validEmail, TestProperties.validPassword);
+        Assert.assertEquals(driver.getCurrentUrl(),
+                PageProperties.loginPageUrl, "Не перешел на страницу авторизации");
+    }
+
+    @Severity(CRITICAL)
+    @Epic(value = "Страница авторизации пользователя")
+    @Feature(value = "Авторизация")
+    @Story(value = "Авторизация с несуществующим логином и паролем")
+    @Owner(value = "Ruslan Bikineev")
+    @Test()
+    public void testInvalidLoginAndPassword() {
+        loginPage.loginAs(TestProperties.invalidEmail, TestProperties.invalidPassword);
+        Assert.assertEquals(loginPage.getInvalidLoginMessage(),
+                TestProperties.invalidLoginMessage, "Вывод сообщения об ошибке авторизации не совпадает");
+        Assert.assertEquals(loginPage.getInvalidLoginMessageColor(),
+                TestProperties.invalidLoginMessageColor, "Цвет сообщения об ошибке авторизации не совпадает");
+    }
+
+    @Severity(NORMAL)
+    @Epic(value = "Страница авторизации пользователя")
+    @Feature(value = "Авторизация")
+    @Story(value = "Авторизация с корректным логином и пустым паролем")
+    @Owner(value = "Ruslan Bikineev")
+    @Test()
+    public void testValidLoginAndEmptyPassword() {
+        loginPage.loginAs(TestProperties.validEmail, "");
+        Assert.assertEquals(TestProperties.validEmail,
+                loginPage.getEmailField(), "Введенный логин не совпадает с логином в поле ввода");
+        Assert.assertEquals("",
+                loginPage.getPasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
+    }
+
+    @Severity(CRITICAL)
+    @Epic(value = "Страница авторизации пользователя")
+    @Feature(value = "Авторизация")
+    @Story(value = "Авторизация с пустым логином и паролем")
+    @Owner(value = "Ruslan Bikineev")
+    @Test()
+    public void testEmptyLoginAndPassword() {
+        loginPage.submitLogin();
+        Assert.assertEquals("", loginPage.getEmailField(),
+                "Введенный логин не совпадает с логином в поле ввода");
+        Assert.assertEquals("", loginPage.getPasswordField(),
+                "Введенный пароль не совпадает с паролем в поле ввода");
+    }
 }
