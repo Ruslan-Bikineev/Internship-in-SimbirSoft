@@ -6,7 +6,7 @@ public class TestProperties {
     public static final String invalidEmail = "test2025@mail.ru";
     public static final String invalidPassword = "1234!Qaz";
     public static final String logoWight = "104";
-    public static final String logoHeight = "104";
+    public static final String logoHeight = "10";
     public static final String supportSkypeName = "seleniumcoaching";
     public static final String supportUSANumber = "+1 646-480-0603";
     public static final String supportIndiaNumber1 = "+919711-111-558";
