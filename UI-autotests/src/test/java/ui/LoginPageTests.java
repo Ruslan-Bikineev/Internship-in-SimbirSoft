@@ -1,11 +1,11 @@
 package ui;
 
+import framework.MyWebDriver;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -16,24 +16,19 @@ import pageobject.HomePage;
 import pageobject.LoginPage;
 import pageobject.PageProperties;
 
-import java.time.Duration;
-
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.qameta.allure.SeverityLevel.MINOR;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 
-public class LoginPageUITests {
-    WebDriver driver;
+public class LoginPageTests {
+    MyWebDriver driver;
     LoginPage loginPage;
 
     @BeforeMethod
     public void setUp() {
-        driver = new ChromeDriver();
-        HomePage homePage = new HomePage(driver);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver = new MyWebDriver(new ChromeDriver());
+        HomePage homePage = new HomePage(MyWebDriver.getMyWebDriver());
         homePage.openHomePage();
         loginPage = homePage.clickMemberLogin();
     }
@@ -77,7 +72,7 @@ public class LoginPageUITests {
     public void testValidLoginAndPassword() {
         loginPage.loginAs(TestProperties.validEmail, TestProperties.validPassword);
         Assert.assertEquals(driver.getCurrentUrl(),
-                PageProperties.loginPageUrl, "Не перешел на страницу авторизации");
+                PageProperties.userHomePageUrl, "Не перешел на страницу авторизации");
     }
 
     @Severity(CRITICAL)

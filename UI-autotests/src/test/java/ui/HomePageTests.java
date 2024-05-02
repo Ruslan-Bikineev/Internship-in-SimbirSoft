@@ -1,37 +1,32 @@
 package ui;
 
+import framework.MyWebDriver;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageobject.HomePage;
 
-import java.time.Duration;
-
 import static io.qameta.allure.SeverityLevel.MINOR;
 
-public class HomePageUITests {
-    WebDriver driver;
+public class HomePageTests {
+    MyWebDriver driver;
     HomePage homePage;
 
-    @BeforeSuite
+    @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        homePage = new HomePage(driver);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver = new MyWebDriver(new ChromeDriver());
+        homePage = new HomePage(MyWebDriver.getMyWebDriver());
         homePage.openHomePage();
     }
 
-    @AfterSuite
+    @AfterClass
     public void tearDown() {
         driver.quit();
     }
