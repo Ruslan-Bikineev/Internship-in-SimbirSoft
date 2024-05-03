@@ -78,5 +78,4 @@ public class HomePage {
     public String getSiteSupportIndiaNumber2() {
         return siteSupportIndiaNumber2.getText();
     }
-
 }

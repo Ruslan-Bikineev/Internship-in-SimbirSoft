@@ -79,5 +79,4 @@ public class LoginPageTests extends BaseTest {
         Assert.assertEquals("", loginPage.getPasswordField(),
                 "Введенный пароль не совпадает с паролем в поле ввода");
     }
-
 }

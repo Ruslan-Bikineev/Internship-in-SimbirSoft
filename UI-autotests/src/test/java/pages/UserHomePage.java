@@ -13,5 +13,4 @@ public class UserHomePage {
         }
         PageFactory.initElements(driver, this);
     }
-
 }

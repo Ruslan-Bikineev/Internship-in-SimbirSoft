@@ -7,5 +7,4 @@ public class TestProperties {
     public static final String nullFiledEmailAndPasswordError = "This field is required";
     public static final String invalidLoginMessage = "User not found";
     public static final String invalidLoginMessageColor = "rgba(255, 0, 0, 1)";
-
 }

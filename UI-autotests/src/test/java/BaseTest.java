@@ -28,5 +28,4 @@ public abstract class BaseTest {
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
-
 }

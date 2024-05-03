@@ -21,6 +21,7 @@ public class LoginPage {
 
     @FindBy(css = "#password")
     private WebElement passwordField;
+
     @FindBy(css = "[data-testid=\"login-button\"]")
     private WebElement loginButton;
 
@@ -87,5 +88,4 @@ public class LoginPage {
     public String getPasswordField() {
         return passwordField.getAttribute("value");
     }
-
 }
