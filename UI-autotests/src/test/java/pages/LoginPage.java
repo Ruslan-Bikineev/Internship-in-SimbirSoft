@@ -47,7 +47,6 @@ public class LoginPage {
         return this;
     }
 
-
     public UserHomePage submitLogin() {
         loginButton.click();
         return new UserHomePage(driver);
