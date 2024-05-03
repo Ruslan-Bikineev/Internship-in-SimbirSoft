@@ -9,11 +9,15 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <!--==================================================================-->
         <testng.version>7.10.1</testng.version>
         <selenium.version>4.20.0</selenium.version>
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <!--==================================================================-->
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--==================================================================-->
     </properties>
 
     <dependencies>
@@ -33,19 +37,25 @@
             <version>2.0.13</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+<!--        Профиль для запуска тестов через файл testng.xml        -->
+    <profiles>
+        <profile>
+            <id>run-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven-surefire-plugin.version}</version>
+                        <configuration>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>testng.xml</suiteXmlFile>
+                            </suiteXmlFiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+<!--================================================================-->
 </project>

@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
 
-abstract public class BaseTest {
+public abstract class BaseTest {
     private WebDriver driver;
 
     @BeforeMethod
