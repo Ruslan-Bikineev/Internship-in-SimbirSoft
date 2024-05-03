@@ -1,39 +1,16 @@
-package ui;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PageProperties;
 
-import java.time.Duration;
-
-public class LoginPageTests {
-    WebDriver driver;
-    LoginPage loginPage;
-
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        HomePage homePage = new HomePage(driver);
-        homePage.openHomePage();
-        loginPage = homePage.clickMemberLogin();
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
+public class LoginPageTests extends BaseTest {
 
     @Test
     public void testMessagesUnderFieldLoginAndPasswordWhenFieldEmpty() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.openHomePage();
+        LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.typeUsername("");
         loginPage.typePassword("");
         loginPage.clickLoginPageTitle();
@@ -43,8 +20,11 @@ public class LoginPageTests {
                 TestProperties.nullFiledEmailAndPasswordError, "Ошибка под полем ввода пароля не соответствует");
     }
 
-    @Test()
+    @Test
     public void testMessagesUnderFieldLoginAndPasswordWhenInvalidEmailAndPasswordEmpty() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.openHomePage();
+        LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.typeUsername("test");
         loginPage.typePassword("");
         loginPage.clickLoginPageTitle();
@@ -54,15 +34,21 @@ public class LoginPageTests {
                 TestProperties.nullFiledEmailAndPasswordError, "Ошибка под полем ввода пароля не соответствует");
     }
 
-    @Test()
+    @Test
     public void testValidLoginAndPassword() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.openHomePage();
+        LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.loginAs(TestProperties.validEmail, TestProperties.validPassword);
-        Assert.assertEquals(driver.getCurrentUrl(),
+        Assert.assertEquals(getCurrentUrl(),
                 PageProperties.userHomePageUrl, "Не перешел на страницу авторизации");
     }
 
-    @Test()
+    @Test
     public void testInvalidLoginAndPassword() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.openHomePage();
+        LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.loginAs(TestProperties.invalidEmail, TestProperties.invalidPassword);
         Assert.assertEquals(loginPage.getInvalidLoginMessage(),
                 TestProperties.invalidLoginMessage, "Вывод сообщения об ошибке авторизации не совпадает");
@@ -70,8 +56,11 @@ public class LoginPageTests {
                 TestProperties.invalidLoginMessageColor, "Цвет сообщения об ошибке авторизации не совпадает");
     }
 
-    @Test()
+    @Test
     public void testValidLoginAndEmptyPassword() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.openHomePage();
+        LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.loginAs(TestProperties.validEmail, "");
         Assert.assertEquals(TestProperties.validEmail,
                 loginPage.getEmailField(), "Введенный логин не совпадает с логином в поле ввода");
@@ -79,8 +68,11 @@ public class LoginPageTests {
                 loginPage.getPasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
     }
 
-    @Test()
+    @Test
     public void testEmptyLoginAndPassword() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.openHomePage();
+        LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.submitLogin();
         Assert.assertEquals("", loginPage.getEmailField(),
                 "Введенный логин не совпадает с логином в поле ввода");

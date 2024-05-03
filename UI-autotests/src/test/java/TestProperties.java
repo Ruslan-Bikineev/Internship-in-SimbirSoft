@@ -1,5 +1,3 @@
-package ui;
-
 public class TestProperties {
     public static final String validEmail = "test-account2025@mail.ru";
     public static final String validPassword = "qwer1234!@#$";
