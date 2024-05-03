@@ -1,4 +1,4 @@
-package pageobject;
+package pages;
 
 public class PageProperties {
     public static final String homePageUrl = "https://www.way2automation.com/";

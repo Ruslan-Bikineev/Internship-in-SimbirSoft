@@ -1,4 +1,4 @@
-package pageobject;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,7 +35,6 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-
     public LoginPage typeUsername(String username) {
         emailField.clear();
         emailField.sendKeys(username);
@@ -53,7 +52,6 @@ public class LoginPage {
         loginButton.click();
         return new UserHomePage(driver);
     }
-
 
     public UserHomePage loginAs(String username, String password) {
         typeUsername(username);

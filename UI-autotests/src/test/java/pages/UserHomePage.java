@@ -1,4 +1,4 @@
-package pageobject;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -13,6 +13,5 @@ public class UserHomePage {
         }
         PageFactory.initElements(driver, this);
     }
-
 
 }

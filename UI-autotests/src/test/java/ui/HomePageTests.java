@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pageobject.HomePage;
+import pages.HomePage;
 
 import java.time.Duration;
 
@@ -49,20 +49,17 @@ public class HomePageTests {
                 TestProperties.supportSkypeName, "Skype службы поддержки сайта не совпадает");
     }
 
-
     @Test
     public void testHomePageSupportUSANumber() {
         Assert.assertEquals(homePage.getSiteSupportUSANumber(),
                 TestProperties.supportUSANumber, "Номер USA службы поддержки сайта не совпадает");
     }
 
-
     @Test
     public void testHomePageSupportIndiaNumber1() {
         Assert.assertEquals(homePage.getSiteSupportIndiaNumber1(),
                 TestProperties.supportIndiaNumber1, "Номер India 1 службы поддержки сайта не совпадает");
     }
-
 
     @Test
     public void testHomePageSupportIndiaNumber2() {

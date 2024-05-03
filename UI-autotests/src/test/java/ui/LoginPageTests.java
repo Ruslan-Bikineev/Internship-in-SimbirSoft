@@ -6,9 +6,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pageobject.HomePage;
-import pageobject.LoginPage;
-import pageobject.PageProperties;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.PageProperties;
 
 import java.time.Duration;
 
@@ -31,7 +31,6 @@ public class LoginPageTests {
     public void tearDown() {
         driver.quit();
     }
-
 
     @Test
     public void testMessagesUnderFieldLoginAndPasswordWhenFieldEmpty() {
@@ -62,7 +61,6 @@ public class LoginPageTests {
                 PageProperties.userHomePageUrl, "Не перешел на страницу авторизации");
     }
 
-
     @Test()
     public void testInvalidLoginAndPassword() {
         loginPage.loginAs(TestProperties.invalidEmail, TestProperties.invalidPassword);
@@ -71,7 +69,6 @@ public class LoginPageTests {
         Assert.assertEquals(loginPage.getInvalidLoginMessageColor(),
                 TestProperties.invalidLoginMessageColor, "Цвет сообщения об ошибке авторизации не совпадает");
     }
-
 
     @Test()
     public void testValidLoginAndEmptyPassword() {
@@ -82,7 +79,6 @@ public class LoginPageTests {
                 loginPage.getPasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
     }
 
-
     @Test()
     public void testEmptyLoginAndPassword() {
         loginPage.submitLogin();
@@ -91,4 +87,5 @@ public class LoginPageTests {
         Assert.assertEquals("", loginPage.getPasswordField(),
                 "Введенный пароль не совпадает с паролем в поле ввода");
     }
+
 }

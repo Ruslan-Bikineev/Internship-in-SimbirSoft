@@ -1,4 +1,4 @@
-package pageobject;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,12 +28,10 @@ public class HomePage {
     @FindBy(xpath = "//*[@class=\"elementor-icon-list-item elementor-inline-item lazyloaded\"]")
     private WebElement siteSupportIndiaNumber2;
 
-
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
 
     public void openHomePage() {
         driver.get(PageProperties.homePageUrl);
