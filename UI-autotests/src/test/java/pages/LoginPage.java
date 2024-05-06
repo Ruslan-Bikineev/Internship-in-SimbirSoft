@@ -10,22 +10,16 @@ public class LoginPage {
     private final WebDriver driver;
     @FindBy(xpath = "//h3")
     private WebElement loginPageTitle;
-
     @FindBy(css = "#email")
     private WebElement emailField;
-
     @FindBy(css = "input[type=email] + .inline-error")
     private WebElement emailFieldError;
-
     @FindBy(css = "input[type=password] + .inline-error")
     private WebElement passwordFieldError;
-
     @FindBy(css = "#password")
     private WebElement passwordField;
-
     @FindBy(css = "[data-testid=\"login-button\"]")
     private WebElement loginButton;
-
     @FindBy(css = ".text-with-icon")
     private WebElement invalidLoginMessage;
 
