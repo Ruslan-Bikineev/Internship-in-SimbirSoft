@@ -37,7 +37,7 @@
             <version>2.0.13</version>
         </dependency>
     </dependencies>
-<!--        Профиль для запуска тестов через файл testng.xml        -->
+<!--        Профиль для запуска тестов через файл logintests.xml        -->
     <profiles>
         <profile>
             <id>run-tests</id>
@@ -49,7 +49,7 @@
                         <version>${maven-surefire-plugin.version}</version>
                         <configuration>
                             <suiteXmlFiles>
-                                <suiteXmlFile>testng.xml</suiteXmlFile>
+                                <suiteXmlFile>configuration/logintests.xml</suiteXmlFile>
                             </suiteXmlFiles>
                         </configuration>
                     </plugin>

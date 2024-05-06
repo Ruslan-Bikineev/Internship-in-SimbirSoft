@@ -11,9 +11,9 @@ public class HomePage {
     private WebElement popup;
     @FindBy(css = ".dialog-close-button")
     private WebElement popupClose;
-    @FindBy(css = "#menu-item-27580")
+    @FindBy(css = "#ast-hf-menu-1 #menu-item-27580")
     private WebElement buttonAllCourses;
-    @FindBy(css = "#MzYwOjY4NA\\=\\=-1")
+    @FindBy(css = "#ast-desktop-header .site-logo-img")
     private WebElement siteLogoImg;
     @FindBy(css = "#menu-item-27625 .menu-link")
     private WebElement buttonMemberLogin;
