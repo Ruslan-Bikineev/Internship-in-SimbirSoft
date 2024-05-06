@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,48 +34,59 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Открытие главной страницы")
     public void openHomePage() {
         driver.get(PageProperties.homePageUrl);
     }
 
+    @Step("Открытие вкладки «Все курсы»")
     public HomePage clickAllCourses() {
         buttonAllCourses.click();
         return this;
     }
 
+    @Step("Переход на страницу «Вход в систему»")
     public LoginPage clickMemberLogin() {
         buttonMemberLogin.click();
         return new LoginPage(driver);
     }
 
+    @Step("Закрытия всплывающего окна")
     public void clickPopupClose() {
         popupClose.click();
     }
 
+    @Step("Получение ширины верхнего логотипа")
     public String getSiteLogoImgWidth() {
         return siteLogoImg.getAttribute("width");
     }
 
+    @Step("Получение высоты верхнего логотипа")
     public String getSiteLogoImgHeight() {
         return siteLogoImg.getAttribute("height");
     }
 
+    @Step("Получение email'a службы поддержки сайта")
     public String getSiteSupportEmailName() {
         return siteSupportEmailName.getText();
     }
 
+    @Step("Получение Skype службы поддержки сайта")
     public String getSiteSupportSkypeName() {
         return siteSupportSkypeName.getText();
     }
 
+    @Step("Получение номера USA службы поддержки сайта")
     public String getSiteSupportUSANumber() {
         return siteSupportUSANumber.getText();
     }
 
+    @Step("Получение номера India 1 службы поддержки сайта")
     public String getSiteSupportIndiaNumber1() {
         return siteSupportIndiaNumber1.getText();
     }
 
+    @Step("Получение номера India 2 службы поддержки сайта")
     public String getSiteSupportIndiaNumber2() {
         return siteSupportIndiaNumber2.getText();
     }

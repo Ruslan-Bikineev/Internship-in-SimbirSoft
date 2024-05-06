@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,18 +37,22 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Ввод логина пользователя: {username}")
     public LoginPage typeUsername(String username) {
         emailField.clear();
         emailField.sendKeys(username);
         return this;
     }
 
+    @Step("Ввод пароля пользователя: {password}")
     public LoginPage typePassword(String password) {
         passwordField.clear();
         passwordField.sendKeys(password);
         return this;
     }
 
+
+    @Step("Клик по кнопке «Вход в систему»")
     public UserHomePage submitLogin() {
         loginButton.click();
         return new UserHomePage(driver);
@@ -59,32 +64,39 @@ public class LoginPage {
         return submitLogin();
     }
 
+    @Step("Ошибка при вводе имени пользователя")
     public String getEmailFieldError() {
         String color = emailFieldError.getCssValue("color");
         return emailFieldError.getText();
     }
 
+    @Step("Ошибка при вводе пароля пользователя")
     public String getPasswordFieldError() {
         return passwordFieldError.getText();
     }
 
+    @Step("Клик по логотипу")
     public LoginPage clickLoginPageTitle() {
         loginPageTitle.click();
         return this;
     }
 
+    @Step("Сообщение об ошибке при неверном логине или пароле")
     public String getInvalidLoginMessage() {
         return invalidLoginMessage.getText();
     }
 
+    @Step("Цвет сообщение об ошибке при неверном логине или пароле")
     public String getInvalidLoginMessageColor() {
         return invalidLoginMessage.getCssValue("color");
     }
 
+    @Step("Получение поля логина")
     public String getEmailField() {
         return emailField.getAttribute("value");
     }
 
+    @Step("Получение поля пароля")
     public String getPasswordField() {
         return passwordField.getAttribute("value");
     }

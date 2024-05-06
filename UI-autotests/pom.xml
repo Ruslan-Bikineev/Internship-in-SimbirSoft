@@ -11,7 +11,9 @@
     <properties>
         <!--==================================================================-->
         <testng.version>7.10.1</testng.version>
+        <aspectj.version>1.9.22</aspectj.version>
         <selenium.version>4.20.0</selenium.version>
+        <allure-testng.version>2.27.0</allure-testng.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <!--==================================================================-->
         <maven.compiler.source>21</maven.compiler.source>
@@ -36,8 +38,13 @@
             <artifactId>slf4j-api</artifactId>
             <version>2.0.13</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure-testng.version}</version>
+        </dependency>
     </dependencies>
-<!--        Профиль для запуска тестов через файл logintests.xml        -->
+    <!--        Профиль для запуска тестов через файл logintests.xml        -->
     <profiles>
         <profile>
             <id>run-tests</id>
@@ -48,14 +55,32 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${maven-surefire-plugin.version}</version>
                         <configuration>
+                            <argLine>
+                                -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                            </argLine>
                             <suiteXmlFiles>
                                 <suiteXmlFile>configuration/logintests.xml</suiteXmlFile>
                             </suiteXmlFiles>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjweaver</artifactId>
+                                <version>${aspectj.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    <plugin>
+                        <groupId>io.qameta.allure</groupId>
+                        <artifactId>allure-maven</artifactId>
+                        <version>2.11.2</version>
+                        <configuration>
+                            <reportVersion>${allure-testng.version}</reportVersion>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
     </profiles>
-<!--================================================================-->
+    <!--================================================================-->
 </project>
