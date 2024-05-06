@@ -12,7 +12,6 @@ import pages.PageProperties;
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.qameta.allure.SeverityLevel.MINOR;
-import static io.qameta.allure.SeverityLevel.NORMAL;
 
 public class LoginPageTests extends BaseTest {
 
@@ -87,7 +86,7 @@ public class LoginPageTests extends BaseTest {
                 TestProperties.invalidLoginMessageColor, "Цвет сообщения об ошибке авторизации не совпадает");
     }
 
-    @Severity(NORMAL)
+    @Severity(CRITICAL)
     @Epic(value = "Страница авторизации пользователя")
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с корректным логином и пустым паролем")
