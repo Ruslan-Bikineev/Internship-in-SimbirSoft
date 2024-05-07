@@ -13,10 +13,10 @@ import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.qameta.allure.SeverityLevel.MINOR;
 
+@Epic(value = "Страница авторизации пользователя")
 public class LoginPageTests extends BaseTest {
 
     @Severity(MINOR)
-    @Epic(value = "Страница авторизации пользователя")
     @Feature(value = "Поле ввода логина и пароля")
     @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
     @Owner(value = "Ruslan Bikineev")
@@ -35,7 +35,6 @@ public class LoginPageTests extends BaseTest {
     }
 
     @Severity(MINOR)
-    @Epic(value = "Страница авторизации пользователя")
     @Feature(value = "Поле ввода логина и пароля")
     @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
     @Owner(value = "Ruslan Bikineev")
@@ -54,7 +53,6 @@ public class LoginPageTests extends BaseTest {
     }
 
     @Severity(BLOCKER)
-    @Epic(value = "Страница авторизации пользователя")
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с корректным логином и паролем")
     @Owner(value = "Ruslan Bikineev")
@@ -70,7 +68,6 @@ public class LoginPageTests extends BaseTest {
 
 
     @Severity(CRITICAL)
-    @Epic(value = "Страница авторизации пользователя")
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с несуществующим логином и паролем")
     @Owner(value = "Ruslan Bikineev")
@@ -87,11 +84,10 @@ public class LoginPageTests extends BaseTest {
     }
 
     @Severity(CRITICAL)
-    @Epic(value = "Страница авторизации пользователя")
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с корректным логином и пустым паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test()
+    @Test
     public void testValidLoginAndEmptyPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
@@ -104,11 +100,10 @@ public class LoginPageTests extends BaseTest {
     }
 
     @Severity(CRITICAL)
-    @Epic(value = "Страница авторизации пользователя")
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с пустым логином и паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test()
+    @Test
     public void testEmptyLoginAndPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
