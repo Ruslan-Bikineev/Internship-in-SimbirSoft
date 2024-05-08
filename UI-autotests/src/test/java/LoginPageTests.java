@@ -4,6 +4,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
@@ -16,40 +17,38 @@ import static io.qameta.allure.SeverityLevel.MINOR;
 @Epic(value = "Страница авторизации пользователя")
 public class LoginPageTests extends BaseTest {
 
-    @Severity(MINOR)
-    @Feature(value = "Поле ввода логина и пароля")
-    @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
-    @Owner(value = "Ruslan Bikineev")
-    @Test
-    public void testMessagesUnderFieldLoginAndPasswordWhenFieldEmpty() {
-        HomePage homePage = new HomePage(getDriver());
-        homePage.openHomePage();
-        LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.typeUsername("");
-        loginPage.typePassword("");
-        loginPage.clickLoginPageTitle();
-        Assert.assertEquals(loginPage.getEmailFieldError(),
-                TestProperties.nullFiledEmailAndPasswordError, "Ошибка под полем ввода логина не соответствует");
-        Assert.assertEquals(loginPage.getPasswordFieldError(),
-                TestProperties.nullFiledEmailAndPasswordError, "Ошибка под полем ввода пароля не соответствует");
+    @DataProvider(name = "LoginInvalidDataProvider")
+    public Object[][] loginInvalidData() {
+        return new Object[][]{
+                {"", ""},
+                {"testexample.com", ""}
+        };
     }
 
     @Severity(MINOR)
     @Feature(value = "Поле ввода логина и пароля")
     @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
     @Owner(value = "Ruslan Bikineev")
-    @Test
-    public void testMessagesUnderFieldLoginAndPasswordWhenInvalidEmailAndPasswordEmpty() {
+    @Test(dataProvider = "LoginInvalidDataProvider")
+    public void testMessagesUnderFieldLoginAndPassword(String email, String password) {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.typeUsername("test");
-        loginPage.typePassword("");
+        loginPage.typeUsername(email);
+        loginPage.typePassword(password);
         loginPage.clickLoginPageTitle();
-        Assert.assertEquals(loginPage.getEmailFieldError(),
-                TestProperties.emailError, "Ошибка под полем ввода логина не соответствует");
+        if (email.isEmpty()) {
+            Assert.assertEquals(loginPage.getEmailFieldError(),
+                    TestProperties.nullFiledEmailAndPasswordError,
+                    "Ошибка под полем ввода логина не соответствует");
+        } else {
+            Assert.assertEquals(loginPage.getEmailFieldError(),
+                    TestProperties.emailError,
+                    "Ошибка под полем ввода логина не соответствует");
+        }
         Assert.assertEquals(loginPage.getPasswordFieldError(),
-                TestProperties.nullFiledEmailAndPasswordError, "Ошибка под полем ввода пароля не соответствует");
+                TestProperties.nullFiledEmailAndPasswordError,
+                "Ошибка под полем ввода пароля не соответствует");
     }
 
     @Severity(BLOCKER)
