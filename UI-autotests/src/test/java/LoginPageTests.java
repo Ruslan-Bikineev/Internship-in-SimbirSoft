@@ -65,7 +65,6 @@ public class LoginPageTests extends BaseTest {
                 PageProperties.userHomePageUrl, "Не перешел на страницу авторизации");
     }
 
-
     @Severity(CRITICAL)
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с несуществующим логином и паролем")
