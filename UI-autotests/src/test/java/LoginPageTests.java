@@ -1,3 +1,4 @@
+import data.TestsData;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -39,15 +40,15 @@ public class LoginPageTests extends BaseTest {
         loginPage.clickLoginPageTitle();
         if (email.isEmpty()) {
             Assert.assertEquals(loginPage.getEmailFieldError(),
-                    TestProperties.nullFiledEmailAndPasswordError,
+                    TestsData.thisFieldIsRequiredMessage,
                     "Ошибка под полем ввода логина не соответствует");
         } else {
             Assert.assertEquals(loginPage.getEmailFieldError(),
-                    TestProperties.emailError,
+                    TestsData.pleaseProvideAValidEmailAddressMessage,
                     "Ошибка под полем ввода логина не соответствует");
         }
         Assert.assertEquals(loginPage.getPasswordFieldError(),
-                TestProperties.nullFiledEmailAndPasswordError,
+                TestsData.thisFieldIsRequiredMessage,
                 "Ошибка под полем ввода пароля не соответствует");
     }
 
@@ -60,7 +61,7 @@ public class LoginPageTests extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.loginAs(TestProperties.validEmail, TestProperties.validPassword);
+        loginPage.loginAs(TestsData.validEmail, TestsData.validPassword);
         Assert.assertEquals(getCurrentUrl(),
                 PageProperties.userHomePageUrl, "Не перешел на страницу авторизации");
     }
@@ -74,11 +75,11 @@ public class LoginPageTests extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.loginAs(TestProperties.invalidEmail, TestProperties.invalidPassword);
+        loginPage.loginAs(TestsData.invalidEmail, TestsData.invalidPassword);
         Assert.assertEquals(loginPage.getInvalidLoginMessage(),
-                TestProperties.invalidLoginMessage, "Вывод сообщения об ошибке авторизации не совпадает");
+                TestsData.userNotFoundMessage, "Вывод сообщения об ошибке авторизации не совпадает");
         Assert.assertEquals(loginPage.getInvalidLoginMessageColor(),
-                TestProperties.invalidLoginMessageColor, "Цвет сообщения об ошибке авторизации не совпадает");
+                TestsData.userNotFoundMessageMessageColor, "Цвет сообщения об ошибке авторизации не совпадает");
     }
 
     @Severity(CRITICAL)
@@ -90,8 +91,8 @@ public class LoginPageTests extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.loginAs(TestProperties.validEmail, "");
-        Assert.assertEquals(TestProperties.validEmail,
+        loginPage.loginAs(TestsData.validEmail, "");
+        Assert.assertEquals(TestsData.validEmail,
                 loginPage.getEmailField(), "Введенный логин не совпадает с логином в поле ввода");
         Assert.assertEquals("",
                 loginPage.getPasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
