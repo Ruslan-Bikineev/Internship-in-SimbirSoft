@@ -45,7 +45,6 @@ public class LoginPage {
         return this;
     }
 
-
     @Step("Клик по кнопке «Вход в систему»")
     public UserHomePage submitLogin() {
         loginButton.click();

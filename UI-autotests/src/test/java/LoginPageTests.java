@@ -60,9 +60,9 @@ public class LoginPageTests extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.typeUsername(email);
-        loginPage.typePassword(password);
-        loginPage.clickLoginPageTitle();
+        loginPage.typeUsername(email)
+                .typePassword(password)
+                .clickLoginPageTitle();
         Assert.assertEquals(loginPage.getEmailFieldError(), expectedMessage,
                 "Ошибка под полем ввода логина не соответствует");
         Assert.assertEquals(loginPage.getPasswordFieldError(),
