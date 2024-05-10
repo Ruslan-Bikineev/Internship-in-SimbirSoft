@@ -18,11 +18,36 @@ import static io.qameta.allure.SeverityLevel.MINOR;
 @Epic(value = "Страница авторизации пользователя")
 public class LoginPageTests extends BaseTest {
 
+    @DataProvider(name = "LoginDataOfDifferentTypesProvider")
+    public Object[][] loginDataOfDifferentTypes() {
+        return new Object[][]{
+                {"", ""},
+                {TestsData.validEmail, ""},
+                {"", TestsData.validPassword},
+                {TestsData.validEmail, TestsData.invalidPassword},
+                {TestsData.invalidEmail, TestsData.validPassword}
+        };
+    }
+
+    @Severity(BLOCKER)
+    @Feature(value = "Авторизация")
+    @Story(value = "Авторизация с не валидными данными разных типов")
+    @Owner(value = "Ruslan Bikineev")
+    @Test(dataProvider = "LoginDataOfDifferentTypesProvider")
+    public void testLoginWithInvalidDataOfDifferentTypes(String email, String password) {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.openHomePage();
+        LoginPage loginPage = homePage.clickMemberLogin();
+        loginPage.loginAs(email, password);
+        Assert.assertNotEquals(getCurrentUrl(),
+                PageProperties.loginPageUrl, "Перешел на страницу пользователя");
+    }
+
     @DataProvider(name = "LoginInvalidDataProvider")
     public Object[][] loginInvalidData() {
         return new Object[][]{
-                {"", ""},
-                {"testexample.com", ""}
+                {"", "", TestsData.thisFieldIsRequiredMessage},
+                {"testexample.com", "", TestsData.pleaseProvideAValidEmailAddressMessage}
         };
     }
 
@@ -31,22 +56,15 @@ public class LoginPageTests extends BaseTest {
     @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
     @Owner(value = "Ruslan Bikineev")
     @Test(dataProvider = "LoginInvalidDataProvider")
-    public void testMessagesUnderFieldLoginAndPassword(String email, String password) {
+    public void testMessagesUnderFieldLoginAndPassword(String email, String password, String expectedMessage) {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.typeUsername(email);
         loginPage.typePassword(password);
         loginPage.clickLoginPageTitle();
-        if (email.isEmpty()) {
-            Assert.assertEquals(loginPage.getEmailFieldError(),
-                    TestsData.thisFieldIsRequiredMessage,
-                    "Ошибка под полем ввода логина не соответствует");
-        } else {
-            Assert.assertEquals(loginPage.getEmailFieldError(),
-                    TestsData.pleaseProvideAValidEmailAddressMessage,
-                    "Ошибка под полем ввода логина не соответствует");
-        }
+        Assert.assertEquals(loginPage.getEmailFieldError(), expectedMessage,
+                "Ошибка под полем ввода логина не соответствует");
         Assert.assertEquals(loginPage.getPasswordFieldError(),
                 TestsData.thisFieldIsRequiredMessage,
                 "Ошибка под полем ввода пароля не соответствует");

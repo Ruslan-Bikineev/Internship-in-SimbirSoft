@@ -4,6 +4,7 @@
         <classes>
             <class name="LoginPageTests">
                 <methods>
+                    <include name="testLoginWithInvalidDataOfDifferentTypes"/>
                     <include name="testMessagesUnderFieldLoginAndPassword"/>
                     <include name="testValidLoginAndPassword"/>
                     <include name="testInvalidLoginAndPassword"/>
