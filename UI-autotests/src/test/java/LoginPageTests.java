@@ -22,10 +22,10 @@ public class LoginPageTests extends BaseTest {
     public Object[][] loginDataOfDifferentTypes() {
         return new Object[][]{
                 {"", ""},
-                {TestsData.validEmail, ""},
-                {"", TestsData.validPassword},
-                {TestsData.validEmail, TestsData.invalidPassword},
-                {TestsData.invalidEmail, TestsData.validPassword}
+                {TestsData.VALID_EMAIL, ""},
+                {"", TestsData.VALID_PASSWORD},
+                {TestsData.VALID_EMAIL, TestsData.INVALID_PASSWORD},
+                {TestsData.INVALID_EMAIL, TestsData.VALID_PASSWORD}
         };
     }
 
@@ -46,8 +46,8 @@ public class LoginPageTests extends BaseTest {
     @DataProvider(name = "LoginInvalidDataProvider")
     public Object[][] loginInvalidData() {
         return new Object[][]{
-                {"", "", TestsData.thisFieldIsRequiredMessage},
-                {"testexample.com", "", TestsData.pleaseProvideAValidEmailAddressMessage}
+                {"", "", TestsData.THIS_FIELD_IS_REQUIRED_MESSAGE},
+                {"testexample.com", "", TestsData.PLEASE_PROVIDE_A_VALID_EMAIL_ADDRESS_MESSAGE}
         };
     }
 
@@ -66,7 +66,7 @@ public class LoginPageTests extends BaseTest {
         Assert.assertEquals(loginPage.getEmailFieldError(), expectedMessage,
                 "Ошибка под полем ввода логина не соответствует");
         Assert.assertEquals(loginPage.getPasswordFieldError(),
-                TestsData.thisFieldIsRequiredMessage,
+                TestsData.THIS_FIELD_IS_REQUIRED_MESSAGE,
                 "Ошибка под полем ввода пароля не соответствует");
     }
 
@@ -79,7 +79,7 @@ public class LoginPageTests extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.loginAs(TestsData.validEmail, TestsData.validPassword);
+        loginPage.loginAs(TestsData.VALID_EMAIL, TestsData.VALID_PASSWORD);
         Assert.assertEquals(getCurrentUrl(),
                 PageProperties.userHomePageUrl, "Не перешел на страницу авторизации");
     }
@@ -93,11 +93,11 @@ public class LoginPageTests extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.loginAs(TestsData.invalidEmail, TestsData.invalidPassword);
+        loginPage.loginAs(TestsData.INVALID_EMAIL, TestsData.INVALID_PASSWORD);
         Assert.assertEquals(loginPage.getInvalidLoginMessage(),
-                TestsData.userNotFoundMessage, "Вывод сообщения об ошибке авторизации не совпадает");
+                TestsData.USER_NOT_FOUND_MESSAGE, "Вывод сообщения об ошибке авторизации не совпадает");
         Assert.assertEquals(loginPage.getInvalidLoginMessageColor(),
-                TestsData.userNotFoundMessageMessageColor, "Цвет сообщения об ошибке авторизации не совпадает");
+                TestsData.USER_NOT_FOUND_MESSAGE_COLOR, "Цвет сообщения об ошибке авторизации не совпадает");
     }
 
     @Severity(CRITICAL)
@@ -109,8 +109,8 @@ public class LoginPageTests extends BaseTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.loginAs(TestsData.validEmail, "");
-        Assert.assertEquals(TestsData.validEmail,
+        loginPage.loginAs(TestsData.VALID_EMAIL, "");
+        Assert.assertEquals(TestsData.VALID_EMAIL,
                 loginPage.getEmailField(), "Введенный логин не совпадает с логином в поле ввода");
         Assert.assertEquals("",
                 loginPage.getPasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
