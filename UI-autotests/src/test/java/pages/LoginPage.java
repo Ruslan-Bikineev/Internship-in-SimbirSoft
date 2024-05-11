@@ -26,7 +26,8 @@ public class LoginPage {
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         if (!driver.getTitle().equals("Way2Automation")) {
-            throw new IllegalStateException("This is not login page");
+            throw new IllegalStateException("This is not login page " +
+                    "current page is: " + driver.getCurrentUrl());
         }
         PageFactory.initElements(driver, this);
     }

@@ -33,14 +33,12 @@ public class LoginPageTests extends BaseTest {
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с не валидными данными разных типов")
     @Owner(value = "Ruslan Bikineev")
-    @Test(dataProvider = "LoginDataOfDifferentTypesProvider")
+    @Test(expectedExceptions = IllegalStateException.class, dataProvider = "LoginDataOfDifferentTypesProvider")
     public void testLoginWithInvalidDataOfDifferentTypes(String email, String password) {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.loginAs(email, password);
-        Assert.assertNotEquals(getCurrentUrl(),
-                PageProperties.loginPageUrl, "Перешел на страницу пользователя");
     }
 
     @DataProvider(name = "LoginInvalidDataProvider")
@@ -81,7 +79,7 @@ public class LoginPageTests extends BaseTest {
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.loginAs(TestsData.VALID_EMAIL, TestsData.VALID_PASSWORD);
         Assert.assertEquals(getCurrentUrl(),
-                PageProperties.userHomePageUrl, "Не перешел на страницу авторизации");
+                PageProperties.USER_HOME_PAGE_URL, "Не перешел на страницу авторизации");
     }
 
     @Severity(CRITICAL)

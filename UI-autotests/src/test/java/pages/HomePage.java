@@ -36,7 +36,7 @@ public class HomePage {
 
     @Step("Открытие главной страницы")
     public void openHomePage() {
-        driver.get(PageProperties.homePageUrl);
+        driver.get(PageProperties.HOME_PAGE_URL);
     }
 
     @Step("Открытие вкладки «Все курсы»")
