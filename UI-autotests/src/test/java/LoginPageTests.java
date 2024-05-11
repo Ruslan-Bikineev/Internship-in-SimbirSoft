@@ -31,7 +31,7 @@ public class LoginPageTests extends BaseTest {
 
     @Severity(BLOCKER)
     @Feature(value = "Авторизация")
-    @Story(value = "Авторизация с не валидными данными разных типов")
+    @Story(value = "Авторизация с использванием разных данных (в том числе и некорректных)")
     @Owner(value = "Ruslan Bikineev")
     @Test(expectedExceptions = IllegalStateException.class, dataProvider = "LoginDataOfDifferentTypesProvider")
     public void testLoginWithInvalidDataOfDifferentTypes(String email, String password) {
