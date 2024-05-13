@@ -2,15 +2,19 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class UserHomePage {
     private final WebDriver driver;
+    private final WebDriverWait wait;
 
     public UserHomePage(WebDriver driver) {
         this.driver = driver;
-        if (driver.getTitle().equals("Our apologies! We were unable to process your request")) {
-            throw new IllegalStateException("This is not user home page");
-        }
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.urlToBe(PageProperties.USER_HOME_PAGE_URL));
         PageFactory.initElements(driver, this);
     }
 }
