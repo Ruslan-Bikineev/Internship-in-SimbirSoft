@@ -4,6 +4,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -33,7 +34,7 @@ public class LoginPageTests extends BaseTest {
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с использванием разных данных (в том числе и некорректных)")
     @Owner(value = "Ruslan Bikineev")
-    @Test(expectedExceptions = IllegalStateException.class, dataProvider = "LoginDataOfDifferentTypesProvider")
+    @Test(expectedExceptions = TimeoutException.class, dataProvider = "LoginDataOfDifferentTypesProvider")
     public void testLoginWithInvalidDataOfDifferentTypes(String email, String password) {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
