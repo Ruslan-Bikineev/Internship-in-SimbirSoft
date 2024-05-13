@@ -1,18 +1,17 @@
 package pages;
 
+import framework.Waiters;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
+public class LoginPage extends Waiters {
     private final WebDriver driver;
-    private final WebDriverWait wait;
     @FindBy(xpath = "//h3")
     private WebElement loginPageTitle;
     @FindBy(css = "#email")
@@ -29,9 +28,9 @@ public class LoginPage {
     private WebElement invalidLoginMessage;
 
     public LoginPage(WebDriver driver) {
+        super(new WebDriverWait(driver, Duration.ofSeconds(15)));
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.urlToBe(PageProperties.LOGIN_PAGE_URL));
+        waitUrlToBe(PageProperties.LOGIN_PAGE_URL);
         PageFactory.initElements(driver, this);
     }
 
