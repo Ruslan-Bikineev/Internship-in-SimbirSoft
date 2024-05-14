@@ -8,32 +8,22 @@ import tests.BaseTest;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class ScreenShooter {
 
-    public void takeScreenShot() {
+    @Attachment(value = "Screenshot", fileExtension = ".png")
+    public byte[] getScreenshotByte() {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
-            Screenshot originalFileInTempFolder = shot();
-            BufferedImage bufferedImage = originalFileInTempFolder.getImage();
-            File file = new File(System.currentTimeMillis() + ".png");
-            ImageIO.write(bufferedImage, "PNG", file);
-            getBytes(file.getAbsolutePath());
-            file.deleteOnExit();
+            Screenshot screenshot =
+                    new AShot().shootingStrategy(ShootingStrategies.simple()).takeScreenshot(BaseTest.getDriver());
+            BufferedImage bufferedImage = screenshot.getImage();
+            ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Attachment(value = "Screenshot", fileExtension = ".png")
-    public static byte[] getBytes(String path) throws IOException {
-        return Files.readAllBytes(Paths.get(path));
-    }
-
-    private Screenshot shot() {
-        return new AShot().shootingStrategy(ShootingStrategies.simple()).takeScreenshot(BaseTest.getDriver());
+        return byteArrayOutputStream.toByteArray();
     }
 }
