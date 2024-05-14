@@ -10,7 +10,7 @@ public class AllureListener implements TestLifecycleListener {
     public void beforeTestStop(TestResult result) {
         if (result.getStatus() == Status.FAILED || result.getStatus() == Status.BROKEN) {
             ScreenShooter screenShooter = new ScreenShooter();
-            screenShooter.takeScreenShot(result.getName());
+            screenShooter.takeScreenShot();
         }
     }
 }
