@@ -12,7 +12,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class ScreenShooter {
-
     @Attachment(value = "Screenshot", fileExtension = ".png")
     public byte[] getScreenshotByte() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
