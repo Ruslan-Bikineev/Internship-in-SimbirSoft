@@ -1,6 +1,5 @@
 package pages;
 
-import framework.Waiters;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage extends Waiters {
+import static framework.Waiters.waitUrlToBe;
+
+public class LoginPage {
     private final WebDriver driver;
     @FindBy(xpath = "//h3")
     private WebElement loginPageTitle;
@@ -28,9 +29,8 @@ public class LoginPage extends Waiters {
     private WebElement invalidLoginMessage;
 
     public LoginPage(WebDriver driver) {
-        super(new WebDriverWait(driver, Duration.ofSeconds(15)));
         this.driver = driver;
-        waitUrlToBe(PageProperties.LOGIN_PAGE_URL);
+        waitUrlToBe(new WebDriverWait(driver, Duration.ofSeconds(15)), PageProperties.LOGIN_PAGE_URL);
         PageFactory.initElements(driver, this);
     }
 
