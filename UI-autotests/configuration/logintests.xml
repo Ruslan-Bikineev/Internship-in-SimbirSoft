@@ -2,7 +2,7 @@
 <suite name="Authorization Tests Suite">
     <test name="Login Page Tests">
         <classes>
-            <class name="LoginPageTests">
+            <class name="tests.LoginPageTests">
                 <methods>
                     <include name="testLoginWithInvalidDataOfDifferentTypes"/>
                     <include name="testMessagesUnderFieldLoginAndPassword"/>

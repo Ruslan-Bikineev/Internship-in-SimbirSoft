@@ -1,4 +1,4 @@
-package framework;
+package helpers;
 
 import io.qameta.allure.listener.TestLifecycleListener;
 import io.qameta.allure.model.Status;

@@ -1,10 +1,11 @@
-package framework;
+package helpers;
 
 import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import tests.BaseTest;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
