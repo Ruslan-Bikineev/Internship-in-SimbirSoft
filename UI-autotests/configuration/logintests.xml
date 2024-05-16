@@ -1,8 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Authorization Tests Suite">
+    <listeners>
+        <listener class-name="helpers.MyListener"></listener>
+    </listeners>
     <test name="Login Page Tests">
         <classes>
-            <class name="LoginPageTests">
+            <class name="tests.LoginPageTests">
                 <methods>
                     <include name="testLoginWithInvalidDataOfDifferentTypes"/>
                     <include name="testMessagesUnderFieldLoginAndPassword"/>

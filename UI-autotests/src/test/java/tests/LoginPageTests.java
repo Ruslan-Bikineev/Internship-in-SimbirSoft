@@ -1,3 +1,5 @@
+package tests;
+
 import data.TestsData;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;

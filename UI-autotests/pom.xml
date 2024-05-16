@@ -43,6 +43,11 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure-testng.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.ashot</groupId>
+            <artifactId>ashot</artifactId>
+            <version>1.5.4</version>
+        </dependency>
     </dependencies>
     <!--        Профиль для запуска тестов через файл logintests.xml        -->
     <profiles>
