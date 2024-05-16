@@ -1,4 +1,4 @@
-package tests;
+package tests.way2automation;
 
 import data.TestsData;
 import io.qameta.allure.Epic;
@@ -10,9 +10,10 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.PageProperties;
+import tests.BaseTest;
+import way2automation_pages.HomePage;
+import way2automation_pages.LoginPage;
+import way2automation_pages.PageProperties;
 
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static io.qameta.allure.SeverityLevel.CRITICAL;

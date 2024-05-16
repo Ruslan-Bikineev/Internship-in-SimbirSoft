@@ -1,4 +1,4 @@
-package pages;
+package way2automation_pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;

@@ -30,7 +30,7 @@ public class HomePage {
         return this;
     }
 
-    @Step("Получение ника пользователя в качестве гостя")
+    @Step("Получение ник пользователя в качестве гостя")
     public String getGuestLabel() {
         String[] labelArray = dateAndGuestLabel.getText().split(" ");
         return labelArray[labelArray.length - 1];

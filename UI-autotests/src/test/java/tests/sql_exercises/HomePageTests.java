@@ -1,6 +1,7 @@
-package tests;
+package tests.sql_exercises;
 
 import helpers.Json;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
@@ -9,6 +10,7 @@ import org.openqa.selenium.Cookie;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import sql_exercises_pages.HomePage;
+import tests.BaseTest;
 
 import java.io.File;
 import java.util.List;
@@ -16,7 +18,8 @@ import java.util.List;
 import static data.TestsData.PATH_TO_COOKIES_FILE;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 
-public class SqlExercisesLoginPageTests extends BaseTest {
+@Epic(value = "Главная страница")
+public class HomePageTests extends BaseTest {
     private Json json = new Json();
 
     @Severity(NORMAL)
