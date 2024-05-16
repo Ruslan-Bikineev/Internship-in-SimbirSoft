@@ -34,9 +34,10 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    @Step("Открытие главной страницы")
-    public void openHomePage() {
+    @Step("Открытие главной страницы: " + PageProperties.HOME_PAGE_URL)
+    public HomePage openHomePage() {
         driver.get(PageProperties.HOME_PAGE_URL);
+        return this;
     }
 
     @Step("Открытие вкладки «Все курсы»")

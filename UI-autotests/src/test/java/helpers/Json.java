@@ -11,22 +11,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Json {
-    public void serializeJsonFile(String path, Object object) throws IOException {
+    public void serializeJsonFile(String path, Object object) {
         ObjectWriter objectMapper = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        objectMapper.writeValue(new File(path), object);
+        try {
+            objectMapper.writeValue(new File(path), object);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public List<Cookie> deserializeCookiesFromJsonFile(String path) throws IOException {
+    public List<Cookie> deserializeCookiesFromJsonFile(String path) {
         File file = new File(path);
         List<Cookie> cookieList = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
         if (file.exists()) {
-            List<CookiePOJO> cookiePOJOList = objectMapper.readValue(file, new TypeReference<>() { });
-            for (CookiePOJO cookiePOJO : cookiePOJOList) {
-                cookieList.add(cookiePOJO.toCookie());
+            try {
+                List<CookiePojo> cookiePojoList = objectMapper.readValue(file, new TypeReference<>() {
+                });
+                cookiePojoList.forEach(cookie -> cookieList.add(cookie.toCookie()));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } else {
-            throw new IOException("File " + path + " not found");
         }
         return cookieList;
     }

@@ -6,7 +6,7 @@ import org.openqa.selenium.Cookie;
 import java.util.Date;
 
 @Data
-public class CookiePOJO {
+public class CookiePojo {
     private String name;
     private String value;
     private String domain;

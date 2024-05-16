@@ -5,6 +5,12 @@
     </listeners>
     <test name="Login Page Tests">
         <classes>
+            <class name="tests.SqlExercisesLoginPageTests">
+                <methods>
+                    <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
+                    <include name="testAuthorizationWithoutLoginWithTheirCookies"/>
+                </methods>
+            </class>
             <class name="tests.LoginPageTests">
                 <methods>
                     <include name="testLoginWithInvalidDataOfDifferentTypes"/>
