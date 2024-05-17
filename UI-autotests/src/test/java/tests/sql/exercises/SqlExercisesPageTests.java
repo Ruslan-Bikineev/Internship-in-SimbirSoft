@@ -19,11 +19,11 @@ import static data.TestsData.PATH_TO_COOKIES_FILE;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 
 @Epic(value = "Главная страница")
+@Feature(value = "Авторизация пользователем гость")
 public class SqlExercisesPageTests extends BaseTest {
     private Json json = new Json();
 
     @Test
-    @Feature(value = "Авторизация пользователем гость")
     @Story(value = "Авторизация пользователем гость и сохранение Cookie в файл")
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
@@ -36,7 +36,6 @@ public class SqlExercisesPageTests extends BaseTest {
     }
 
     @Test(dependsOnMethods = "testAuthorizationWithoutLoginAndSaveCookiesToFile")
-    @Feature(value = "Авторизация пользователем гость")
     @Story(value = "Авторизация c использованием Cookie, авторизованного пользователя гость")
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
