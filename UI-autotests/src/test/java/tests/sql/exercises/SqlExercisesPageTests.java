@@ -37,7 +37,7 @@ public class SqlExercisesPageTests extends BaseTest {
 
     @Test(dependsOnMethods = "testAuthorizationWithoutLoginAndSaveCookiesToFile")
     @Feature(value = "Авторизация пользователем гость")
-    @Story(value = "Авторизация пользователем гость c использованием Cookie")
+    @Story(value = "Авторизация c использованием Cookie, авторизованного пользователя гость")
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void testAuthorizationWithoutLoginWithTheirCookies() {
