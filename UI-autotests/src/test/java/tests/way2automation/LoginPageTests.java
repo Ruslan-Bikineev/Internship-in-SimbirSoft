@@ -34,11 +34,11 @@ public class LoginPageTests extends BaseTest {
         };
     }
 
-    @Severity(BLOCKER)
+    @Test(expectedExceptions = TimeoutException.class, dataProvider = "LoginDataOfDifferentTypesProvider")
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с использванием разных данных (в том числе и некорректных)")
     @Owner(value = "Ruslan Bikineev")
-    @Test(expectedExceptions = TimeoutException.class, dataProvider = "LoginDataOfDifferentTypesProvider")
+    @Severity(BLOCKER)
     public void testLoginWithInvalidDataOfDifferentTypes(String email, String password) {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
@@ -54,11 +54,11 @@ public class LoginPageTests extends BaseTest {
         };
     }
 
-    @Severity(MINOR)
+    @Test(dataProvider = "LoginInvalidDataProvider")
     @Feature(value = "Поле ввода логина и пароля")
     @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
     @Owner(value = "Ruslan Bikineev")
-    @Test(dataProvider = "LoginInvalidDataProvider")
+    @Severity(MINOR)
     public void testMessagesUnderFieldLoginAndPassword(String email, String password, String expectedMessage) {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
@@ -73,11 +73,11 @@ public class LoginPageTests extends BaseTest {
                 "Ошибка под полем ввода пароля не соответствует");
     }
 
-    @Severity(BLOCKER)
+    @Test
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с корректным логином и паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test
+    @Severity(BLOCKER)
     public void testValidLoginAndPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
@@ -87,11 +87,11 @@ public class LoginPageTests extends BaseTest {
                 UserHomePage.USER_HOME_PAGE_URL, "Не перешел на страницу авторизации");
     }
 
-    @Severity(CRITICAL)
+    @Test
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с несуществующим логином и паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test
+    @Severity(CRITICAL)
     public void testInvalidLoginAndPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
@@ -103,11 +103,11 @@ public class LoginPageTests extends BaseTest {
                 TestsData.USER_NOT_FOUND_MESSAGE_COLOR, "Цвет сообщения об ошибке авторизации не совпадает");
     }
 
-    @Severity(CRITICAL)
+    @Test
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с корректным логином и пустым паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test
+    @Severity(CRITICAL)
     public void testValidLoginAndEmptyPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
@@ -119,11 +119,11 @@ public class LoginPageTests extends BaseTest {
                 loginPage.getValuePasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
     }
 
-    @Severity(CRITICAL)
+    @Test
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с пустым логином и паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test
+    @Severity(CRITICAL)
     public void testEmptyLoginAndPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
