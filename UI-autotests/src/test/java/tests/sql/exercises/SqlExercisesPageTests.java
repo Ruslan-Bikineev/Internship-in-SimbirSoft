@@ -1,4 +1,4 @@
-package tests.sql_exercises;
+package tests.sql.exercises;
 
 import helpers.Json;
 import io.qameta.allure.Epic;
@@ -9,7 +9,7 @@ import io.qameta.allure.Story;
 import org.openqa.selenium.Cookie;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import sql_exercises_pages.HomePage;
+import pages.sql.exercises.SqlExercisesPage;
 import tests.BaseTest;
 
 import java.io.File;
@@ -19,7 +19,7 @@ import static data.TestsData.PATH_TO_COOKIES_FILE;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 
 @Epic(value = "Главная страница")
-public class HomePageTests extends BaseTest {
+public class SqlExercisesPageTests extends BaseTest {
     private Json json = new Json();
 
     @Severity(NORMAL)
@@ -28,8 +28,8 @@ public class HomePageTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Test
     public void testAuthorizationWithoutLoginAndSaveCookiesToFile() {
-        HomePage homePage = new HomePage(getDriver());
-        homePage.openHomePage()
+        SqlExercisesPage sqlExercisesPage = new SqlExercisesPage(getDriver());
+        sqlExercisesPage.openHomePage()
                 .enterWithoutLogin();
         json.serializeJsonFile(PATH_TO_COOKIES_FILE, getDriver().manage().getCookies());
         Assert.assertNotNull(new File(PATH_TO_COOKIES_FILE));
@@ -41,13 +41,13 @@ public class HomePageTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Test
     public void testAuthorizationWithoutLoginWithTheirCookies() {
-        HomePage homePage = new HomePage(getDriver());
-        homePage.openHomePage();
+        SqlExercisesPage sqlExercisesPage = new SqlExercisesPage(getDriver());
+        sqlExercisesPage.openHomePage();
         getDriver().manage().deleteAllCookies();
         List<Cookie> cookieList = json.deserializeCookiesFromJsonFile(PATH_TO_COOKIES_FILE);
         addCookies(cookieList);
         getDriver().navigate().refresh();
-        Assert.assertTrue(homePage.getGuestLabel().equals("гость")
-                || homePage.getGuestLabel().equals("guest"));
+        Assert.assertTrue(sqlExercisesPage.getGuestLabel().equals("гость")
+                || sqlExercisesPage.getGuestLabel().equals("guest"));
     }
 }

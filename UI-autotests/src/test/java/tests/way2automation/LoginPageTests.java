@@ -1,6 +1,7 @@
 package tests.way2automation;
 
 import data.TestsData;
+import helpers.JavaScriptUtil;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -10,10 +11,10 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.way2automation.HomePage;
+import pages.way2automation.LoginPage;
+import pages.way2automation.UserHomePage;
 import tests.BaseTest;
-import way2automation_pages.HomePage;
-import way2automation_pages.LoginPage;
-import way2automation_pages.PageProperties;
 
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
@@ -83,7 +84,7 @@ public class LoginPageTests extends BaseTest {
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.loginAs(TestsData.VALID_EMAIL, TestsData.VALID_PASSWORD);
         Assert.assertEquals(getCurrentUrl(),
-                PageProperties.USER_HOME_PAGE_URL, "Не перешел на страницу авторизации");
+                UserHomePage.USER_HOME_PAGE_URL, "Не перешел на страницу авторизации");
     }
 
     @Severity(CRITICAL)
@@ -113,9 +114,9 @@ public class LoginPageTests extends BaseTest {
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.loginAs(TestsData.VALID_EMAIL, "");
         Assert.assertEquals(TestsData.VALID_EMAIL,
-                loginPage.getEmailField(), "Введенный логин не совпадает с логином в поле ввода");
+                loginPage.getValueOfEmailField(), "Введенный логин не совпадает с логином в поле ввода");
         Assert.assertEquals("",
-                loginPage.getPasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
+                loginPage.getValuePasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
     }
 
     @Severity(CRITICAL)
@@ -128,9 +129,9 @@ public class LoginPageTests extends BaseTest {
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.submitLogin();
-        Assert.assertEquals("", loginPage.getEmailField(),
+        Assert.assertEquals("", loginPage.getValueOfEmailField(),
                 "Введенный логин не совпадает с логином в поле ввода");
-        Assert.assertEquals("", loginPage.getPasswordField(),
+        Assert.assertEquals("", loginPage.getValuePasswordField(),
                 "Введенный пароль не совпадает с паролем в поле ввода");
     }
 }

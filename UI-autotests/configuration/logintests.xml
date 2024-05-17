@@ -5,7 +5,7 @@
     </listeners>
     <test name="Login Page Tests">
         <classes>
-            <class name="tests.sql_exercises.HomePageTests">
+            <class name="tests.sql.exercises.SqlExercisesPageTests">
                 <methods>
                     <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
                     <include name="testAuthorizationWithoutLoginWithTheirCookies"/>

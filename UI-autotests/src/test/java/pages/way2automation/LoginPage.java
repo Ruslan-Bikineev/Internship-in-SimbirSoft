@@ -1,6 +1,7 @@
-package way2automation_pages;
+package pages.way2automation;
 
 import io.qameta.allure.Step;
+import lombok.Data;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +12,9 @@ import java.time.Duration;
 
 import static helpers.Waiters.waitUrlToBe;
 
+@Data
 public class LoginPage {
+    public static final String LOGIN_PAGE_URL = "https://sso.teachable.com/secure/673/identity/login";
     private final WebDriver driver;
     @FindBy(xpath = "//h3")
     private WebElement loginPageTitle;
@@ -30,7 +33,7 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        waitUrlToBe(new WebDriverWait(driver, Duration.ofSeconds(15)), PageProperties.LOGIN_PAGE_URL);
+        waitUrlToBe(new WebDriverWait(driver, Duration.ofSeconds(15)), LOGIN_PAGE_URL);
         PageFactory.initElements(driver, this);
     }
 
@@ -87,13 +90,13 @@ public class LoginPage {
         return invalidLoginMessage.getCssValue("color");
     }
 
-    @Step("Получение поля логина")
-    public String getEmailField() {
+    @Step("Получение значения поля логина")
+    public String getValueOfEmailField() {
         return emailField.getAttribute("value");
     }
 
-    @Step("Получение поля пароля")
-    public String getPasswordField() {
+    @Step("Получение значения поля пароля")
+    public String getValuePasswordField() {
         return passwordField.getAttribute("value");
     }
 }

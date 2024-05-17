@@ -1,4 +1,4 @@
-package way2automation_pages;
+package pages.way2automation;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
+    public static final String HOME_PAGE_URL = "https://www.way2automation.com/";
     private final WebDriver driver;
     @FindBy(css = ".elementor-location-popup")
     private WebElement popup;
@@ -34,9 +35,9 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    @Step("Открытие главной страницы: " + PageProperties.HOME_PAGE_URL)
+    @Step("Открытие главной страницы: " + HOME_PAGE_URL)
     public HomePage openHomePage() {
-        driver.get(PageProperties.HOME_PAGE_URL);
+        driver.get(HOME_PAGE_URL);
         return this;
     }
 
