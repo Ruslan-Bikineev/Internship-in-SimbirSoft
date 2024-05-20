@@ -1,6 +1,7 @@
-package tests;
+package tests.way2automation;
 
 import data.TestsData;
+import helpers.JavaScriptUtil;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -10,9 +11,10 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.PageProperties;
+import pages.way2automation.HomePage;
+import pages.way2automation.LoginPage;
+import pages.way2automation.UserHomePage;
+import tests.BaseTest;
 
 import static io.qameta.allure.SeverityLevel.BLOCKER;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
@@ -32,11 +34,11 @@ public class LoginPageTests extends BaseTest {
         };
     }
 
-    @Severity(BLOCKER)
+    @Test(expectedExceptions = TimeoutException.class, dataProvider = "LoginDataOfDifferentTypesProvider")
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с использванием разных данных (в том числе и некорректных)")
     @Owner(value = "Ruslan Bikineev")
-    @Test(expectedExceptions = TimeoutException.class, dataProvider = "LoginDataOfDifferentTypesProvider")
+    @Severity(BLOCKER)
     public void testLoginWithInvalidDataOfDifferentTypes(String email, String password) {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
@@ -52,11 +54,11 @@ public class LoginPageTests extends BaseTest {
         };
     }
 
-    @Severity(MINOR)
+    @Test(dataProvider = "LoginInvalidDataProvider")
     @Feature(value = "Поле ввода логина и пароля")
     @Story(value = "Проверка отображений ошибки под полями ввода логина и пароля")
     @Owner(value = "Ruslan Bikineev")
-    @Test(dataProvider = "LoginInvalidDataProvider")
+    @Severity(MINOR)
     public void testMessagesUnderFieldLoginAndPassword(String email, String password, String expectedMessage) {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
@@ -71,25 +73,25 @@ public class LoginPageTests extends BaseTest {
                 "Ошибка под полем ввода пароля не соответствует");
     }
 
-    @Severity(BLOCKER)
+    @Test
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с корректным логином и паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test
+    @Severity(BLOCKER)
     public void testValidLoginAndPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.loginAs(TestsData.VALID_EMAIL, TestsData.VALID_PASSWORD);
         Assert.assertEquals(getCurrentUrl(),
-                PageProperties.USER_HOME_PAGE_URL, "Не перешел на страницу авторизации");
+                UserHomePage.USER_HOME_PAGE_URL, "Не перешел на страницу авторизации");
     }
 
-    @Severity(CRITICAL)
+    @Test
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с несуществующим логином и паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test
+    @Severity(CRITICAL)
     public void testInvalidLoginAndPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
@@ -101,35 +103,35 @@ public class LoginPageTests extends BaseTest {
                 TestsData.USER_NOT_FOUND_MESSAGE_COLOR, "Цвет сообщения об ошибке авторизации не совпадает");
     }
 
-    @Severity(CRITICAL)
+    @Test
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с корректным логином и пустым паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test
+    @Severity(CRITICAL)
     public void testValidLoginAndEmptyPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.loginAs(TestsData.VALID_EMAIL, "");
         Assert.assertEquals(TestsData.VALID_EMAIL,
-                loginPage.getEmailField(), "Введенный логин не совпадает с логином в поле ввода");
+                loginPage.getValueOfEmailField(), "Введенный логин не совпадает с логином в поле ввода");
         Assert.assertEquals("",
-                loginPage.getPasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
+                loginPage.getValuePasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
     }
 
-    @Severity(CRITICAL)
+    @Test
     @Feature(value = "Авторизация")
     @Story(value = "Авторизация с пустым логином и паролем")
     @Owner(value = "Ruslan Bikineev")
-    @Test
+    @Severity(CRITICAL)
     public void testEmptyLoginAndPassword() {
         HomePage homePage = new HomePage(getDriver());
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.submitLogin();
-        Assert.assertEquals("", loginPage.getEmailField(),
+        Assert.assertEquals("", loginPage.getValueOfEmailField(),
                 "Введенный логин не совпадает с логином в поле ввода");
-        Assert.assertEquals("", loginPage.getPasswordField(),
+        Assert.assertEquals("", loginPage.getValuePasswordField(),
                 "Введенный пароль не совпадает с паролем в поле ввода");
     }
 }

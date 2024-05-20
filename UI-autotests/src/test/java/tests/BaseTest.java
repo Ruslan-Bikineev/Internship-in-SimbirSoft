@@ -1,18 +1,16 @@
 package tests;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BaseTest {
     private WebDriver driver;
-
-    public WebDriver getDriver() {
-        return driver;
-    }
 
     @BeforeMethod
     public void setUp() {
@@ -27,7 +25,15 @@ public class BaseTest {
         this.driver.quit();
     }
 
+    public WebDriver getDriver() {
+        return driver;
+    }
+
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
+    }
+
+    public void addCookies(List<Cookie> cookieList) {
+        cookieList.forEach(cookie -> getDriver().manage().addCookie(cookie));
     }
 }

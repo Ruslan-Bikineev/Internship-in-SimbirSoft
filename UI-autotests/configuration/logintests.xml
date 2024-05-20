@@ -5,7 +5,13 @@
     </listeners>
     <test name="Login Page Tests">
         <classes>
-            <class name="tests.LoginPageTests">
+            <class name="tests.sql.exercises.SqlExercisesPageTests">
+                <methods>
+                    <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
+                    <include name="testAuthorizationWithoutLoginWithTheirCookies"/>
+                </methods>
+            </class>
+            <class name="tests.way2automation.LoginPageTests">
                 <methods>
                     <include name="testLoginWithInvalidDataOfDifferentTypes"/>
                     <include name="testMessagesUnderFieldLoginAndPassword"/>
