@@ -134,4 +134,16 @@ public class LoginPageTests extends BaseTest {
         Assert.assertEquals("", loginPage.getValuePasswordField(),
                 "Введенный пароль не совпадает с паролем в поле ввода");
     }
+
+    @Test
+    @Feature(value = "Скролл")
+    @Story(value = "Отсутствие скролла по высоте при максимальном размере окна")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(MINOR)
+    public void testScrollIsNotVisibleInMaximumWindow() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.openHomePage()
+                .clickMemberLogin();
+        Assert.assertFalse(JavaScriptUtil.hasHeightScroll(getDriver()));
+    }
 }

@@ -19,6 +19,7 @@
                     <include name="testInvalidLoginAndPassword"/>
                     <include name="testValidLoginAndEmptyPassword"/>
                     <include name="testEmptyLoginAndPassword"/>
+                    <include name="testScrollIsNotVisibleInMaximumWindow"/>
                 </methods>
             </class>
         </classes>
