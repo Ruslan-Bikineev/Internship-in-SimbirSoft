@@ -64,8 +64,8 @@ public class LoginPageTests extends BaseTest {
         homePage.openHomePage();
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.typeUsername(email)
-                .typePassword(password)
-                .clickLoginPageTitle();
+                .typePassword(password);
+        JavaScriptUtil.removeFocusFromElement(getDriver(), loginPage.getPasswordField());
         Assert.assertEquals(loginPage.getEmailFieldError(), expectedMessage,
                 "Ошибка под полем ввода логина не соответствует");
         Assert.assertEquals(loginPage.getPasswordFieldError(),
@@ -133,5 +133,17 @@ public class LoginPageTests extends BaseTest {
                 "Введенный логин не совпадает с логином в поле ввода");
         Assert.assertEquals("", loginPage.getValuePasswordField(),
                 "Введенный пароль не совпадает с паролем в поле ввода");
+    }
+
+    @Test
+    @Feature(value = "Скролл")
+    @Story(value = "Отсутствие скролла по высоте при максимальном размере окна")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(MINOR)
+    public void testScrollIsNotVisibleInMaximumWindow() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.openHomePage()
+                .clickMemberLogin();
+        Assert.assertFalse(JavaScriptUtil.hasHeightScroll(getDriver()));
     }
 }
