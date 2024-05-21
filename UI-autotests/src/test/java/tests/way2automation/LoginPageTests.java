@@ -65,7 +65,7 @@ public class LoginPageTests extends BaseTest {
         LoginPage loginPage = homePage.clickMemberLogin();
         loginPage.typeUsername(email)
                 .typePassword(password);
-        JavaScriptUtil.blurToElement(getDriver(), loginPage.getPasswordField());
+        JavaScriptUtil.removeFocusFromElement(getDriver(), loginPage.getPasswordField());
         Assert.assertEquals(loginPage.getEmailFieldError(), expectedMessage,
                 "Ошибка под полем ввода логина не соответствует");
         Assert.assertEquals(loginPage.getPasswordFieldError(),

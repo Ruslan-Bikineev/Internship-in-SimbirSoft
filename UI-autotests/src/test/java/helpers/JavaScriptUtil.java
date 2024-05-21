@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class JavaScriptUtil {
     @Step("Убираем фокус из поля ввода")
-    public static void blurToElement(WebDriver driver, WebElement element) {
+    public static void removeFocusFromElement(WebDriver driver, WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].blur();", element);
     }
