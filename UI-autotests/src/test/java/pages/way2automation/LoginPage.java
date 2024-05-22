@@ -2,8 +2,8 @@ package pages.way2automation;
 
 import io.qameta.allure.Step;
 import lombok.Data;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,7 +15,7 @@ import static helpers.Waiters.waitUrlToBe;
 @Data
 public class LoginPage {
     public static final String LOGIN_PAGE_URL = "https://sso.teachable.com/secure/673/identity/login";
-    private final WebDriver driver;
+    private final RemoteWebDriver driver;
     @FindBy(xpath = "//h3")
     private WebElement loginPageTitle;
     @FindBy(css = "#email")
@@ -31,7 +31,7 @@ public class LoginPage {
     @FindBy(css = ".text-with-icon")
     private WebElement invalidLoginMessage;
 
-    public LoginPage(WebDriver driver) {
+    public LoginPage(RemoteWebDriver driver) {
         this.driver = driver;
         waitUrlToBe(new WebDriverWait(driver, Duration.ofSeconds(15)), LOGIN_PAGE_URL);
         PageFactory.initElements(driver, this);

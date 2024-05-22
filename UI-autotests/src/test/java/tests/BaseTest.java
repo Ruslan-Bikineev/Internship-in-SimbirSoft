@@ -1,7 +1,6 @@
 package tests;
 
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
@@ -13,7 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class BaseTest {
-    private WebDriver driver;
+    private RemoteWebDriver driver;
 
     @BeforeMethod
     public void setUp() throws MalformedURLException {
@@ -29,7 +28,7 @@ public class BaseTest {
         this.driver.quit();
     }
 
-    public WebDriver getDriver() {
+    public RemoteWebDriver getDriver() {
         return driver;
     }
 
