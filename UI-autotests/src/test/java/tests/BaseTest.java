@@ -1,26 +1,25 @@
 package tests;
 
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import tests.driver.factory.WebDriverFactory;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
 public class BaseTest {
-    private RemoteWebDriver driver;
+    private WebDriver driver;
 
     @BeforeMethod
-    public void setUp() throws MalformedURLException {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        this.driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
-        this.driver.manage().window().maximize();
-        this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
-        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+    @Parameters(value = {"remote"})
+    public void setUp(boolean remote) {
+        driver = WebDriverFactory.getDriver(remote);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     @AfterMethod
@@ -28,7 +27,7 @@ public class BaseTest {
         this.driver.quit();
     }
 
-    public RemoteWebDriver getDriver() {
+    public WebDriver getDriver() {
         return driver;
     }
 

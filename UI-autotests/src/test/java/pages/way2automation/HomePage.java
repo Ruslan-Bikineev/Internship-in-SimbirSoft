@@ -1,14 +1,14 @@
 package pages.way2automation;
 
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
     public static final String HOME_PAGE_URL = "https://www.way2automation.com/";
-    private final RemoteWebDriver driver;
+    private final WebDriver driver;
     @FindBy(css = ".elementor-location-popup")
     private WebElement popup;
     @FindBy(css = ".dialog-close-button")
@@ -30,7 +30,7 @@ public class HomePage {
     @FindBy(xpath = "//*[@class=\"elementor-icon-list-item elementor-inline-item lazyloaded\"]")
     private WebElement siteSupportIndiaNumber2;
 
-    public HomePage(RemoteWebDriver driver) {
+    public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

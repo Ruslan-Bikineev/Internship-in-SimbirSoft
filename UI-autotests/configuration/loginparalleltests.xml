@@ -1,5 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Authorization Tests Suite" parallel="classes" thread-count="2">
+    <parameter name="remote" value="true"></parameter>
     <listeners>
         <listener class-name="helpers.MyListener"></listener>
     </listeners>
