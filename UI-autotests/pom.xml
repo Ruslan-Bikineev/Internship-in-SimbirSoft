@@ -12,7 +12,7 @@
         <!--==================================================================-->
         <testng.version>7.10.1</testng.version>
         <aspectj.version>1.9.22</aspectj.version>
-        <selenium.version>4.20.0</selenium.version>
+        <selenium.version>4.21.0</selenium.version>
         <allure-testng.version>2.27.0</allure-testng.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <!--==================================================================-->
