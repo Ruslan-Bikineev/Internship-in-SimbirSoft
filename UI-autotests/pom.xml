@@ -75,6 +75,13 @@
                 <suiteXmlFile>configuration/loginparalleltests.xml</suiteXmlFile>
             </properties>
         </profile>
+        <!--      Профиль для запуска тестов через файл testng-failed.xml       -->
+        <profile>
+            <id>retry-failed-tests</id>
+            <properties>
+                <suiteXmlFile>target/surefire-reports/testng-failed.xml</suiteXmlFile>
+            </properties>
+        </profile>
     </profiles>
     <!--================================================================-->
     <build>
