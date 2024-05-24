@@ -7,6 +7,10 @@ target/
 .allure
 allure-results
 
+### Selenium-server ###
+selenium-server
+selenium-server*.jar
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
