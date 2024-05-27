@@ -14,9 +14,9 @@ public class BaseTest {
     private WebDriver driver;
 
     @BeforeMethod
-    @Parameters(value = {"remote"})
-    public void setUp(boolean remote) {
-        driver = WebDriverFactory.getDriver(remote);
+    @Parameters(value = {"remote", "browser"})
+    public void setUp(boolean remote, String browser) {
+        driver = WebDriverFactory.getDriver(remote, browser);
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
