@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -19,8 +18,7 @@ public class RemoteWebDriverFactory implements DriverFactory {
                 case "Chrome" -> new RemoteWebDriver(gridHubUrl, new ChromeOptions());
                 case "Firefox" -> new RemoteWebDriver(gridHubUrl, new FirefoxOptions());
                 case "Edge" -> new RemoteWebDriver(gridHubUrl, new EdgeOptions());
-                case "IE" ->
-                        new RemoteWebDriver(gridHubUrl, new InternetExplorerOptions(internetExplorerSetCapability()));
+                case "IE" -> new RemoteWebDriver(gridHubUrl, internetExplorerOptions());
                 default -> throw new IllegalStateException("Unexpected value: " + browser);
             };
         } catch (MalformedURLException e) {

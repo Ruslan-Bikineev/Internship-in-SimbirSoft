@@ -8,10 +8,11 @@ import java.time.Duration;
 public interface DriverFactory {
     WebDriver createDriver(String browserName);
 
-    default InternetExplorerOptions internetExplorerSetCapability() {
+    default InternetExplorerOptions internetExplorerOptions() {
         InternetExplorerOptions options = new InternetExplorerOptions();
         options.waitForUploadDialogUpTo(Duration.ofSeconds(15));
         options.introduceFlakinessByIgnoringSecurityDomains();
+        options.destructivelyEnsureCleanSession();
         options.ignoreZoomSettings();
         return options;
     }
