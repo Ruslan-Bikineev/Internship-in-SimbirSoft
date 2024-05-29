@@ -14,7 +14,7 @@ public class LocalWebDriverFactory implements DriverFactory {
             case "Firefox" -> new FirefoxDriver();
             case "Edge" -> new EdgeDriver();
             case "IE" -> new InternetExplorerDriver(internetExplorerOptions());
-            default -> throw new IllegalStateException("Unexpected value: " + browser);
+            default -> throw new IllegalArgumentException("Unexpected value: " + browser);
         };
     }
 }
