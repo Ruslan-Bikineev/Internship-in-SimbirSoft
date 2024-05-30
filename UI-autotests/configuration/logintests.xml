@@ -7,6 +7,11 @@
         <parameter name="remote" value="false"></parameter>
         <parameter name="browser" value="Chrome"></parameter>
         <classes>
+            <class name="tests.way2automation.DroppablePageTests">
+                <methods>
+                    <include name="testDragAndDropExample1"/>
+                </methods>
+            </class>
             <class name="tests.sql.exercises.SqlExercisesPageTests">
                 <methods>
                     <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
@@ -30,6 +35,11 @@
         <parameter name="remote" value="false"></parameter>
         <parameter name="browser" value="Firefox"></parameter>
         <classes>
+            <class name="tests.way2automation.DroppablePageTests">
+                <methods>
+                    <include name="testDragAndDropExample1"/>
+                </methods>
+            </class>
             <class name="tests.sql.exercises.SqlExercisesPageTests">
                 <methods>
                     <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
@@ -53,6 +63,11 @@
         <parameter name="remote" value="false"></parameter>
         <parameter name="browser" value="Edge"></parameter>
         <classes>
+            <class name="tests.way2automation.DroppablePageTests">
+                <methods>
+                    <include name="testDragAndDropExample1"/>
+                </methods>
+            </class>
             <class name="tests.sql.exercises.SqlExercisesPageTests">
                 <methods>
                     <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
@@ -76,6 +91,11 @@
         <parameter name="remote" value="false"></parameter>
         <parameter name="browser" value="IE"></parameter>
         <classes>
+            <class name="tests.way2automation.DroppablePageTests">
+                <methods>
+                    <include name="testDragAndDropExample1"/>
+                </methods>
+            </class>
             <class name="tests.sql.exercises.SqlExercisesPageTests">
                 <methods>
                     <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>

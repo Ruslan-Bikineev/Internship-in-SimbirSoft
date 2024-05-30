@@ -3,10 +3,15 @@
     <listeners>
         <listener class-name="helpers.MyListener"></listener>
     </listeners>
-    <test name="Login Page Tests Chrome browser" parallel="classes" thread-count="2">
+    <test name="Login Page Tests Chrome browser" parallel="classes" thread-count="3">
         <parameter name="remote" value="true"></parameter>
         <parameter name="browser" value="Chrome"></parameter>
         <classes>
+            <class name="tests.way2automation.DroppablePageTests">
+                <methods>
+                    <include name="testDragAndDropExample1"/>
+                </methods>
+            </class>
             <class name="tests.sql.exercises.SqlExercisesPageTests">
                 <methods>
                     <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
@@ -26,10 +31,15 @@
             </class>
         </classes>
     </test>
-    <test name="Login Page Tests Firefox browser" parallel="classes" thread-count="2">
+    <test name="Login Page Tests Firefox browser" parallel="classes" thread-count="3">
         <parameter name="remote" value="true"></parameter>
         <parameter name="browser" value="Firefox"></parameter>
         <classes>
+            <class name="tests.way2automation.DroppablePageTests">
+                <methods>
+                    <include name="testDragAndDropExample1"/>
+                </methods>
+            </class>
             <class name="tests.sql.exercises.SqlExercisesPageTests">
                 <methods>
                     <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
@@ -49,10 +59,15 @@
             </class>
         </classes>
     </test>
-    <test name="Login Page Tests Edge browser" parallel="classes" thread-count="2">
+    <test name="Login Page Tests Edge browser" parallel="classes" thread-count="3">
         <parameter name="remote" value="true"></parameter>
         <parameter name="browser" value="Edge"></parameter>
         <classes>
+            <class name="tests.way2automation.DroppablePageTests">
+                <methods>
+                    <include name="testDragAndDropExample1"/>
+                </methods>
+            </class>
             <class name="tests.sql.exercises.SqlExercisesPageTests">
                 <methods>
                     <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
@@ -72,10 +87,15 @@
             </class>
         </classes>
     </test>
-    <test name="Login Page Tests IE browser" parallel="classes" thread-count="2">
+    <test name="Login Page Tests IE browser" parallel="classes" thread-count="3">
         <parameter name="remote" value="true"></parameter>
         <parameter name="browser" value="IE"></parameter>
         <classes>
+            <class name="tests.way2automation.DroppablePageTests">
+                <methods>
+                    <include name="testDragAndDropExample1"/>
+                </methods>
+            </class>
             <class name="tests.sql.exercises.SqlExercisesPageTests">
                 <methods>
                     <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
