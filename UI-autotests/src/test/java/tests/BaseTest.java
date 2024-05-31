@@ -9,6 +9,7 @@ import tests.driver.factory.WebDriverFactory;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
 public class BaseTest {
     private WebDriver driver;
@@ -37,5 +38,14 @@ public class BaseTest {
 
     public void addCookies(List<Cookie> cookieList) {
         cookieList.forEach(cookie -> getDriver().manage().addCookie(cookie));
+    }
+
+    public Optional<String> getNewWindowHandle(String... oldWindowHandles) {
+        List<String> oldWindowHandlesList = List.of(oldWindowHandles);
+        Optional<String> resultWindowHandle;
+        resultWindowHandle = Optional.ofNullable(driver.getWindowHandles().stream()
+                .filter(windowHandle -> !oldWindowHandlesList.contains(windowHandle))
+                .findFirst().orElse(null));
+        return resultWindowHandle;
     }
 }
