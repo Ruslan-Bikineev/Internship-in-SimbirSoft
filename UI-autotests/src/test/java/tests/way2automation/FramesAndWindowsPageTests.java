@@ -28,13 +28,13 @@ public class FramesAndWindowsPageTests extends BaseTest {
         framesAndWindowsPage.openFramesAndWindowsPage();
         String originalWindowHandle = getDriver().getWindowHandle();
         NewBrowserTabPage newBrowserTabPage1 = framesAndWindowsPage.clickNewBrowserTab();
-        Optional<String> newBrowserTabPage1WindowHandle = getNewWindowHandle(originalWindowHandle);
-        newBrowserTabPage1WindowHandle.ifPresent(h -> getDriver().switchTo().window(h));
+        String newBrowserTabPage1WindowHandle = getNewWindowHandle(originalWindowHandle);
+        Assert.assertFalse(newBrowserTabPage1WindowHandle.isBlank());
+        getDriver().switchTo().window(newBrowserTabPage1WindowHandle);
         NewBrowserTabPage newBrowserTabPage2 = newBrowserTabPage1.clickNewBrowserTab();
-        Optional<String> newBrowserTabPage2WindowHandle = getNewWindowHandle(originalWindowHandle,
-                newBrowserTabPage1WindowHandle.orElse(null));
-        Assert.assertTrue(newBrowserTabPage1WindowHandle.isPresent());
-        Assert.assertTrue(newBrowserTabPage2WindowHandle.isPresent());
+        String newBrowserTabPage2WindowHandle = getNewWindowHandle(
+                originalWindowHandle, newBrowserTabPage1WindowHandle);
+        Assert.assertFalse(newBrowserTabPage2WindowHandle.isBlank());
         Assert.assertEquals(getDriver().getWindowHandles().size(), 3);
     }
 }

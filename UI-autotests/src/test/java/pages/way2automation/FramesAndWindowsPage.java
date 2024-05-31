@@ -19,13 +19,13 @@ public class FramesAndWindowsPage {
         PageFactory.initElements(driver, this);
     }
 
-    @Step("Открытие страницы: " + FRAMES_AND_WINDOWS_PAGE_URL)
+    @Step("Открываем страницу: " + FRAMES_AND_WINDOWS_PAGE_URL)
     public FramesAndWindowsPage openFramesAndWindowsPage() {
         driver.get(FRAMES_AND_WINDOWS_PAGE_URL);
         return this;
     }
 
-    @Step("Открываем новую вкладку New Browser Tab Example 1 и переносим фокус на неё")
+    @Step("Открываем новую вкладку New Browser Tab Example 1")
     public NewBrowserTabPage clickNewBrowserTab() {
         driver.switchTo().frame(iframeExample1);
         linkNewBrowserTab.click();

@@ -40,12 +40,18 @@ public class BaseTest {
         cookieList.forEach(cookie -> getDriver().manage().addCookie(cookie));
     }
 
-    public Optional<String> getNewWindowHandle(String... oldWindowHandles) {
+    /**
+     * Данный метод возвращает дескриптор нового окна,
+     * если ранее открытые окна были переданы в качестве входных параметров.
+     *
+     * @param oldWindowHandles дескрипторы ранее открытых окон
+     * @return String, содержащий дескриптор нового окна, или пустой null, если новое окно не найдено
+     */
+    public String getNewWindowHandle(String... oldWindowHandles) {
         List<String> oldWindowHandlesList = List.of(oldWindowHandles);
-        Optional<String> resultWindowHandle;
-        resultWindowHandle = Optional.ofNullable(driver.getWindowHandles().stream()
+        String resultWindowHandle = driver.getWindowHandles().stream()
                 .filter(windowHandle -> !oldWindowHandlesList.contains(windowHandle))
-                .findFirst().orElse(null));
+                .findFirst().orElse(null);
         return resultWindowHandle;
     }
 }

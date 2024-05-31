@@ -17,7 +17,7 @@ public class NewBrowserTabPage {
         PageFactory.initElements(driver, this);
     }
 
-    @Step("Открываем новую вкладку New Browser Tab Example 1 и переносим фокус на неё")
+    @Step("Открываем новую вкладку New Browser Tab")
     public NewBrowserTabPage clickNewBrowserTab() {
         linkNewBrowserTab.click();
         return new NewBrowserTabPage(driver);
