@@ -12,9 +12,9 @@ public class DroppablePage {
     private final WebDriver driver;
     @FindBy(css = "#example-1-tab-1 iframe")
     private WebElement iframeExample1;
-    @FindBy(css = "#draggable")
+    @FindBy(id = "draggable")
     private WebElement draggableExample1;
-    @FindBy(css = "#droppable")
+    @FindBy(id = "droppable")
     private WebElement droppableExample1;
 
     public DroppablePage(WebDriver driver) {
