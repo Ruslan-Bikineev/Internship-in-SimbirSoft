@@ -9,7 +9,6 @@ import tests.driver.factory.WebDriverFactory;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.Optional;
 
 public class BaseTest {
     private WebDriver driver;
@@ -45,7 +44,7 @@ public class BaseTest {
      * если ранее открытые окна были переданы в качестве входных параметров.
      *
      * @param oldWindowHandles дескрипторы ранее открытых окон
-     * @return String, содержащий дескриптор нового окна, или пустой null, если новое окно не найдено
+     * @return String, содержащий дескриптор нового окна, или null, если новое окно не найдено
      */
     public String getNewWindowHandle(String... oldWindowHandles) {
         List<String> oldWindowHandlesList = List.of(oldWindowHandles);

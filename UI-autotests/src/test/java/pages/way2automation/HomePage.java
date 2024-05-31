@@ -35,13 +35,13 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    @Step("Открытие главной страницы: " + HOME_PAGE_URL)
+    @Step("Открываем страницу: " + HOME_PAGE_URL)
     public HomePage openHomePage() {
         driver.get(HOME_PAGE_URL);
         return this;
     }
 
-    @Step("Открытие вкладки «Все курсы»")
+    @Step("Открываем вкладку «Все курсы»")
     public HomePage clickAllCourses() {
         buttonAllCourses.click();
         return this;
@@ -53,7 +53,7 @@ public class HomePage {
         return new LoginPage(driver);
     }
 
-    @Step("Закрытия всплывающего окна")
+    @Step("Закрываем всплывающее окно")
     public void clickPopupClose() {
         popupClose.click();
     }

@@ -25,7 +25,7 @@ public class FramesAndWindowsPage {
         return this;
     }
 
-    @Step("Открываем новую вкладку New Browser Tab Example 1")
+    @Step("Открываем новую вкладку New Browser Tab")
     public NewBrowserTabPage clickNewBrowserTab() {
         driver.switchTo().frame(iframeExample1);
         linkNewBrowserTab.click();
