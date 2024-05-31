@@ -18,7 +18,7 @@ public class FramesAndWindowsPageTests extends BaseTest {
 
     @Test
     @Feature(value = "Открывание новых вкладок")
-    @Story(value = "Открывание новых вкладок в браузере со сменой фокуса на каждую открытую вкладку")
+    @Story(value = "Открывание 2-х новых вкладок в браузере со сменой фокуса на каждую открытую вкладку")
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void openFramesAndWindowsPageTest() {
@@ -27,13 +27,13 @@ public class FramesAndWindowsPageTests extends BaseTest {
         String originalWindowHandle = getDriver().getWindowHandle();
         NewBrowserTabPage newBrowserTabPage1 = framesAndWindowsPage.clickNewBrowserTab();
         String newBrowserTabPage1WindowHandle = getNewWindowHandle(originalWindowHandle);
-        Assert.assertFalse(newBrowserTabPage1WindowHandle.isBlank(), "Новая вкладка не открылась");
-        getDriver().switchTo().window(newBrowserTabPage1WindowHandle);
+        Assert.assertFalse(newBrowserTabPage1WindowHandle.isBlank(), "Дескриптор первой вкладки пустой");
+        switchToWindow(newBrowserTabPage1WindowHandle);
         NewBrowserTabPage newBrowserTabPage2 = newBrowserTabPage1.clickNewBrowserTab();
         String newBrowserTabPage2WindowHandle =
                 getNewWindowHandle(originalWindowHandle, newBrowserTabPage1WindowHandle);
-        getDriver().switchTo().window(newBrowserTabPage2WindowHandle);
-        Assert.assertFalse(newBrowserTabPage2WindowHandle.isBlank(), "Новая вкладка не открылась");
+        switchToWindow(newBrowserTabPage2WindowHandle);
+        Assert.assertFalse(newBrowserTabPage2WindowHandle.isBlank(), "Дескриптор второй вкладки пустой");
         Assert.assertEquals(getDriver().getWindowHandles().size(), 3,
                 "Неверное количество открытых вкладок");
     }

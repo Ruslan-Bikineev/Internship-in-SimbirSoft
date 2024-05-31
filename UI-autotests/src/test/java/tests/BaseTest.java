@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -52,5 +53,10 @@ public class BaseTest {
                 .filter(windowHandle -> !oldWindowHandlesList.contains(windowHandle))
                 .findFirst().orElse(null);
         return resultWindowHandle;
+    }
+
+    @Step("Переключаем фокус на вкладку с дескриптором: {windowHandle}")
+    public void switchToWindow(String windowHandle) {
+        driver.switchTo().window(windowHandle);
     }
 }
