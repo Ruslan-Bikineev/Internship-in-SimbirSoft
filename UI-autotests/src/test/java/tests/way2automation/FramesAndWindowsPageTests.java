@@ -11,6 +11,7 @@ import pages.way2automation.FramesAndWindowsPage;
 import pages.way2automation.NewBrowserTabPage;
 import tests.BaseTest;
 
+import static helpers.Helper.getNewWindowHandle;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 
 @Epic(value = "Страница с фреймами и окнами")
@@ -26,12 +27,12 @@ public class FramesAndWindowsPageTests extends BaseTest {
         framesAndWindowsPage.openFramesAndWindowsPage();
         String originalWindowHandle = getDriver().getWindowHandle();
         NewBrowserTabPage newBrowserTabPage1 = framesAndWindowsPage.clickNewBrowserTab();
-        String newBrowserTabPage1WindowHandle = getNewWindowHandle(originalWindowHandle);
+        String newBrowserTabPage1WindowHandle = getNewWindowHandle(getDriver(), originalWindowHandle);
         Assert.assertFalse(newBrowserTabPage1WindowHandle.isBlank(), "Дескриптор первой вкладки пустой");
         switchToWindow(newBrowserTabPage1WindowHandle);
         NewBrowserTabPage newBrowserTabPage2 = newBrowserTabPage1.clickNewBrowserTab();
         String newBrowserTabPage2WindowHandle =
-                getNewWindowHandle(originalWindowHandle, newBrowserTabPage1WindowHandle);
+                getNewWindowHandle(getDriver(), originalWindowHandle, newBrowserTabPage1WindowHandle);
         switchToWindow(newBrowserTabPage2WindowHandle);
         Assert.assertFalse(newBrowserTabPage2WindowHandle.isBlank(), "Дескриптор второй вкладки пустой");
         Assert.assertEquals(getDriver().getWindowHandles().size(), 3,
