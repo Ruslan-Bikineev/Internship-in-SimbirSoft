@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import java.util.List;
 
 public class Helper {
-
     /**
      * Данный метод добавляет Cookie в браузер.
      *
@@ -21,6 +20,7 @@ public class Helper {
      * Данный метод возвращает дескриптор нового окна,
      * если ранее открытые окна были переданы в качестве входных параметров.
      *
+     * @param driver           экземпляр WebDriver, используемый для взаимодействия с браузером.
      * @param oldWindowHandles дескрипторы ранее открытых окон.
      * @return String, содержащий дескриптор нового окна, или null, если новое окно не найдено.
      */
