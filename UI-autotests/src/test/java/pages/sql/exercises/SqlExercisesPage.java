@@ -19,7 +19,7 @@ public class SqlExercisesPage {
         PageFactory.initElements(driver, this);
     }
 
-    @Step("Открытие главной страницы: " + HOME_PAGE_URL)
+    @Step("Открываем страницу: " + HOME_PAGE_URL)
     public SqlExercisesPage openHomePage() {
         driver.get(HOME_PAGE_URL);
         return this;
@@ -31,7 +31,7 @@ public class SqlExercisesPage {
         return this;
     }
 
-    @Step("Получение ник пользователя в качестве гостя")
+    @Step("Получаем ник пользователя в качестве гостя")
     public String getGuestLabel() {
         String[] labelArray = dateAndGuestLabel.getText().split(" ");
         return labelArray[labelArray.length - 1];

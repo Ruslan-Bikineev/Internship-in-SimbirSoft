@@ -22,7 +22,7 @@ public class DroppablePage {
         PageFactory.initElements(driver, this);
     }
 
-    @Step("Открытие страницы: " + DROPPABLE_PAGE_URL)
+    @Step("Открываем страницу: " + DROPPABLE_PAGE_URL)
     public DroppablePage openDroppablePage() {
         driver.get(DROPPABLE_PAGE_URL);
         return this;

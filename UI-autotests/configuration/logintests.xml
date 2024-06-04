@@ -7,6 +7,11 @@
         <parameter name="remote" value="false"></parameter>
         <parameter name="browser" value="Chrome"></parameter>
         <classes>
+            <class name="tests.way2automation.FramesAndWindowsPageTests">
+                <methods>
+                    <include name="openFramesAndWindowsPageTest"/>
+                </methods>
+            </class>
             <class name="tests.way2automation.DroppablePageTests">
                 <methods>
                     <include name="testDragAndDropExample1"/>
@@ -35,6 +40,11 @@
         <parameter name="remote" value="false"></parameter>
         <parameter name="browser" value="Firefox"></parameter>
         <classes>
+            <class name="tests.way2automation.FramesAndWindowsPageTests">
+                <methods>
+                    <include name="openFramesAndWindowsPageTest"/>
+                </methods>
+            </class>
             <class name="tests.way2automation.DroppablePageTests">
                 <methods>
                     <include name="testDragAndDropExample1"/>
@@ -63,6 +73,11 @@
         <parameter name="remote" value="false"></parameter>
         <parameter name="browser" value="Edge"></parameter>
         <classes>
+            <class name="tests.way2automation.FramesAndWindowsPageTests">
+                <methods>
+                    <include name="openFramesAndWindowsPageTest"/>
+                </methods>
+            </class>
             <class name="tests.way2automation.DroppablePageTests">
                 <methods>
                     <include name="testDragAndDropExample1"/>
@@ -91,6 +106,11 @@
         <parameter name="remote" value="false"></parameter>
         <parameter name="browser" value="IE"></parameter>
         <classes>
+            <class name="tests.way2automation.FramesAndWindowsPageTests">
+                <methods>
+                    <include name="openFramesAndWindowsPageTest"/>
+                </methods>
+            </class>
             <class name="tests.way2automation.DroppablePageTests">
                 <methods>
                     <include name="testDragAndDropExample1"/>
