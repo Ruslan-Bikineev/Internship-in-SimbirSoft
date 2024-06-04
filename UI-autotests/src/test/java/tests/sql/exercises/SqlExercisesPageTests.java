@@ -16,6 +16,7 @@ import java.io.File;
 import java.util.List;
 
 import static data.TestsData.PATH_TO_COOKIES_FILE;
+import static helpers.Helper.addCookies;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 
 @Epic(value = "Главная страница")
@@ -44,7 +45,7 @@ public class SqlExercisesPageTests extends BaseTest {
         sqlExercisesPage.openHomePage();
         getDriver().manage().deleteAllCookies();
         List<Cookie> cookieList = json.deserializeCookiesFromJsonFile(PATH_TO_COOKIES_FILE);
-        addCookies(cookieList);
+        addCookies(getDriver(), cookieList);
         getDriver().navigate().refresh();
         Assert.assertTrue(sqlExercisesPage.getGuestLabel().equals("гость")
                 || sqlExercisesPage.getGuestLabel().equals("guest"));

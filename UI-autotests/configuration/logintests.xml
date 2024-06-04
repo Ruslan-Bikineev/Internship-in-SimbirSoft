@@ -12,6 +12,11 @@
                     <include name="testInputAlertBox"/>
                 </methods>
             </class>
+            <class name="tests.way2automation.FramesAndWindowsPageTests">
+                <methods>
+                    <include name="openFramesAndWindowsPageTest"/>
+                </methods>
+            </class>
             <class name="tests.way2automation.DroppablePageTests">
                 <methods>
                     <include name="testDragAndDropExample1"/>
@@ -43,6 +48,11 @@
             <class name="tests.way2automation.AlertPageTests">
                 <methods>
                     <include name="testInputAlertBox"/>
+                </methods>
+            </class>
+            <class name="tests.way2automation.FramesAndWindowsPageTests">
+                <methods>
+                    <include name="openFramesAndWindowsPageTest"/>
                 </methods>
             </class>
             <class name="tests.way2automation.DroppablePageTests">
@@ -78,6 +88,11 @@
                     <include name="testInputAlertBox"/>
                 </methods>
             </class>
+            <class name="tests.way2automation.FramesAndWindowsPageTests">
+                <methods>
+                    <include name="openFramesAndWindowsPageTest"/>
+                </methods>
+            </class>
             <class name="tests.way2automation.DroppablePageTests">
                 <methods>
                     <include name="testDragAndDropExample1"/>
@@ -109,6 +124,11 @@
             <class name="tests.way2automation.AlertPageTests">
                 <methods>
                     <include name="testInputAlertBox"/>
+                </methods>
+            </class>
+            <class name="tests.way2automation.FramesAndWindowsPageTests">
+                <methods>
+                    <include name="openFramesAndWindowsPageTest"/>
                 </methods>
             </class>
             <class name="tests.way2automation.DroppablePageTests">
