@@ -1,6 +1,5 @@
 package tests;
 
-import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -32,10 +31,5 @@ public class BaseTest {
 
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
-    }
-
-    @Step("Переключаем фокус на вкладку с дескриптором: {windowHandle}")
-    public void switchToWindow(String windowHandle) {
-        driver.switchTo().window(windowHandle);
     }
 }

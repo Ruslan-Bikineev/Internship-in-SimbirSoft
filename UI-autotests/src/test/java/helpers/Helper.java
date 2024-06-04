@@ -1,11 +1,23 @@
 package helpers;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
 public class Helper {
+    /**
+     * Данный метод переключаем фокус на вкладку в браузере.
+     *
+     * @param driver       экземпляр WebDriver, используемый для взаимодействия с браузером.
+     * @param windowHandle дескриптор вкладки для смены фокуса.
+     */
+    @Step("Переключаем фокус на вкладку с дескриптором: {windowHandle}")
+    public static void switchToWindow(WebDriver driver, String windowHandle) {
+        driver.switchTo().window(windowHandle);
+    }
+
     /**
      * Данный метод добавляет Cookie в браузер.
      *
