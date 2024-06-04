@@ -13,11 +13,11 @@ import tests.BaseTest;
 import static data.TestsData.IT_IS_A_CUSTOM_TEXT;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 
-@Epic(value = "Страница с оповещением")
+@Epic(value = "Страница с alert боксом")
 public class AlertPageTests extends BaseTest {
     @Test
-    @Feature(value = "Ввод кастомного текста в алерт бокс")
-    @Story(value = "Ввод кастомного текста в алерт бокс и проверка его содержимого")
+    @Feature(value = "Alert бокс")
+    @Story(value = "Ввод кастомного текста в alert бокс и проверка его содержимого")
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void testInputAlertBox() {
