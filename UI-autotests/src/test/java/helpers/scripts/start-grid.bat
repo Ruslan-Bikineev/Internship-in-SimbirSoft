@@ -11,3 +11,4 @@ start java -jar %SELENIUM_JAR% node --port 4445
 start java -jar %SELENIUM_JAR% node --port 4446
 start java -jar %SELENIUM_JAR% node --port 4447
 start java -jar %SELENIUM_JAR% node --port 4448
+start java -jar %SELENIUM_JAR% node --port 4449
