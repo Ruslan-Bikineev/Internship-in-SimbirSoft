@@ -15,5 +15,4 @@ public class TestsData {
     public static final String PLEASE_PROVIDE_A_VALID_EMAIL_ADDRESS_MESSAGE = "Please provide a valid email address";
     public static final String HTTPWATCH_AUTHENTICATION_LOGIN = "httpwatch";
     public static final String HTTPWATCH_AUTHENTICATION_PASSWORD = "httpwatch";
-    public static final String HTTPWATCH_AFTER_BASIC_AUTHENTICATION_IMAGE_URL = "https://www.httpwatch.com/httpgallery/authentication/authenticatedimage/default";
 }

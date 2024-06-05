@@ -18,8 +18,6 @@ public class AuthenticationPage {
     private final WebDriver driver;
     @FindBy(id = "displayImage")
     WebElement displayImageButton;
-    @FindBy(id = "downloadImg")
-    WebElement downloadImageAfterBasicAuth;
 
     public AuthenticationPage(WebDriver driver) {
         this.driver = driver;
@@ -30,11 +28,6 @@ public class AuthenticationPage {
     public AuthenticationPage openAuthenticationPage() {
         driver.get(AUTHENTICATION_PAGE_URL);
         return this;
-    }
-
-    @Step("Получаем ссылку на картинку после базовой авторизации")
-    public String getDownloadImageAfterBasicAuth() {
-        return downloadImageAfterBasicAuth.getAttribute("src");
     }
 
     @Step("Отправляем http запрос для базовой авторизации, логин: {login}, пароль: {password}")
