@@ -3,156 +3,29 @@
     <listeners>
         <listener class-name="helpers.MyListener"></listener>
     </listeners>
+    <parameter name="remote" value="true"></parameter>
     <test name="Login Page Tests Chrome browser" parallel="classes" thread-count="5">
-        <parameter name="remote" value="true"></parameter>
         <parameter name="browser" value="Chrome"></parameter>
-        <classes>
-            <class name="tests.way2automation.AlertPageTests">
-                <methods>
-                    <include name="testInputAlertBox"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.FramesAndWindowsPageTests">
-                <methods>
-                    <include name="openFramesAndWindowsPageTest"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.DroppablePageTests">
-                <methods>
-                    <include name="testDragAndDropExample1"/>
-                </methods>
-            </class>
-            <class name="tests.sql.exercises.SqlExercisesPageTests">
-                <methods>
-                    <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
-                    <include name="testAuthorizationWithoutLoginWithTheirCookies"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.LoginPageTests">
-                <methods>
-                    <include name="testLoginWithInvalidDataOfDifferentTypes"/>
-                    <include name="testMessagesUnderFieldLoginAndPassword"/>
-                    <include name="testValidLoginAndPassword"/>
-                    <include name="testInvalidLoginAndPassword"/>
-                    <include name="testValidLoginAndEmptyPassword"/>
-                    <include name="testEmptyLoginAndPassword"/>
-                    <include name="testScrollIsNotVisibleInMaximumWindow"/>
-                </methods>
-            </class>
-        </classes>
+        <packages>
+            <package name="tests.*"></package>
+        </packages>
     </test>
     <test name="Login Page Tests Firefox browser" parallel="classes" thread-count="5">
-        <parameter name="remote" value="true"></parameter>
         <parameter name="browser" value="Firefox"></parameter>
-        <classes>
-            <class name="tests.way2automation.AlertPageTests">
-                <methods>
-                    <include name="testInputAlertBox"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.FramesAndWindowsPageTests">
-                <methods>
-                    <include name="openFramesAndWindowsPageTest"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.DroppablePageTests">
-                <methods>
-                    <include name="testDragAndDropExample1"/>
-                </methods>
-            </class>
-            <class name="tests.sql.exercises.SqlExercisesPageTests">
-                <methods>
-                    <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
-                    <include name="testAuthorizationWithoutLoginWithTheirCookies"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.LoginPageTests">
-                <methods>
-                    <include name="testLoginWithInvalidDataOfDifferentTypes"/>
-                    <include name="testMessagesUnderFieldLoginAndPassword"/>
-                    <include name="testValidLoginAndPassword"/>
-                    <include name="testInvalidLoginAndPassword"/>
-                    <include name="testValidLoginAndEmptyPassword"/>
-                    <include name="testEmptyLoginAndPassword"/>
-                    <include name="testScrollIsNotVisibleInMaximumWindow"/>
-                </methods>
-            </class>
-        </classes>
+        <packages>
+            <package name="tests.*"></package>
+        </packages>
     </test>
     <test name="Login Page Tests Edge browser" parallel="classes" thread-count="5">
-        <parameter name="remote" value="true"></parameter>
         <parameter name="browser" value="Edge"></parameter>
-        <classes>
-            <class name="tests.way2automation.AlertPageTests">
-                <methods>
-                    <include name="testInputAlertBox"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.FramesAndWindowsPageTests">
-                <methods>
-                    <include name="openFramesAndWindowsPageTest"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.DroppablePageTests">
-                <methods>
-                    <include name="testDragAndDropExample1"/>
-                </methods>
-            </class>
-            <class name="tests.sql.exercises.SqlExercisesPageTests">
-                <methods>
-                    <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
-                    <include name="testAuthorizationWithoutLoginWithTheirCookies"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.LoginPageTests">
-                <methods>
-                    <include name="testLoginWithInvalidDataOfDifferentTypes"/>
-                    <include name="testMessagesUnderFieldLoginAndPassword"/>
-                    <include name="testValidLoginAndPassword"/>
-                    <include name="testInvalidLoginAndPassword"/>
-                    <include name="testValidLoginAndEmptyPassword"/>
-                    <include name="testEmptyLoginAndPassword"/>
-                    <include name="testScrollIsNotVisibleInMaximumWindow"/>
-                </methods>
-            </class>
-        </classes>
+        <packages>
+            <package name="tests.*"></package>
+        </packages>
     </test>
     <test name="Login Page Tests IE browser" parallel="classes" thread-count="5">
-        <parameter name="remote" value="true"></parameter>
         <parameter name="browser" value="IE"></parameter>
-        <classes>
-            <class name="tests.way2automation.AlertPageTests">
-                <methods>
-                    <include name="testInputAlertBox"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.FramesAndWindowsPageTests">
-                <methods>
-                    <include name="openFramesAndWindowsPageTest"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.DroppablePageTests">
-                <methods>
-                    <include name="testDragAndDropExample1"/>
-                </methods>
-            </class>
-            <class name="tests.sql.exercises.SqlExercisesPageTests">
-                <methods>
-                    <include name="testAuthorizationWithoutLoginAndSaveCookiesToFile"/>
-                    <include name="testAuthorizationWithoutLoginWithTheirCookies"/>
-                </methods>
-            </class>
-            <class name="tests.way2automation.LoginPageTests">
-                <methods>
-                    <include name="testLoginWithInvalidDataOfDifferentTypes"/>
-                    <include name="testMessagesUnderFieldLoginAndPassword"/>
-                    <include name="testValidLoginAndPassword"/>
-                    <include name="testInvalidLoginAndPassword"/>
-                    <include name="testValidLoginAndEmptyPassword"/>
-                    <include name="testEmptyLoginAndPassword"/>
-                    <include name="testScrollIsNotVisibleInMaximumWindow"/>
-                </methods>
-            </class>
-        </classes>
+        <packages>
+            <package name="tests.*"></package>
+        </packages>
     </test>
 </suite>
