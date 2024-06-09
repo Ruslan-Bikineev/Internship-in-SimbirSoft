@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import pages.httpwatch.AuthenticationPage;
 import tests.BaseTest;
 
+import static data.TestsData.HTTPWATCH_AFTER_BASIC_AUTHENTICATION_IMAGE_URL;
 import static data.TestsData.HTTPWATCH_AUTHENTICATION_LOGIN;
 import static data.TestsData.HTTPWATCH_AUTHENTICATION_PASSWORD;
 import static io.qameta.allure.SeverityLevel.BLOCKER;
@@ -24,9 +25,9 @@ public class AuthenticationTests extends BaseTest {
     public void testBasicAuthentication() {
         AuthenticationPage authenticationPage = new AuthenticationPage(getDriver());
         authenticationPage.openAuthenticationPage()
+                .setLoginAndPasswordForBasicAuth(HTTPWATCH_AUTHENTICATION_LOGIN, HTTPWATCH_AUTHENTICATION_PASSWORD)
                 .clickDisplayImageButton();
-        int statusCode = authenticationPage.sendHttpRequestForBasicAuth(
-                HTTPWATCH_AUTHENTICATION_LOGIN, HTTPWATCH_AUTHENTICATION_PASSWORD);
-        Assert.assertEquals(statusCode, 200);
+        Assert.assertTrue(authenticationPage.getDownloadImageAfterBasicAuth()
+                .contains(HTTPWATCH_AFTER_BASIC_AUTHENTICATION_IMAGE_URL));
     }
 }
