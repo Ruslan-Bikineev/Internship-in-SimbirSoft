@@ -4,25 +4,25 @@
         <listener class-name="helpers.MyListener"></listener>
     </listeners>
     <parameter name="remote" value="true"></parameter>
-    <test name="Login Page Tests Chrome browser" parallel="classes" thread-count="5">
+    <test name="Login Page Tests Chrome browser" parallel="classes" thread-count="6">
         <parameter name="browser" value="Chrome"></parameter>
         <packages>
             <package name="tests.*"></package>
         </packages>
     </test>
-    <test name="Login Page Tests Firefox browser" parallel="classes" thread-count="5">
+    <test name="Login Page Tests Firefox browser" parallel="classes" thread-count="6">
         <parameter name="browser" value="Firefox"></parameter>
         <packages>
             <package name="tests.*"></package>
         </packages>
     </test>
-    <test name="Login Page Tests Edge browser" parallel="classes" thread-count="5">
+    <test name="Login Page Tests Edge browser" parallel="classes" thread-count="6">
         <parameter name="browser" value="Edge"></parameter>
         <packages>
             <package name="tests.*"></package>
         </packages>
     </test>
-    <test name="Login Page Tests IE browser" parallel="classes" thread-count="5">
+    <test name="Login Page Tests IE browser" parallel="classes" thread-count="6">
         <parameter name="browser" value="IE"></parameter>
         <packages>
             <package name="tests.*"></package>

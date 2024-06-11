@@ -13,4 +13,7 @@ public class TestsData {
     public static final String THIS_FIELD_IS_REQUIRED_MESSAGE = "This field is required";
     public static final String USER_NOT_FOUND_MESSAGE_COLOR = "rgba(255, 0, 0, 1)";
     public static final String PLEASE_PROVIDE_A_VALID_EMAIL_ADDRESS_MESSAGE = "Please provide a valid email address";
+    public static final String HTTPWATCH_AUTHENTICATION_LOGIN = "httpwatch";
+    public static final String HTTPWATCH_AUTHENTICATION_PASSWORD = "httpwatch";
+    public static final String HTTPWATCH_AFTER_BASIC_AUTHENTICATION_IMAGE_URL = "https://www.httpwatch.com/httpgallery/authentication/authenticatedimage/default";
 }
