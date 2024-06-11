@@ -59,9 +59,26 @@
             <version>1.18.32</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.18.0</version>
+        </dependency>
     </dependencies>
-    <!--        Профиль для запуска тестов через файл logintests.xml        -->
     <profiles>
+        <!--    Профиль для запуска тестов через файл cucumberlogintests.xml    -->
+        <profile>
+            <id>run-cucumber-tests</id>
+            <properties>
+                <suiteXmlFile>configuration/cucumberlogintests.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <!--        Профиль для запуска тестов через файл logintests.xml        -->
         <profile>
             <id>run-tests</id>
             <properties>

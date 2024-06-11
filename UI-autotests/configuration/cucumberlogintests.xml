@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Authorization Tests Suite With Cucumber">
+    <listeners>
+        <listener class-name="helpers.MyListener"></listener>
+    </listeners>
+    <test name="Login Page Tests">
+        <classes>
+            <class name="cucumber.runner.CucumberRunnerTests"></class>
+        </classes>
+    </test>
+</suite>
