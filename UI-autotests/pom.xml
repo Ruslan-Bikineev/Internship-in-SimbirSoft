@@ -10,10 +10,11 @@
 
     <properties>
         <!--==================================================================-->
+        <cucumber.version>7.18.0</cucumber.version>
         <testng.version>7.10.1</testng.version>
         <aspectj.version>1.9.22</aspectj.version>
         <selenium.version>4.21.0</selenium.version>
-        <allure-testng.version>2.27.0</allure-testng.version>
+        <allure.version>2.27.0</allure.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <!--==================================================================-->
         <maven.compiler.source>21</maven.compiler.source>
@@ -21,7 +22,23 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--==================================================================-->
     </properties>
-
+    <!-- Add allure-bom to dependency management to ensure correct versions of all the dependencies are used -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-bom</artifactId>
+                <version>${allure.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>messages</artifactId>
+                <version>24.1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
@@ -39,9 +56,24 @@
             <version>2.0.13</version>
         </dependency>
         <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>${allure-testng.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>ru.yandex.qatools.ashot</groupId>
@@ -60,8 +92,15 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    <!--        Профиль для запуска тестов через файл logintests.xml        -->
     <profiles>
+        <!--    Профиль для запуска тестов через файл cucumberlogintests.xml    -->
+        <profile>
+            <id>run-cucumber-tests</id>
+            <properties>
+                <suiteXmlFile>configuration/cucumberlogintests.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <!--        Профиль для запуска тестов через файл logintests.xml        -->
         <profile>
             <id>run-tests</id>
             <properties>
@@ -111,7 +150,7 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.11.2</version>
                 <configuration>
-                    <reportVersion>${allure-testng.version}</reportVersion>
+                    <reportVersion>${allure.version}</reportVersion>
                 </configuration>
             </plugin>
         </plugins>
