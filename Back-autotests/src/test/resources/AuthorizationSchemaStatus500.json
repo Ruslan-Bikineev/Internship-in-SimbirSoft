@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "http://localhost:8000/index.php?rest_route=/wp/v2/users/me",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "enum": [
+        "empty_password",
+        "empty_username",
+        "invalid_username",
+        "incorrect_password"
+      ]
+    },
+    "message": {
+      "type": "string",
+      "enum": [
+        "<strong>Ошибка</strong>: Вы не ввели пароль.",
+        "<strong>Ошибка</strong>: Вы не ввели имя пользователя.",
+        "<strong>Ошибка:</strong> Имя пользователя <strong>NonExistentLogin</strong> не зарегистрировано на сайте. Если вы забыли имя пользователя, используйте вместо него адрес email.",
+        "<strong>Ошибка</strong>: Введённый вами пароль пользователя <strong>Name</strong> неверен. <a href=\"http://localhost:8000/wp-login.php?action=lostpassword\">Забыли пароль?</a>"
+      ]
+    },
+    "data": {
+      "type": "null"
+    },
+    "additional_errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "empty_password"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "enum": [
+              "<strong>Ошибка</strong>: Вы не ввели пароль."
+            ]
+          }
+        }
+      }
+    }
+  }
+}
