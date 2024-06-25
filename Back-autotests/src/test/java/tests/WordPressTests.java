@@ -1,5 +1,10 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -9,15 +14,19 @@ import org.testng.annotations.Test;
 
 import static data.TestData.VALID_LOGIN;
 import static data.TestData.VALID_PASSWORD;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 
 //TODO: check in DB
-//TODO: testNg xml file
 //TODO: decomposition tests
-//TODO: added allure report and annotations
+@Epic(value = "Пост")
+@Feature(value = "Проверка CRUD запросов поста через API")
 public class WordPressTests {
     @Test
+    @Story(value = "Добавление нового поста авторизованным пользователем (Вызов метода POST)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testCreatePostWithAuthorizationUserAndFillBodyMethodPost() {
         JSONObject requestBody = new JSONObject();
         requestBody.put("slug", "Test slug");
@@ -57,6 +66,9 @@ public class WordPressTests {
     }
 
     @Test
+    @Story(value = "Добавление нового поста без авторизации (Вызов метода POST)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testCreatePostWithoutAuthorizationUserAndFillBodyMethodPost() {
         JSONObject requestBody = new JSONObject();
         requestBody.put("slug", "Test slug");
@@ -81,6 +93,9 @@ public class WordPressTests {
     }
 
     @Test
+    @Story(value = "Добавление нового поста с пустым телом запроса JSON авторизованным пользователем (Вызов метода POST)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testCreatePostWithAuthorizationUserAndEmptyBodyMethodPost() {
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -96,6 +111,9 @@ public class WordPressTests {
     }
 
     @Test
+    @Story(value = "Удаление поста авторизованным пользователем (Вызов метода DELETE)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testDeletePostWithAuthorizationUserMethodDelete() {
         Response preConditionResponse = RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -125,6 +143,9 @@ public class WordPressTests {
     }
 
     @Test
+    @Story(value = "Удаление несуществующего поста авторизованным пользователем (Вызов метода DELETE)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testDeleteNonExistentPostWithAuthorizationUserMethodDelete() {
         RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -140,6 +161,9 @@ public class WordPressTests {
     }
 
     @Test
+    @Story(value = "Удаление поста без авторизации (Вызов метода DELETE)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testDeletePostWithoutAuthorizationUserMethodDelete() {
         Response preConditionResponse = RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -177,6 +201,9 @@ public class WordPressTests {
     }
 
     @Test
+    @Story(value = "Редактирование поста авторизованным пользователем (Вызов метода PUT)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testEditPostWithAuthorizationUserMethodPut() {
         Response preConditionResponse = RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -217,6 +244,9 @@ public class WordPressTests {
     }
 
     @Test
+    @Story(value = "Редактирование несуществующего поста авторизованным пользователем (Вызов метода PUT)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testEditNonExistentPostWithAuthorizationUserMethodPut() {
         RestAssured.given()
                 .contentType(ContentType.JSON)
@@ -230,6 +260,9 @@ public class WordPressTests {
     }
 
     @Test
+    @Story(value = "Редактирование поста без авторизации (Вызов метода PUT)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testEditPostWithoutAuthorizationUserMethodPut() {
         Response preConditionResponse = RestAssured.given()
                 .contentType(ContentType.JSON)
