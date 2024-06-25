@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "http://localhost:8000/index.php?rest_route=/wp/v2/users/me",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "date": {
+      "type": "string",
+      "format": "datetime"
+    },
+    "date_gmt": {
+      "type": "string",
+      "format": "datetime"
+    },
+    "guid": {
+      "type": "object"
+    },
+    "modified": {
+      "type": "string",
+      "format": "datetime"
+    },
+    "modified_gmt": {
+      "type": "string",
+      "format": "datetime"
+    },
+    "password": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["publish", "future", "draft", "pending", "private"]
+    },
+    "type": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string",
+      "format": "uri"
+    },
+    "title": {
+      "type": "object"
+    },
+    "content": {
+      "type": "object"
+    },
+    "excerpt": {
+      "type": "object"
+    },
+    "author": {
+      "type": "integer"
+    },
+    "featured_media": {
+      "type": "integer"
+    },
+    "comment_status": {
+      "type": "string",
+      "enum": ["open", "closed"]
+    },
+    "ping_status": {
+      "type": "string",
+      "enum": ["open", "closed"]
+    },
+    "sticky": {
+      "type": "boolean"
+    },
+    "template": {
+      "type": "string"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["standard", "aside", "chat", "gallery", "link", "image", "quote", "status", "video", "audio"]
+    },
+    "meta": {
+      "type": "object"
+    },
+    "categories": {
+      "type": "array"
+    },
+    "tags": {
+      "type": "array"
+    },
+    "permalink_template": {
+      "type": "string"
+    },
+    "generated_slug": {
+      "type": "string"
+    },
+    "_links": {
+      "type": "object"
+    }
+  }
+}
