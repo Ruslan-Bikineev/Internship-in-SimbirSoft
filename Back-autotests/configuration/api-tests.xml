@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="API Tests" parallel="tests" thread-count="2">
+<suite name="API Tests">
+<!--    parallel="tests" thread-count="2"-->
     <test name="Authorization API Tests Suite">
         <classes>
             <class name="tests.AuthorizationTests"/>
-        </classes>
-    </test>
-    <test name="WordPress API Tests Suite">
-        <classes>
             <class name="tests.WordPressTests"/>
         </classes>
     </test>
+<!--    <test name="WordPress API Tests Suite">-->
+<!--        <classes>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

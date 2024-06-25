@@ -6,12 +6,15 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static data.TestData.DELETE;
+import static data.TestData.POST;
+import static data.TestData.PUT;
+import static data.TestData.URL;
 import static data.TestData.VALID_LOGIN;
 import static data.TestData.VALID_PASSWORD;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
@@ -39,28 +42,27 @@ public class WordPressTests {
         requestBody.put("ping_status", "open");
         requestBody.put("format", "standard");
         requestBody.put("sticky", false);
+        Specification.installSpecification(Specification.requestSpecification(URL));
         Response response = RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body(requestBody.toString())
                 .when()
-                .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
+                .post(POST)
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(response.statusCode(), 201);
 
-
         RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + response.jsonPath().getInt("id"))
+                .delete(DELETE + response.jsonPath().getInt("id"))
                 .then()
                 .assertThat().statusCode(200);
     }
@@ -81,15 +83,15 @@ public class WordPressTests {
         requestBody.put("ping_status", "open");
         requestBody.put("format", "standard");
         requestBody.put("sticky", false);
-        Response response = RestAssured.given()
-                .contentType(ContentType.JSON)
+        Specification.installSpecification(Specification.requestSpecification(URL),
+                Specification.responseSpecification(401));
+        RestAssured.given()
                 .body(requestBody.toString())
                 .when()
-                .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
+                .post(POST)
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
-                .extract().response();
-        Assert.assertEquals(response.statusCode(), 401);
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/ClientErrorResponsesSchema.json"));
     }
 
     @Test
@@ -97,17 +99,17 @@ public class WordPressTests {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testCreatePostWithAuthorizationUserAndEmptyBodyMethodPost() {
-        Response response = RestAssured.given()
-                .contentType(ContentType.JSON)
+        Specification.installSpecification(Specification.requestSpecification(URL),
+                Specification.responseSpecification(400));
+        RestAssured.given()
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .when()
-                .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
+                .post(POST)
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
-                .extract().response();
-        Assert.assertEquals(response.statusCode(), 400);
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/ClientErrorResponsesSchema.json"));
     }
 
     @Test
@@ -115,31 +117,30 @@ public class WordPressTests {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testDeletePostWithAuthorizationUserMethodDelete() {
+        Specification.installSpecification(Specification.requestSpecification(URL));
         Response preConditionResponse = RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"title\": \"Test title for DELETE\"}")
                 .when()
-                .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
+                .post(POST)
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(preConditionResponse.statusCode(), 201);
-
-        Response response = RestAssured.given()
-                .contentType(ContentType.JSON)
+        RestAssured.given()
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
+                .delete(DELETE + preConditionResponse.jsonPath().getInt("id"))
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/DeletePostSuccessfulResponsesSchema.json"))
-                .extract().response();
-        Assert.assertEquals(response.statusCode(), 200);
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/DeletePostSuccessfulResponsesSchema.json"))
+                .assertThat().statusCode(200);
     }
 
     @Test
@@ -147,17 +148,18 @@ public class WordPressTests {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testDeleteNonExistentPostWithAuthorizationUserMethodDelete() {
+        Specification.installSpecification(Specification.requestSpecification(URL),
+                Specification.responseSpecification(404));
         RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/0")
+                .delete(DELETE + "0")
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
-                .assertThat().statusCode(404);
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/ClientErrorResponsesSchema.json"));
     }
 
     @Test
@@ -165,37 +167,36 @@ public class WordPressTests {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testDeletePostWithoutAuthorizationUserMethodDelete() {
+        Specification.installSpecification(Specification.requestSpecification(URL));
         Response preConditionResponse = RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"title\": \"Test title for DELETE\"}")
                 .when()
-                .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
+                .post(POST)
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(preConditionResponse.statusCode(), 201);
 
-        Response response = RestAssured.given()
-                .contentType(ContentType.JSON)
+        RestAssured.given()
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
+                .delete(DELETE + preConditionResponse.jsonPath().getInt("id"))
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
-                .extract().response();
-        Assert.assertEquals(response.statusCode(), 401);
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/ClientErrorResponsesSchema.json"))
+                .assertThat().statusCode(401);
 
         RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
+                .delete(DELETE + preConditionResponse.jsonPath().getInt("id"))
                 .then()
                 .assertThat().statusCode(200);
     }
@@ -205,40 +206,39 @@ public class WordPressTests {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testEditPostWithAuthorizationUserMethodPut() {
+        Specification.installSpecification(Specification.requestSpecification(URL));
         Response preConditionResponse = RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"title\": \"Test title\"}")
                 .when()
-                .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
+                .post(POST)
                 .then()
                 .extract().response();
-
         Assert.assertEquals(preConditionResponse.statusCode(), 201);
 
         Response response = RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"title\": \"Change test title\"}")
-                .put("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
+                .put(PUT + preConditionResponse.jsonPath().getInt("id"))
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(response.statusCode(), 200);
-        Assert.assertEquals(preConditionResponse.jsonPath().getInt("id"), response.jsonPath().getInt("id"));
+        Assert.assertEquals(response.jsonPath().getInt("id"),
+                preConditionResponse.jsonPath().getInt("id"));
 
         RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
+                .delete(DELETE + preConditionResponse.jsonPath().getInt("id"))
                 .then()
                 .assertThat().statusCode(200);
     }
@@ -248,15 +248,16 @@ public class WordPressTests {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testEditNonExistentPostWithAuthorizationUserMethodPut() {
+        Specification.installSpecification(Specification.requestSpecification(URL),
+                Specification.responseSpecification(404));
         RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
-                .put("http://localhost:8000/index.php?rest_route=/wp/v2/posts/0")
+                .put(PUT + "0")
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
-                .assertThat().statusCode(404);
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/ClientErrorResponsesSchema.json"));
     }
 
     @Test
@@ -264,35 +265,33 @@ public class WordPressTests {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testEditPostWithoutAuthorizationUserMethodPut() {
+        Specification.installSpecification(Specification.requestSpecification(URL));
         Response preConditionResponse = RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"title\": \"Test title\"}")
                 .when()
-                .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
+                .post(POST)
                 .then()
                 .extract().response();
-
         Assert.assertEquals(preConditionResponse.statusCode(), 201);
 
         RestAssured.given()
-                .contentType(ContentType.JSON)
                 .body("{\"title\": \"Change test title\"}")
-                .put("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
+                .put(PUT + preConditionResponse.jsonPath().getInt("id"))
                 .then()
-                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
+                .body(matchesJsonSchemaInClasspath(
+                        "Schemas/ClientErrorResponsesSchema.json"))
                 .assertThat().statusCode(401);
 
         RestAssured.given()
-                .contentType(ContentType.JSON)
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
+                .delete(DELETE + preConditionResponse.jsonPath().getInt("id"))
                 .then()
                 .assertThat().statusCode(200);
     }
