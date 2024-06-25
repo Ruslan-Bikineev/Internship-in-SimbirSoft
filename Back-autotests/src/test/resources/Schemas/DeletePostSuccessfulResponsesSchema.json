@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "$id": "http://localhost:8000/index.php?rest_route=/wp/v2/users/me",
+  "$id": "http://localhost:8000/index.php?rest_route=/wp/v2/posts/<id>",
   "type": "object",
   "properties": {
     "deleted": {

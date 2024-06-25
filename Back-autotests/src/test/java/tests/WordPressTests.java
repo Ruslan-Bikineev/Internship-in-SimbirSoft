@@ -18,7 +18,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 //TODO: added allure report and annotations
 public class WordPressTests {
     @Test
-    public void testAddedPostWithAuthorizationUserAndFillBodyMethodPost() {
+    public void testCreatePostWithAuthorizationUserAndFillBodyMethodPost() {
         JSONObject requestBody = new JSONObject();
         requestBody.put("slug", "Test slug");
         requestBody.put("status", "publish");
@@ -39,7 +39,7 @@ public class WordPressTests {
                 .when()
                 .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema200.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(response.statusCode(), 201);
 
@@ -57,7 +57,7 @@ public class WordPressTests {
     }
 
     @Test
-    public void testAddedPostWithoutAuthorizationUserAndFillBodyMethodPost() {
+    public void testCreatePostWithoutAuthorizationUserAndFillBodyMethodPost() {
         JSONObject requestBody = new JSONObject();
         requestBody.put("slug", "Test slug");
         requestBody.put("status", "publish");
@@ -75,13 +75,13 @@ public class WordPressTests {
                 .when()
                 .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema400.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(response.statusCode(), 401);
     }
 
     @Test
-    public void testAddedPostWithAuthorizationUserAndEmptyBodyMethodPost() {
+    public void testCreatePostWithAuthorizationUserAndEmptyBodyMethodPost() {
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .auth()
@@ -90,7 +90,7 @@ public class WordPressTests {
                 .when()
                 .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema400.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(response.statusCode(), 400);
     }
@@ -106,7 +106,7 @@ public class WordPressTests {
                 .when()
                 .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema200.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(preConditionResponse.statusCode(), 201);
 
@@ -119,7 +119,7 @@ public class WordPressTests {
                 .when()
                 .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
                 .then()
-                .body(matchesJsonSchemaInClasspath("DeletePostSchema200.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/DeletePostSuccessfulResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(response.statusCode(), 200);
     }
@@ -135,7 +135,7 @@ public class WordPressTests {
                 .when()
                 .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/0")
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema400.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
                 .assertThat().statusCode(404);
     }
 
@@ -150,7 +150,7 @@ public class WordPressTests {
                 .when()
                 .post("http://localhost:8000/index.php?rest_route=/wp/v2/posts")
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema200.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(preConditionResponse.statusCode(), 201);
 
@@ -160,7 +160,7 @@ public class WordPressTests {
                 .when()
                 .delete("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema400.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(response.statusCode(), 401);
 
@@ -199,7 +199,7 @@ public class WordPressTests {
                 .body("{\"title\": \"Change test title\"}")
                 .put("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema200.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
         Assert.assertEquals(response.statusCode(), 200);
         Assert.assertEquals(preConditionResponse.jsonPath().getInt("id"), response.jsonPath().getInt("id"));
@@ -225,7 +225,7 @@ public class WordPressTests {
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .put("http://localhost:8000/index.php?rest_route=/wp/v2/posts/0")
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema400.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
                 .assertThat().statusCode(404);
     }
 
@@ -249,7 +249,7 @@ public class WordPressTests {
                 .body("{\"title\": \"Change test title\"}")
                 .put("http://localhost:8000/index.php?rest_route=/wp/v2/posts/" + preConditionResponse.jsonPath().getInt("id"))
                 .then()
-                .body(matchesJsonSchemaInClasspath("AddedPostSchema400.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/ClientErrorResponsesSchema.json"))
                 .assertThat().statusCode(401);
 
         RestAssured.given()

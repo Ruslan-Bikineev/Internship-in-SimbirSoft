@@ -27,7 +27,7 @@ public class AuthorizationTests {
                 .when()
                 .get("http://localhost:8000/index.php?rest_route=/wp/v2/users/me")
                 .then()
-                .body(matchesJsonSchemaInClasspath("AuthorizationSchemaStatus200.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/AuthorizationSuccessfulResponsesSchemaStatus.json"))
                 .extract()
                 .response();
         Assert.assertEquals(response.statusCode(), 200);
@@ -53,7 +53,7 @@ public class AuthorizationTests {
                 .when()
                 .get("http://localhost:8000/index.php?rest_route=/wp/v2/users/me")
                 .then()
-                .body(matchesJsonSchemaInClasspath("AuthorizationSchemaStatus500.json"))
+                .body(matchesJsonSchemaInClasspath("Schemas/ServerErrorResponsesSchema.json"))
                 .extract()
                 .response();
         Assert.assertEquals(response.statusCode(), 500);
