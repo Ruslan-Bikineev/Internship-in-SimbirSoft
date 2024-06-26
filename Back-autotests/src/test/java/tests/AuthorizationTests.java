@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 import static data.TestData.GET;
 import static data.TestData.NON_EXISTENT_LOGIN;
 import static data.TestData.NON_EXISTENT_PASSWORD;
-import static data.TestData.URL;
 import static data.TestData.VALID_LOGIN;
 import static data.TestData.VALID_PASSWORD;
 import static io.qameta.allure.SeverityLevel.BLOCKER;
@@ -20,14 +19,14 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 @Epic(value = "Авторизация")
 @Feature(value = "Авторизация через API")
-public class AuthorizationTests {
+public class AuthorizationTests extends BaseTest {
+
     @Test
     @Story(value = "Авторизация с валидными данными")
     @Owner(value = "Ruslan Bikineev")
     @Severity(BLOCKER)
     public void testAuthorizationWithValidData() {
-        Specification.installSpecification(Specification.requestSpecification(URL),
-                Specification.responseSpecification(200));
+        setStatusCodeToResponseSpecification(200);
         RestAssured.given()
                 .auth()
                 .preemptive()
@@ -54,8 +53,7 @@ public class AuthorizationTests {
     @Owner(value = "Ruslan Bikineev")
     @Severity(BLOCKER)
     public void testAuthorizationWithDifferentIncorrectData(String login, String password) {
-        Specification.installSpecification(Specification.requestSpecification(URL),
-                Specification.responseSpecification(500));
+        setStatusCodeToResponseSpecification(500);
         RestAssured.given()
                 .auth()
                 .preemptive()
