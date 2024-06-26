@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeClass;
 import static data.TestData.URL;
 
 public class BaseTest {
+
     @BeforeClass
     public void setUp() {
         RestAssured.requestSpecification = new RequestSpecBuilder()

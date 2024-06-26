@@ -10,7 +10,8 @@
         "rest_cannot_edit_others",
         "rest_post_invalid_id",
         "rest_cannot_delete",
-        "rest_cannot_edit"
+        "rest_cannot_edit",
+        "rest_cannot_create"
       ]
     },
     "message": {

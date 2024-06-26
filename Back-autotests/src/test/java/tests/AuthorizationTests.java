@@ -20,7 +20,6 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 @Epic(value = "Авторизация")
 @Feature(value = "Авторизация через API")
 public class AuthorizationTests extends BaseTest {
-
     @Test
     @Story(value = "Авторизация с валидными данными")
     @Owner(value = "Ruslan Bikineev")
