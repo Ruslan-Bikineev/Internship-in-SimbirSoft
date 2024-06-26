@@ -1,10 +1,11 @@
 package heplers;
 
-import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class helpers {
-    public static JSONObject getDefaultJsonBody() {
-        JSONObject requestBody = new JSONObject();
+    public static Map<String, String> getDefaultJsonBodyPost() {
+        Map<String, String> requestBody = new HashMap<>();
         requestBody.put("status", "publish");
         requestBody.put("title", "Test title");
         requestBody.put("content", "Test content");

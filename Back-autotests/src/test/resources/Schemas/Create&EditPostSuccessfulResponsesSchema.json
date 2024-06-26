@@ -33,7 +33,13 @@
     },
     "status": {
       "type": "string",
-      "enum": ["publish", "future", "draft", "pending", "private"]
+      "enum": [
+        "publish",
+        "future",
+        "draft",
+        "pending",
+        "private"
+      ]
     },
     "type": {
       "type": "string"
@@ -59,11 +65,17 @@
     },
     "comment_status": {
       "type": "string",
-      "enum": ["open", "closed"]
+      "enum": [
+        "open",
+        "closed"
+      ]
     },
     "ping_status": {
       "type": "string",
-      "enum": ["open", "closed"]
+      "enum": [
+        "open",
+        "closed"
+      ]
     },
     "sticky": {
       "type": "boolean"
@@ -73,7 +85,18 @@
     },
     "format": {
       "type": "string",
-      "enum": ["standard", "aside", "chat", "gallery", "link", "image", "quote", "status", "video", "audio"]
+      "enum": [
+        "standard",
+        "aside",
+        "chat",
+        "gallery",
+        "link",
+        "image",
+        "quote",
+        "status",
+        "video",
+        "audio"
+      ]
     },
     "meta": {
       "type": "object"

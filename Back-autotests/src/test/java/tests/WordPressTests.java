@@ -13,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import repository.WpPostsRepositoryImpl;
 
+import java.util.Map;
 import java.util.Optional;
 
 import static data.TestData.DELETE;
@@ -23,7 +24,6 @@ import static data.TestData.VALID_PASSWORD;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-//TODO: decomposition tests
 @Epic(value = "Пост")
 @Feature(value = "Проверка CRUD запросов поста через API")
 public class WordPressTests extends BaseTest {
@@ -32,13 +32,14 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testCreatePostWithAuthorizationUserAndFillBodyMethodPost() {
+        Map<String, String> body = helpers.getDefaultJsonBodyPost();
         WpPostsRepositoryImpl wpPostsRepository = new WpPostsRepositoryImpl();
         setStatusCodeToResponseSpecification(201);
         Response response = RestAssured.given()
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body(helpers.getDefaultJsonBody().toString())
+                .body(body)
                 .when()
                 .post(POST)
                 .then()
@@ -49,23 +50,15 @@ public class WordPressTests extends BaseTest {
         long id = response.jsonPath().getLong("id");
         Optional<Post> byId = wpPostsRepository.findById(id);
         Assert.assertTrue(byId.isPresent());
+        Assert.assertEquals(byId.get().getPostStatus(), body.get("status"));
+        Assert.assertEquals(byId.get().getPostTitle(), body.get("title"));
+        Assert.assertEquals(byId.get().getPostContent(), body.get("content"));
+        Assert.assertEquals(byId.get().getPostExcerpt(), body.get("excerpt"));
+        Assert.assertEquals(byId.get().getCommentStatus(), body.get("comment_status"));
+        Assert.assertEquals(byId.get().getPingStatus(), body.get("ping_status"));
 
-        Assert.assertEquals(byId.get().getPostStatus(), "publish");
-        Assert.assertEquals(byId.get().getPostTitle(), "Test title");
-        Assert.assertEquals(byId.get().getPostContent(), "Test content");
-        Assert.assertEquals(byId.get().getPostExcerpt(), "Test excerpt");
-        Assert.assertEquals(byId.get().getCommentStatus(), "open");
-        Assert.assertEquals(byId.get().getPingStatus(), "open");
-
-        setStatusCodeToResponseSpecification(200);
-        RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"force\": \"true\"}")
-                .when()
-                .delete(DELETE + id)
-                .then();
+        // Post conditions
+        postConditionDeletePost(id);
     }
 
     @Test
@@ -75,7 +68,7 @@ public class WordPressTests extends BaseTest {
     public void testCreatePostWithoutAuthorizationUserAndFillBodyMethodPost() {
         setStatusCodeToResponseSpecification(401);
         RestAssured.given()
-                .body(helpers.getDefaultJsonBody().toString())
+                .body(helpers.getDefaultJsonBodyPost())
                 .when()
                 .post(POST)
                 .then()
@@ -105,21 +98,10 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testDeletePostWithAuthorizationUserMethodDelete() {
+        // Preconditions
         WpPostsRepositoryImpl wpPostsRepository = new WpPostsRepositoryImpl();
-        setStatusCodeToResponseSpecification(201);
-        Response preConditionResponse = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"title\": \"Test title for DELETE\"}")
-                .when()
-                .post(POST)
-                .then()
-                .body(matchesJsonSchemaInClasspath(
-                        "Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
-                .extract().response();
+        long id = preConditionCreatePost();
 
-        long id = preConditionResponse.jsonPath().getLong("id");
         setStatusCodeToResponseSpecification(200);
         RestAssured.given()
                 .auth()
@@ -158,36 +140,21 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testDeletePostWithoutAuthorizationUserMethodDelete() {
+        // Preconditions
         setStatusCodeToResponseSpecification(201);
-        Response preConditionResponse = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"title\": \"Test title for DELETE\"}")
-                .when()
-                .post(POST)
-                .then()
-                .body(matchesJsonSchemaInClasspath(
-                        "Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
-                .extract().response();
+        long id = preConditionCreatePost();
 
         setStatusCodeToResponseSpecification(401);
         RestAssured.given()
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete(DELETE + preConditionResponse.jsonPath().getInt("id"))
+                .delete(DELETE + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "Schemas/ClientErrorResponsesSchema.json"));
 
-        setStatusCodeToResponseSpecification(200);
-        RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"force\": \"true\"}")
-                .when()
-                .delete(DELETE + preConditionResponse.jsonPath().getInt("id"));
+        // Post conditions
+        postConditionDeletePost(id);
     }
 
     @Test
@@ -195,18 +162,11 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testEditPostWithAuthorizationUserMethodPut() {
+        // Preconditions
         WpPostsRepositoryImpl wpPostsRepository = new WpPostsRepositoryImpl();
         setStatusCodeToResponseSpecification(201);
-        Response preConditionResponse = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"title\": \"Test title\"}")
-                .when()
-                .post(POST)
-                .then()
-                .extract().response();
-        long id = preConditionResponse.jsonPath().getLong("id");
+        long id = preConditionCreatePost();
+
         setStatusCodeToResponseSpecification(200);
         Response response = RestAssured.given()
                 .auth()
@@ -222,13 +182,9 @@ public class WordPressTests extends BaseTest {
         Optional<Post> byId = wpPostsRepository.findById(id);
         Assert.assertTrue(byId.isPresent());
         Assert.assertEquals(byId.get().getPostTitle(), "Change test title");
-        RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"force\": \"true\"}")
-                .when()
-                .delete(DELETE + preConditionResponse.jsonPath().getInt("id"));
+
+        // Post conditions
+        postConditionDeletePost(id);
     }
 
     @Test
@@ -252,32 +208,19 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testEditPostWithoutAuthorizationUserMethodPut() {
+        // Preconditions
         setStatusCodeToResponseSpecification(201);
-        Response preConditionResponse = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"title\": \"Test title\"}")
-                .when()
-                .post(POST)
-                .then()
-                .extract().response();
+        long id = preConditionCreatePost();
 
         setStatusCodeToResponseSpecification(401);
         RestAssured.given()
                 .body("{\"title\": \"Change test title\"}")
-                .put(PUT + preConditionResponse.jsonPath().getInt("id"))
+                .put(PUT + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "Schemas/ClientErrorResponsesSchema.json"));
 
-        setStatusCodeToResponseSpecification(200);
-        RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"force\": \"true\"}")
-                .when()
-                .delete(DELETE + preConditionResponse.jsonPath().getInt("id"));
+        // Post conditions
+        postConditionDeletePost(id);
     }
 }
