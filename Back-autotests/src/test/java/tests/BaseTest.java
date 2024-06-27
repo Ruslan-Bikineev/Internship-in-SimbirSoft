@@ -16,7 +16,6 @@ import static data.TestData.VALID_LOGIN;
 import static data.TestData.VALID_PASSWORD;
 
 public class BaseTest {
-
     @BeforeClass
     public void setUp() {
         RestAssured.requestSpecification = new RequestSpecBuilder()
@@ -60,6 +59,4 @@ public class BaseTest {
                 .when()
                 .delete(DELETE + id);
     }
-
-
 }
