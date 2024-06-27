@@ -45,7 +45,7 @@ public class Post {
         return requestBody;
     }
 
-    public Boolean isEqualeWithDefaultJsonBodyPost() {
+    public Boolean isEqualWithDefaultJsonBodyPost() {
         boolean result = true;
         if (!postStatus.equals("publish") || !postTitle.equals("Test title")
                 || !commentStatus.equals("open") || !pingStatus.equals("open")
