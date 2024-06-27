@@ -12,10 +12,10 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
-public class PostsRepositoryImpl implements PostsRepository {
+public class PostRepositoryImpl implements PostRepository {
     private DataSource dataSource;
 
-    public PostsRepositoryImpl() {
+    public PostRepositoryImpl() {
         HikariConfig config = new HikariConfig(
                 System.getProperty("user.dir") + "\\src\\test\\resources\\db.properties");
         dataSource = new HikariDataSource(config);

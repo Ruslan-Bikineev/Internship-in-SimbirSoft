@@ -10,7 +10,7 @@ import io.restassured.response.Response;
 import models.Post;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import repository.PostsRepositoryImpl;
+import repository.PostRepositoryImpl;
 
 import java.util.Map;
 import java.util.Optional;
@@ -33,7 +33,7 @@ public class WordPressTests extends BaseTest {
     public void testCreatePostWithAuthorizationUserAndFillBodyMethodPost() {
         // Preconditions
         Map<String, String> body = Post.getDefaultJsonBodyPost();
-        PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
+        PostRepositoryImpl postsRepository = new PostRepositoryImpl();
 
         setStatusCodeToResponseSpecification(201);
         Response response = RestAssured.given()
@@ -93,7 +93,7 @@ public class WordPressTests extends BaseTest {
     @Severity(CRITICAL)
     public void testDeletePostWithAuthorizationUserMethodDelete() {
         // Preconditions
-        PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
+        PostRepositoryImpl postsRepository = new PostRepositoryImpl();
         long id = preConditionCreatePost();
 
         setStatusCodeToResponseSpecification(200);
@@ -155,7 +155,7 @@ public class WordPressTests extends BaseTest {
     @Severity(CRITICAL)
     public void testEditPostWithAuthorizationUserMethodPut() {
         // Preconditions
-        PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
+        PostRepositoryImpl postsRepository = new PostRepositoryImpl();
         long id = preConditionCreatePost();
 
         setStatusCodeToResponseSpecification(200);
