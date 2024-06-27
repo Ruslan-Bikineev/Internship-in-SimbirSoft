@@ -3,7 +3,7 @@ package models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,8 +12,8 @@ import java.util.Map;
 public class Post {
     private long id;
     private long postAuthor;
-    private Date postDate;
-    private Date postDateGmt;
+    private Timestamp postDate;
+    private Timestamp postDateGmt;
     private String postContent;
     private String postTitle;
     private String postExcerpt;
@@ -24,8 +24,8 @@ public class Post {
     private String postName;
     private String toPing;
     private String pinged;
-    private Date postModified;
-    private Date postModifiedGmt;
+    private Timestamp postModified;
+    private Timestamp postModifiedGmt;
     private String postContentFiltered;
     private long postParent;
     private String guid;
