@@ -10,7 +10,7 @@ import io.restassured.response.Response;
 import models.Post;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import repository.WpPostsRepositoryImpl;
+import repository.PostsRepositoryImpl;
 
 import java.util.Map;
 import java.util.Optional;
@@ -33,7 +33,7 @@ public class WordPressTests extends BaseTest {
     public void testCreatePostWithAuthorizationUserAndFillBodyMethodPost() {
         // Preconditions
         Map<String, String> body = Post.getDefaultJsonBodyPost();
-        WpPostsRepositoryImpl wpPostsRepository = new WpPostsRepositoryImpl();
+        PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
 
         setStatusCodeToResponseSpecification(201);
         Response response = RestAssured.given()
@@ -48,7 +48,7 @@ public class WordPressTests extends BaseTest {
                         "Schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().response();
         long id = response.jsonPath().getLong("id");
-        Optional<Post> byId = wpPostsRepository.findById(id);
+        Optional<Post> byId = postsRepository.findById(id);
         Assert.assertTrue(byId.isPresent());
         Assert.assertTrue(byId.get().isEqualWithDefaultJsonBodyPost());
         // Post conditions
@@ -93,7 +93,7 @@ public class WordPressTests extends BaseTest {
     @Severity(CRITICAL)
     public void testDeletePostWithAuthorizationUserMethodDelete() {
         // Preconditions
-        WpPostsRepositoryImpl wpPostsRepository = new WpPostsRepositoryImpl();
+        PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
         long id = preConditionCreatePost();
 
         setStatusCodeToResponseSpecification(200);
@@ -107,7 +107,7 @@ public class WordPressTests extends BaseTest {
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "Schemas/DeletePostSuccessfulResponses.json"));
-        Optional<Post> byId = wpPostsRepository.findById(id);
+        Optional<Post> byId = postsRepository.findById(id);
         Assert.assertFalse(byId.isPresent());
     }
 
@@ -155,7 +155,7 @@ public class WordPressTests extends BaseTest {
     @Severity(CRITICAL)
     public void testEditPostWithAuthorizationUserMethodPut() {
         // Preconditions
-        WpPostsRepositoryImpl wpPostsRepository = new WpPostsRepositoryImpl();
+        PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
         long id = preConditionCreatePost();
 
         setStatusCodeToResponseSpecification(200);
@@ -170,7 +170,7 @@ public class WordPressTests extends BaseTest {
                         "Schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().response();
         Assert.assertEquals(response.jsonPath().getInt("id"), id);
-        Optional<Post> byId = wpPostsRepository.findById(id);
+        Optional<Post> byId = postsRepository.findById(id);
         Assert.assertTrue(byId.isPresent());
         Assert.assertEquals(byId.get().getPostTitle(), "Change test title");
         // Post conditions
