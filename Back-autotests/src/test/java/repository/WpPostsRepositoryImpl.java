@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class WpPostsRepositoryImpl implements WpPostsRepository {
-
     private DataSource dataSource;
 
     public WpPostsRepositoryImpl() {
@@ -55,7 +54,6 @@ public class WpPostsRepositoryImpl implements WpPostsRepository {
     @Override
     public void delete(long id) {
     }
-
 
     private Post resultSetToPost(ResultSet resultSet) throws SQLException {
         return new Post(resultSet.getLong("id"),
