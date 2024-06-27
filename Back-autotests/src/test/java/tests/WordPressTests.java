@@ -135,7 +135,6 @@ public class WordPressTests extends BaseTest {
     @Severity(CRITICAL)
     public void testDeletePostWithoutAuthorizationUserMethodDelete() {
         // Preconditions
-        setStatusCodeToResponseSpecification(201);
         long id = preConditionCreatePost();
 
         setStatusCodeToResponseSpecification(401);
@@ -157,7 +156,6 @@ public class WordPressTests extends BaseTest {
     public void testEditPostWithAuthorizationUserMethodPut() {
         // Preconditions
         WpPostsRepositoryImpl wpPostsRepository = new WpPostsRepositoryImpl();
-        setStatusCodeToResponseSpecification(201);
         long id = preConditionCreatePost();
 
         setStatusCodeToResponseSpecification(200);
@@ -201,7 +199,6 @@ public class WordPressTests extends BaseTest {
     @Severity(CRITICAL)
     public void testEditPostWithoutAuthorizationUserMethodPut() {
         // Preconditions
-        setStatusCodeToResponseSpecification(201);
         long id = preConditionCreatePost();
 
         setStatusCodeToResponseSpecification(401);
