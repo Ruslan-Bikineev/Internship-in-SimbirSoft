@@ -1,6 +1,5 @@
 package tests;
 
-import heplers.helpers;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -32,8 +31,10 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testCreatePostWithAuthorizationUserAndFillBodyMethodPost() {
-        Map<String, String> body = helpers.getDefaultJsonBodyPost();
+        // Preconditions
+        Map<String, String> body = Post.getDefaultJsonBodyPost();
         WpPostsRepositoryImpl wpPostsRepository = new WpPostsRepositoryImpl();
+
         setStatusCodeToResponseSpecification(201);
         Response response = RestAssured.given()
                 .auth()
@@ -46,17 +47,10 @@ public class WordPressTests extends BaseTest {
                 .body(matchesJsonSchemaInClasspath(
                         "Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
-
         long id = response.jsonPath().getLong("id");
         Optional<Post> byId = wpPostsRepository.findById(id);
         Assert.assertTrue(byId.isPresent());
-        Assert.assertEquals(byId.get().getPostStatus(), body.get("status"));
-        Assert.assertEquals(byId.get().getPostTitle(), body.get("title"));
-        Assert.assertEquals(byId.get().getPostContent(), body.get("content"));
-        Assert.assertEquals(byId.get().getPostExcerpt(), body.get("excerpt"));
-        Assert.assertEquals(byId.get().getCommentStatus(), body.get("comment_status"));
-        Assert.assertEquals(byId.get().getPingStatus(), body.get("ping_status"));
-
+        Assert.assertTrue(byId.get().isEqualeWithDefaultJsonBodyPost());
         // Post conditions
         postConditionDeletePost(id);
     }
@@ -68,7 +62,7 @@ public class WordPressTests extends BaseTest {
     public void testCreatePostWithoutAuthorizationUserAndFillBodyMethodPost() {
         setStatusCodeToResponseSpecification(401);
         RestAssured.given()
-                .body(helpers.getDefaultJsonBodyPost())
+                .body(Post.getDefaultJsonBodyPost())
                 .when()
                 .post(POST)
                 .then()
@@ -152,7 +146,6 @@ public class WordPressTests extends BaseTest {
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "Schemas/ClientErrorResponsesSchema.json"));
-
         // Post conditions
         postConditionDeletePost(id);
     }
@@ -182,7 +175,6 @@ public class WordPressTests extends BaseTest {
         Optional<Post> byId = wpPostsRepository.findById(id);
         Assert.assertTrue(byId.isPresent());
         Assert.assertEquals(byId.get().getPostTitle(), "Change test title");
-
         // Post conditions
         postConditionDeletePost(id);
     }
@@ -219,7 +211,6 @@ public class WordPressTests extends BaseTest {
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "Schemas/ClientErrorResponsesSchema.json"));
-
         // Post conditions
         postConditionDeletePost(id);
     }

@@ -1,11 +1,11 @@
 package tests;
 
-import heplers.helpers;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import models.Post;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 
@@ -14,7 +14,6 @@ import static data.TestData.POST;
 import static data.TestData.URL;
 import static data.TestData.VALID_LOGIN;
 import static data.TestData.VALID_PASSWORD;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class BaseTest {
 
@@ -43,12 +42,10 @@ public class BaseTest {
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body(helpers.getDefaultJsonBodyPost())
+                .body(Post.getDefaultJsonBodyPost())
                 .when()
                 .post(POST)
                 .then()
-                .body(matchesJsonSchemaInClasspath(
-                        "Schemas/Create&EditPostSuccessfulResponsesSchema.json"))
                 .extract().response();
         return response.jsonPath().getLong("id");
     }
@@ -63,4 +60,6 @@ public class BaseTest {
                 .when()
                 .delete(DELETE + id);
     }
+
+
 }

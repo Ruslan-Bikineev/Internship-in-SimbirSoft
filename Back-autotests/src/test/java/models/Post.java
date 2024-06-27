@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -31,4 +33,25 @@ public class Post {
     private String postType;
     private String postMimeType;
     private long commentCount;
+
+    public static Map<String, String> getDefaultJsonBodyPost() {
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("status", "publish");
+        requestBody.put("title", "Test title");
+        requestBody.put("content", "Test content");
+        requestBody.put("excerpt", "Test excerpt");
+        requestBody.put("comment_status", "open");
+        requestBody.put("ping_status", "open");
+        return requestBody;
+    }
+
+    public Boolean isEqualeWithDefaultJsonBodyPost() {
+        boolean result = true;
+        if (!postStatus.equals("publish") || !postTitle.equals("Test title")
+                || !commentStatus.equals("open") || !pingStatus.equals("open")
+                || !postContent.equals("Test content") || !postExcerpt.equals("Test excerpt")) {
+            result = false;
+        }
+        return result;
+    }
 }
