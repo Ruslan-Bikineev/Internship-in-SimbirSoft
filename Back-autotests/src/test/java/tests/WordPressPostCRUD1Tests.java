@@ -24,16 +24,15 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 @Epic(value = "Пост")
 @Feature(value = "Проверка CRUD запросов поста через API")
-public class WordPressPostCRUDTests extends BaseTest {
+public class WordPressPostCRUD1Tests extends BaseTest {
+
     @Test
     @Story(value = "Добавление нового поста авторизованным пользователем (Вызов метода POST)")
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testCreatePostWithAuthorizationUserAndFillBodyMethodPost() {
-        // Preconditions
         Map<String, String> body = Post.getDefaultJsonBodyPost();
         PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
-
         long responseId = RestAssured.given()
                 .auth()
                 .preemptive()
@@ -49,8 +48,16 @@ public class WordPressPostCRUDTests extends BaseTest {
         Optional<Post> byId = postsRepository.findById(responseId);
         Assert.assertTrue(byId.isPresent());
         Assert.assertTrue(byId.get().isEqualWithDefaultJsonBodyPost());
-        // Post conditions
-        postConditionDeletePost(responseId);
+
+        RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(VALID_LOGIN, VALID_PASSWORD)
+                .body("{\"force\": \"true\"}")
+                .when()
+                .delete(DELETE_POST + responseId)
+                .then()
+                .assertThat().statusCode(200);
     }
 
     @Test
@@ -90,9 +97,17 @@ public class WordPressPostCRUDTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testDeletePostWithAuthorizationUserMethodDelete() {
-        // Preconditions
         PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
-        long preConditionPostId = preConditionCreatePost();
+        long preConditionPostId = RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(VALID_LOGIN, VALID_PASSWORD)
+                .body(Post.getDefaultJsonBodyPost())
+                .when()
+                .post(CREATE_POST)
+                .then()
+                .assertThat().statusCode(201)
+                .extract().jsonPath().getLong("id");
 
         RestAssured.given()
                 .auth()
@@ -128,54 +143,6 @@ public class WordPressPostCRUDTests extends BaseTest {
     }
 
     @Test
-    @Story(value = "Удаление поста без авторизации (Вызов метода DELETE)")
-    @Owner(value = "Ruslan Bikineev")
-    @Severity(CRITICAL)
-    public void testDeletePostWithoutAuthorizationUserMethodDelete() {
-        // Preconditions
-        long preConditionPostId = preConditionCreatePost();
-
-        RestAssured.given()
-                .body("{\"force\": \"true\"}")
-                .when()
-                .delete(DELETE_POST + preConditionPostId)
-                .then()
-                .assertThat().statusCode(401)
-                .body(matchesJsonSchemaInClasspath(
-                        "schemas/ClientErrorResponses.json"));
-        // Post conditions
-        postConditionDeletePost(preConditionPostId);
-    }
-
-    @Test
-    @Story(value = "Редактирование поста авторизованным пользователем (Вызов метода PUT)")
-    @Owner(value = "Ruslan Bikineev")
-    @Severity(CRITICAL)
-    public void testEditPostWithAuthorizationUserMethodPut() {
-        // Preconditions
-        PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
-        long preConditionPostId = preConditionCreatePost();
-
-        long responseId = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"title\": \"Change test title\"}")
-                .put(UPDATE_POST + preConditionPostId)
-                .then()
-                .assertThat().statusCode(200)
-                .body(matchesJsonSchemaInClasspath(
-                        "schemas/Create&EditPostSuccessfulResponses.json"))
-                .extract().jsonPath().getLong("id");
-        Assert.assertEquals(responseId, preConditionPostId);
-        Optional<Post> byId = postsRepository.findById(preConditionPostId);
-        Assert.assertTrue(byId.isPresent());
-        Assert.assertEquals(byId.get().getPostTitle(), "Change test title");
-        // Post conditions
-        postConditionDeletePost(preConditionPostId);
-    }
-
-    @Test
     @Story(value = "Редактирование несуществующего поста авторизованным пользователем (Вызов метода PUT)")
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
@@ -189,49 +156,5 @@ public class WordPressPostCRUDTests extends BaseTest {
                 .assertThat().statusCode(404)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
-    }
-
-    @Test
-    @Story(value = "Редактирование поста без авторизации (Вызов метода PUT)")
-    @Owner(value = "Ruslan Bikineev")
-    @Severity(CRITICAL)
-    public void testEditPostWithoutAuthorizationUserMethodPut() {
-        // Preconditions
-        long preConditionPostId = preConditionCreatePost();
-
-        RestAssured.given()
-                .body("{\"title\": \"Change test title\"}")
-                .put(UPDATE_POST + preConditionPostId)
-                .then()
-                .assertThat().statusCode(401)
-                .body(matchesJsonSchemaInClasspath(
-                        "schemas/ClientErrorResponses.json"));
-        // Post conditions
-        postConditionDeletePost(preConditionPostId);
-    }
-
-    private long preConditionCreatePost() {
-        return RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body(Post.getDefaultJsonBodyPost())
-                .when()
-                .post(CREATE_POST)
-                .then()
-                .assertThat().statusCode(201)
-                .extract().jsonPath().getLong("id");
-    }
-
-    private void postConditionDeletePost(long id) {
-        RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .body("{\"force\": \"true\"}")
-                .when()
-                .delete(DELETE_POST + id)
-                .then()
-                .assertThat().statusCode(200);
     }
 }

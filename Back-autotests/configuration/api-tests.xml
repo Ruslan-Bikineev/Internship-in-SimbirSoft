@@ -6,9 +6,10 @@
             <class name="tests.WordPressAuthorizationTests"/>
         </classes>
     </test>
-        <test name="WordPress API Tests Suite">
-            <classes>
-                <class name="tests.WordPressPostCRUDTests"/>
-            </classes>
-        </test>
+    <test name="WordPress API Tests Suite">
+        <classes>
+            <class name="tests.WordPressPostCRUD1Tests"/>
+            <class name="tests.WordPressPostCRUD2Tests"/>
+        </classes>
+    </test>
 </suite>
