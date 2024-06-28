@@ -116,5 +116,6 @@
     "_links": {
       "type": "object"
     }
-  }
+  },
+  "required": ["id"]
 }

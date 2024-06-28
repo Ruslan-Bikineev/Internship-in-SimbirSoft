@@ -46,7 +46,6 @@ public class WordPressPostCRUDTests extends BaseTest {
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().jsonPath().getLong("id");
-        Assert.assertNotNull(responseId);
         Optional<Post> byId = postsRepository.findById(responseId);
         Assert.assertTrue(byId.isPresent());
         Assert.assertTrue(byId.get().isEqualWithDefaultJsonBodyPost());
