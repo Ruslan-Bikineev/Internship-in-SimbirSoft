@@ -25,7 +25,6 @@ public class AuthorizationTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(BLOCKER)
     public void testAuthorizationWithValidData() {
-        setStatusCodeToResponseSpecification(200);
         RestAssured.given()
                 .auth()
                 .preemptive()
@@ -33,6 +32,7 @@ public class AuthorizationTests extends BaseTest {
                 .when()
                 .get(GET_CURRENT_USER)
                 .then()
+                .assertThat().statusCode(200)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/AuthorizationSuccessfulResponses.json"));
     }
@@ -52,7 +52,6 @@ public class AuthorizationTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(BLOCKER)
     public void testAuthorizationWithDifferentIncorrectData(String login, String password) {
-        setStatusCodeToResponseSpecification(500);
         RestAssured.given()
                 .auth()
                 .preemptive()
@@ -60,6 +59,7 @@ public class AuthorizationTests extends BaseTest {
                 .when()
                 .get(GET_CURRENT_USER)
                 .then()
+                .assertThat().statusCode(500)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ServerErrorResponses.json"));
     }

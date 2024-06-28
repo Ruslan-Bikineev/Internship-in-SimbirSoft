@@ -35,7 +35,6 @@ public class WordPressTests extends BaseTest {
         Map<String, String> body = Post.getDefaultJsonBodyPost();
         PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
 
-        setStatusCodeToResponseSpecification(201);
         Response response = RestAssured.given()
                 .auth()
                 .preemptive()
@@ -44,6 +43,7 @@ public class WordPressTests extends BaseTest {
                 .when()
                 .post(CREATE_POST)
                 .then()
+                .assertThat().statusCode(201)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().response();
@@ -60,12 +60,12 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testCreatePostWithoutAuthorizationUserAndFillBodyMethodPost() {
-        setStatusCodeToResponseSpecification(401);
         RestAssured.given()
                 .body(Post.getDefaultJsonBodyPost())
                 .when()
                 .post(CREATE_POST)
                 .then()
+                .assertThat().statusCode(401)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
     }
@@ -75,7 +75,6 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testCreatePostWithAuthorizationUserAndEmptyBodyMethodPost() {
-        setStatusCodeToResponseSpecification(400);
         RestAssured.given()
                 .auth()
                 .preemptive()
@@ -83,6 +82,7 @@ public class WordPressTests extends BaseTest {
                 .when()
                 .post(CREATE_POST)
                 .then()
+                .assertThat().statusCode(400)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
     }
@@ -96,7 +96,6 @@ public class WordPressTests extends BaseTest {
         PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
         long id = preConditionCreatePost();
 
-        setStatusCodeToResponseSpecification(200);
         RestAssured.given()
                 .auth()
                 .preemptive()
@@ -105,6 +104,7 @@ public class WordPressTests extends BaseTest {
                 .when()
                 .delete(DELETE_POST + id)
                 .then()
+                .assertThat().statusCode(200)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/DeletePostSuccessfulResponses.json"));
         Optional<Post> byId = postsRepository.findById(id);
@@ -116,7 +116,6 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testDeleteNonExistentPostWithAuthorizationUserMethodDelete() {
-        setStatusCodeToResponseSpecification(404);
         RestAssured.given()
                 .auth()
                 .preemptive()
@@ -125,6 +124,7 @@ public class WordPressTests extends BaseTest {
                 .when()
                 .delete(DELETE_POST + "0")
                 .then()
+                .assertThat().statusCode(404)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
     }
@@ -137,12 +137,12 @@ public class WordPressTests extends BaseTest {
         // Preconditions
         long id = preConditionCreatePost();
 
-        setStatusCodeToResponseSpecification(401);
         RestAssured.given()
                 .body("{\"force\": \"true\"}")
                 .when()
                 .delete(DELETE_POST + id)
                 .then()
+                .assertThat().statusCode(401)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
         // Post conditions
@@ -158,7 +158,6 @@ public class WordPressTests extends BaseTest {
         PostsRepositoryImpl postsRepository = new PostsRepositoryImpl();
         long id = preConditionCreatePost();
 
-        setStatusCodeToResponseSpecification(200);
         Response response = RestAssured.given()
                 .auth()
                 .preemptive()
@@ -166,6 +165,7 @@ public class WordPressTests extends BaseTest {
                 .body("{\"title\": \"Change test title\"}")
                 .put(UPDATE_POST + id)
                 .then()
+                .assertThat().statusCode(200)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().response();
@@ -182,13 +182,13 @@ public class WordPressTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
     public void testEditNonExistentPostWithAuthorizationUserMethodPut() {
-        setStatusCodeToResponseSpecification(404);
         RestAssured.given()
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .put(UPDATE_POST + "0")
                 .then()
+                .assertThat().statusCode(404)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
     }
@@ -201,11 +201,11 @@ public class WordPressTests extends BaseTest {
         // Preconditions
         long id = preConditionCreatePost();
 
-        setStatusCodeToResponseSpecification(401);
         RestAssured.given()
                 .body("{\"title\": \"Change test title\"}")
                 .put(UPDATE_POST + id)
                 .then()
+                .assertThat().statusCode(401)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
         // Post conditions
@@ -213,8 +213,7 @@ public class WordPressTests extends BaseTest {
     }
 
     private long preConditionCreatePost() {
-        setStatusCodeToResponseSpecification(201);
-        Response response = RestAssured.given()
+        return RestAssured.given()
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
@@ -222,18 +221,19 @@ public class WordPressTests extends BaseTest {
                 .when()
                 .post(CREATE_POST)
                 .then()
-                .extract().response();
-        return response.jsonPath().getLong("id");
+                .assertThat().statusCode(201)
+                .extract().jsonPath().getLong("id");
     }
 
     private void postConditionDeletePost(long id) {
-        setStatusCodeToResponseSpecification(200);
         RestAssured.given()
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete(DELETE_POST + id);
+                .delete(DELETE_POST + id)
+                .then()
+                .assertThat().statusCode(200);
     }
 }
