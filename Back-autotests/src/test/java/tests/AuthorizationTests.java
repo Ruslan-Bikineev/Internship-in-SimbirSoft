@@ -34,7 +34,7 @@ public class AuthorizationTests extends BaseTest {
                 .get(GET)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/AuthorizationSuccessfulResponses.json"));
+                        "schemas/AuthorizationSuccessfulResponses.json"));
     }
 
     @DataProvider(name = "DifferentIncorrectDataProvider")
@@ -61,6 +61,6 @@ public class AuthorizationTests extends BaseTest {
                 .get(GET)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/ServerErrorResponses.json"));
+                        "schemas/ServerErrorResponses.json"));
     }
 }

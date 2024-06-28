@@ -19,6 +19,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--==================================================================-->
     </properties>
+    <!--        Профиль для запуска тестов через файл api-tests.xml        -->
+    <profiles>
+        <profile>
+            <id>run api-tests</id>
+            <properties>
+                <suiteXmlFile>configuration/api-tests.xml</suiteXmlFile>
+            </properties>
+        </profile>
+    </profiles>
     <!-- Add allure-bom to dependency management to ensure correct versions of all the dependencies are used -->
     <dependencyManagement>
         <dependencies>
@@ -86,15 +95,6 @@
             <version>8.0.33</version>
         </dependency>
     </dependencies>
-    <!--        Профиль для запуска тестов через файл api-tests.xml        -->
-    <profiles>
-        <profile>
-            <id>run api-tests</id>
-            <properties>
-                <suiteXmlFile>configuration/api-tests.xml</suiteXmlFile>
-            </properties>
-        </profile>
-    </profiles>
     <build>
         <plugins>
             <plugin>

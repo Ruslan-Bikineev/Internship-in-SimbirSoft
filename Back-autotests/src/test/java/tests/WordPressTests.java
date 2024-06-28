@@ -45,7 +45,7 @@ public class WordPressTests extends BaseTest {
                 .post(POST)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/Create&EditPostSuccessfulResponses.json"))
+                        "schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().response();
         long id = response.jsonPath().getLong("id");
         Optional<Post> byId = postsRepository.findById(id);
@@ -67,7 +67,7 @@ public class WordPressTests extends BaseTest {
                 .post(POST)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/ClientErrorResponses.json"));
+                        "schemas/ClientErrorResponses.json"));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class WordPressTests extends BaseTest {
                 .post(POST)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/ClientErrorResponses.json"));
+                        "schemas/ClientErrorResponses.json"));
     }
 
     @Test
@@ -106,7 +106,7 @@ public class WordPressTests extends BaseTest {
                 .delete(DELETE + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/DeletePostSuccessfulResponses.json"));
+                        "schemas/DeletePostSuccessfulResponses.json"));
         Optional<Post> byId = postsRepository.findById(id);
         Assert.assertFalse(byId.isPresent());
     }
@@ -126,7 +126,7 @@ public class WordPressTests extends BaseTest {
                 .delete(DELETE + "0")
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/ClientErrorResponses.json"));
+                        "schemas/ClientErrorResponses.json"));
     }
 
     @Test
@@ -144,7 +144,7 @@ public class WordPressTests extends BaseTest {
                 .delete(DELETE + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/ClientErrorResponses.json"));
+                        "schemas/ClientErrorResponses.json"));
         // Post conditions
         postConditionDeletePost(id);
     }
@@ -167,7 +167,7 @@ public class WordPressTests extends BaseTest {
                 .put(PUT + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/Create&EditPostSuccessfulResponses.json"))
+                        "schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().response();
         Assert.assertEquals(response.jsonPath().getInt("id"), id);
         Optional<Post> byId = postsRepository.findById(id);
@@ -190,7 +190,7 @@ public class WordPressTests extends BaseTest {
                 .put(PUT + "0")
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/ClientErrorResponses.json"));
+                        "schemas/ClientErrorResponses.json"));
     }
 
     @Test
@@ -207,7 +207,7 @@ public class WordPressTests extends BaseTest {
                 .put(PUT + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
-                        "Schemas/ClientErrorResponses.json"));
+                        "schemas/ClientErrorResponses.json"));
         // Post conditions
         postConditionDeletePost(id);
     }
