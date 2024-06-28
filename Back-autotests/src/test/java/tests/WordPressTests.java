@@ -211,4 +211,29 @@ public class WordPressTests extends BaseTest {
         // Post conditions
         postConditionDeletePost(id);
     }
+
+    private long preConditionCreatePost() {
+        setStatusCodeToResponseSpecification(201);
+        Response response = RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(VALID_LOGIN, VALID_PASSWORD)
+                .body(Post.getDefaultJsonBodyPost())
+                .when()
+                .post(CREATE_POST)
+                .then()
+                .extract().response();
+        return response.jsonPath().getLong("id");
+    }
+
+    private void postConditionDeletePost(long id) {
+        setStatusCodeToResponseSpecification(200);
+        RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(VALID_LOGIN, VALID_PASSWORD)
+                .body("{\"force\": \"true\"}")
+                .when()
+                .delete(DELETE_POST + id);
+    }
 }
