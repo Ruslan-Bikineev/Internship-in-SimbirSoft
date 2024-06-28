@@ -15,9 +15,9 @@ import repository.PostsRepositoryImpl;
 import java.util.Map;
 import java.util.Optional;
 
-import static data.TestData.DELETE;
-import static data.TestData.POST;
-import static data.TestData.PUT;
+import static data.TestData.CREATE_POST;
+import static data.TestData.DELETE_POST;
+import static data.TestData.UPDATE_POST;
 import static data.TestData.VALID_LOGIN;
 import static data.TestData.VALID_PASSWORD;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
@@ -42,7 +42,7 @@ public class WordPressTests extends BaseTest {
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body(body)
                 .when()
-                .post(POST)
+                .post(CREATE_POST)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/Create&EditPostSuccessfulResponses.json"))
@@ -64,7 +64,7 @@ public class WordPressTests extends BaseTest {
         RestAssured.given()
                 .body(Post.getDefaultJsonBodyPost())
                 .when()
-                .post(POST)
+                .post(CREATE_POST)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
@@ -81,7 +81,7 @@ public class WordPressTests extends BaseTest {
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .when()
-                .post(POST)
+                .post(CREATE_POST)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
@@ -103,7 +103,7 @@ public class WordPressTests extends BaseTest {
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete(DELETE + id)
+                .delete(DELETE_POST + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/DeletePostSuccessfulResponses.json"));
@@ -123,7 +123,7 @@ public class WordPressTests extends BaseTest {
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete(DELETE + "0")
+                .delete(DELETE_POST + "0")
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
@@ -141,7 +141,7 @@ public class WordPressTests extends BaseTest {
         RestAssured.given()
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete(DELETE + id)
+                .delete(DELETE_POST + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
@@ -164,7 +164,7 @@ public class WordPressTests extends BaseTest {
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"title\": \"Change test title\"}")
-                .put(PUT + id)
+                .put(UPDATE_POST + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/Create&EditPostSuccessfulResponses.json"))
@@ -187,7 +187,7 @@ public class WordPressTests extends BaseTest {
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
-                .put(PUT + "0")
+                .put(UPDATE_POST + "0")
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));
@@ -204,7 +204,7 @@ public class WordPressTests extends BaseTest {
         setStatusCodeToResponseSpecification(401);
         RestAssured.given()
                 .body("{\"title\": \"Change test title\"}")
-                .put(PUT + id)
+                .put(UPDATE_POST + id)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ClientErrorResponses.json"));

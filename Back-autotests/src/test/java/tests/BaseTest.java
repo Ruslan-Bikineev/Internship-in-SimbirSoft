@@ -10,8 +10,8 @@ import models.Post;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 
-import static data.TestData.DELETE;
-import static data.TestData.POST;
+import static data.TestData.CREATE_POST;
+import static data.TestData.DELETE_POST;
 import static data.TestData.URL;
 import static data.TestData.VALID_LOGIN;
 import static data.TestData.VALID_PASSWORD;
@@ -45,7 +45,7 @@ public class BaseTest {
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body(Post.getDefaultJsonBodyPost())
                 .when()
-                .post(POST)
+                .post(CREATE_POST)
                 .then()
                 .extract().response();
         return response.jsonPath().getLong("id");
@@ -59,6 +59,6 @@ public class BaseTest {
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .body("{\"force\": \"true\"}")
                 .when()
-                .delete(DELETE + id);
+                .delete(DELETE_POST + id);
     }
 }

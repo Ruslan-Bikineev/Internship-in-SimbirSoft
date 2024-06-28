@@ -9,7 +9,7 @@ import io.restassured.RestAssured;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static data.TestData.GET;
+import static data.TestData.GET_CURRENT_USER;
 import static data.TestData.NON_EXISTENT_LOGIN;
 import static data.TestData.NON_EXISTENT_PASSWORD;
 import static data.TestData.VALID_LOGIN;
@@ -31,7 +31,7 @@ public class AuthorizationTests extends BaseTest {
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
                 .when()
-                .get(GET)
+                .get(GET_CURRENT_USER)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/AuthorizationSuccessfulResponses.json"));
@@ -58,7 +58,7 @@ public class AuthorizationTests extends BaseTest {
                 .preemptive()
                 .basic(login, password)
                 .when()
-                .get(GET)
+                .get(GET_CURRENT_USER)
                 .then()
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/ServerErrorResponses.json"));
