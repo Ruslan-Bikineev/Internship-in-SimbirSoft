@@ -119,10 +119,10 @@
         "generated_slug": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     }
-  },
-  "required": [
-    "id"
-  ]
+  }
 }
