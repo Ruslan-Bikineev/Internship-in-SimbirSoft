@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 import repository.PostsRepositoryImpl;
 
 import java.util.Map;
-import java.util.Optional;
 
 import static data.TestData.CREATE_POST;
 import static data.TestData.DELETE_POST;
@@ -45,9 +44,9 @@ public class WordPressPostCRUD1Tests extends BaseTest {
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().jsonPath().getLong("id");
-        Optional<Post> byId = postsRepository.findById(responseId);
-        Assert.assertTrue(byId.isPresent());
-        Assert.assertTrue(byId.get().isEqualWithDefaultJsonBodyPost());
+        Post postsRepositoryById = postsRepository.findById(responseId);
+        Assert.assertNotNull(postsRepositoryById);
+        Assert.assertTrue(postsRepositoryById.isEqualWithDefaultJsonBodyPost());
 
         RestAssured.given()
                 .auth()
@@ -120,8 +119,8 @@ public class WordPressPostCRUD1Tests extends BaseTest {
                 .assertThat().statusCode(200)
                 .body(matchesJsonSchemaInClasspath(
                         "schemas/DeletePostSuccessfulResponses.json"));
-        Optional<Post> byId = postsRepository.findById(preConditionPostId);
-        Assert.assertFalse(byId.isPresent());
+        Post postsRepositoryById = postsRepository.findById(preConditionPostId);
+        Assert.assertNull(postsRepositoryById);
     }
 
     @Test

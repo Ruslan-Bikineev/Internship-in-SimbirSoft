@@ -13,8 +13,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import repository.PostsRepositoryImpl;
 
-import java.util.Optional;
-
 import static data.TestData.CREATE_POST;
 import static data.TestData.DELETE_POST;
 import static data.TestData.UPDATE_POST;
@@ -88,9 +86,9 @@ public class WordPressPostCRUD2Tests extends BaseTest {
                         "schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().jsonPath().getLong("id");
         Assert.assertEquals(responseId, preConditionPostId);
-        Optional<Post> byId = postsRepository.findById(preConditionPostId);
-        Assert.assertTrue(byId.isPresent());
-        Assert.assertEquals(byId.get().getPostTitle(), "Change test title");
+        Post postsRepositoryById = postsRepository.findById(preConditionPostId);
+        Assert.assertNotNull(postsRepositoryById);
+        Assert.assertEquals(postsRepositoryById.getPostTitle(), "Change test title");
     }
 
     @Test

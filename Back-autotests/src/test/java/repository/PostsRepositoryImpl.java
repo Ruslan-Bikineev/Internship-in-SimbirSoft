@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class PostsRepositoryImpl implements PostsRepository {
     private DataSource dataSource;
@@ -24,20 +23,20 @@ public class PostsRepositoryImpl implements PostsRepository {
     }
 
     @Override
-    public Optional<Post> findById(long id) {
+    public Post findById(long id) {
         String sqlQuery = "SELECT * FROM wp_posts WHERE id = " + id;
-        Optional<Post> optionalPost = Optional.empty();
+        Post post = null;
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
             statement.execute(sqlQuery);
             ResultSet resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                optionalPost = Optional.of(resultSetToPost(resultSet));
+                post = resultSetToPost(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return optionalPost;
+        return post;
     }
 
     @Override
