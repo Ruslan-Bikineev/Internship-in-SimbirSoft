@@ -49,11 +49,11 @@ public class Post {
         boolean result = true;
         if (
                 !postStatus.equals("publish") ||
-                !postTitle.equals("Test title") ||
-                !commentStatus.equals("open") ||
-                !pingStatus.equals("open") ||
-                !postContent.equals("Test content") ||
-                !postExcerpt.equals("Test excerpt")
+                        !postTitle.equals("Test title") ||
+                        !commentStatus.equals("open") ||
+                        !pingStatus.equals("open") ||
+                        !postContent.equals("Test content") ||
+                        !postExcerpt.equals("Test excerpt")
         ) {
             result = false;
         }
