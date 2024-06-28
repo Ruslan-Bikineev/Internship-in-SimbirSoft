@@ -47,9 +47,14 @@ public class Post {
 
     public Boolean isEqualWithDefaultJsonBodyPost() {
         boolean result = true;
-        if (!postStatus.equals("publish") || !postTitle.equals("Test title")
-                || !commentStatus.equals("open") || !pingStatus.equals("open")
-                || !postContent.equals("Test content") || !postExcerpt.equals("Test excerpt")) {
+        if (
+                !postStatus.equals("publish") ||
+                !postTitle.equals("Test title") ||
+                !commentStatus.equals("open") ||
+                !pingStatus.equals("open") ||
+                !postContent.equals("Test content") ||
+                !postExcerpt.equals("Test excerpt")
+        ) {
             result = false;
         }
         return result;
