@@ -23,7 +23,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 @Epic(value = "Пост")
 @Feature(value = "Проверка CRUD запросов поста через API")
-public class WordPressPostCRUD2Tests extends BaseTest {
+public class DeleteAndUpdatePostWithPreAndPostConditionsTests extends BaseTest {
     long preConditionPostId;
 
     @BeforeMethod

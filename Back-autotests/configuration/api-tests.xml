@@ -3,13 +3,13 @@
 <suite name="API Tests" parallel="false">
     <test name="Authorization API Tests Suite">
         <classes>
-            <class name="tests.WordPressAuthorizationTests"/>
+            <class name="tests.AuthorizationTests"/>
         </classes>
     </test>
     <test name="WordPress API Tests Suite">
         <classes>
-            <class name="tests.WordPressPostCRUD1Tests"/>
-            <class name="tests.WordPressPostCRUD2Tests"/>
+            <class name="tests.PostCRUDWithoutPreAndPostConditionsTests"/>
+            <class name="tests.DeleteAndUpdatePostWithPreAndPostConditionsTests"/>
         </classes>
     </test>
 </suite>
