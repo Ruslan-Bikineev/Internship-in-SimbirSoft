@@ -8,8 +8,8 @@
     </test>
     <test name="WordPress API Tests Suite">
         <classes>
-            <class name="tests.PostCRUDWithoutPreAndPostConditionsTests"/>
-            <class name="tests.DeleteAndUpdatePostWithPreAndPostConditionsTests"/>
+            <class name="tests.CRUDPostTests"/>
+            <class name="tests.CRUDPostTestsWithCreateTemporaryPost"/>
         </classes>
     </test>
 </suite>

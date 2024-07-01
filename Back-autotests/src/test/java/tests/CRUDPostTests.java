@@ -23,7 +23,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 @Epic(value = "Пост")
 @Feature(value = "Проверка CRUD запросов поста через API")
-public class PostCRUDWithoutPreAndPostConditionsTests extends BaseTest {
+public class CRUDPostTests extends BaseTest {
 
     @Test
     @Story(value = "Добавление нового поста авторизованным пользователем (Вызов метода POST)")
