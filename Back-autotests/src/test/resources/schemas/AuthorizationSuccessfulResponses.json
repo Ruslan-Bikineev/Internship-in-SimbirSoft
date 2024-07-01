@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "http://localhost:8000/index.php?rest_route=/wp/v2/users/me",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "description": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string",
+      "format": "uri"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "avatar_urls": {
+      "type": "object"
+    },
+    "meta": {
+      "type": "array"
+    },
+    "_links": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

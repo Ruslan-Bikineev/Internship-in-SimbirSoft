@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API Tests" parallel="false">
+    <test name="Authorization API Tests Suite">
+        <classes>
+            <class name="tests.AuthorizationTests"/>
+        </classes>
+    </test>
+    <test name="WordPress API Tests Suite">
+        <classes>
+            <class name="tests.CRUDPostTests"/>
+            <class name="tests.CRUDPostTestsWithCreateTemporaryPost"/>
+        </classes>
+    </test>
+</suite>

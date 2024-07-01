@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "http://localhost:8000/index.php?rest_route=/wp/v2",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "enum": [
+        "empty_content",
+        "rest_cannot_edit_others",
+        "rest_post_invalid_id",
+        "rest_cannot_delete",
+        "rest_cannot_edit",
+        "rest_cannot_create"
+      ]
+    },
+    "message": {
+      "type": "string",
+      "enum": [
+        "Содержимое, заголовок и отрывок пусты.",
+        "Извините, вам не разрешено создавать записи от лица этого пользователя.",
+        "Неверный ID записи.",
+        "Извините, вам не разрешено удалять эту запись.",
+        "Извините, вам не разрешено редактировать эту запись."
+      ]
+    },
+    "data": {
+      "type": "object",
+      "status": "400",
+      "status": "401",
+      "status": "404"
+    }
+  }
+}
