@@ -2,6 +2,7 @@ package repository;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import models.Content;
 import models.Post;
 
 import javax.sql.DataSource;
@@ -105,11 +106,30 @@ public class PostsRepositoryImpl implements PostsRepository {
         }
     }
 
+    @Override
+    public long getLastInsertId() {
+        long id;
+        String sqlQuery = "SELECT LAST_INSERT_ID() as id";
+        try (Connection connection = dataSource.getConnection()) {
+            Statement statement = connection.createStatement();
+            statement.execute(sqlQuery);
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                id = resultSet.getLong("id");
+            } else {
+                throw new SQLException("Last insert id not found");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id;
+    }
+
     private void fillPreparedStatementInPost(PreparedStatement preparedStatement, Post post) throws SQLException {
         preparedStatement.setLong(1, post.getPostAuthor());
         preparedStatement.setTimestamp(2, post.getPostDate());
         preparedStatement.setTimestamp(3, post.getPostDate());
-        preparedStatement.setString(4, post.getPostContent());
+        preparedStatement.setString(4, post.getPostContent().getRendered());
         preparedStatement.setString(5, post.getPostTitle());
         preparedStatement.setString(6, post.getPostExcerpt());
         preparedStatement.setString(7, post.getPostStatus());
@@ -135,7 +155,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                 resultSet.getLong("post_author"),
                 resultSet.getTimestamp("post_date"),
                 resultSet.getTimestamp("post_date_gmt"),
-                resultSet.getString("post_content"),
+                new Content(resultSet.getString("post_content"), false),
                 resultSet.getString("post_title"),
                 resultSet.getString("post_excerpt"),
                 resultSet.getString("post_status"),
