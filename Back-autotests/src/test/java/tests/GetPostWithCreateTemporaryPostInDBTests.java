@@ -32,7 +32,6 @@ public class GetPostWithCreateTemporaryPostInDBTests extends BaseTest {
     @Test
     public void testGetSpecificPostWithAuthorizationUserMethodGet() {
         Post responsePost = RestAssured.given()
-//        RestAssured.given()
                 .auth()
                 .preemptive()
                 .basic(VALID_LOGIN, VALID_PASSWORD)
@@ -42,8 +41,7 @@ public class GetPostWithCreateTemporaryPostInDBTests extends BaseTest {
                 .statusCode(200)
                 .body(matchesJsonSchemaInClasspath("schemas/Create&EditPostSuccessfulResponses.json"))
                 .extract().body().jsonPath().getObject("", Post.class);
-//                .log().all();
-        System.out.println(responsePost.getPostContent().getRendered());
+        System.out.println(responsePost);
     }
 
     @Test

@@ -2,8 +2,11 @@ package repository;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import models.Content;
 import models.Post;
+import models.sub.models.Content;
+import models.sub.models.Excerpt;
+import models.sub.models.Guid;
+import models.sub.models.Title;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -130,8 +133,8 @@ public class PostsRepositoryImpl implements PostsRepository {
         preparedStatement.setTimestamp(2, post.getPostDate());
         preparedStatement.setTimestamp(3, post.getPostDate());
         preparedStatement.setString(4, post.getPostContent().getRendered());
-        preparedStatement.setString(5, post.getPostTitle());
-        preparedStatement.setString(6, post.getPostExcerpt());
+        preparedStatement.setString(5, post.getPostTitle().getRendered());
+        preparedStatement.setString(6, post.getPostExcerpt().getRendered());
         preparedStatement.setString(7, post.getPostStatus());
         preparedStatement.setString(8, post.getCommentStatus());
         preparedStatement.setString(9, post.getPingStatus());
@@ -143,7 +146,7 @@ public class PostsRepositoryImpl implements PostsRepository {
         preparedStatement.setTimestamp(15, post.getPostModifiedGmt());
         preparedStatement.setString(16, post.getPostContentFiltered());
         preparedStatement.setLong(17, post.getPostParent());
-        preparedStatement.setString(18, post.getGuid());
+        preparedStatement.setString(18, post.getGuid().getRendered());
         preparedStatement.setInt(19, post.getMenuOrder());
         preparedStatement.setString(20, post.getPostType());
         preparedStatement.setString(21, post.getPostMimeType());
@@ -156,8 +159,8 @@ public class PostsRepositoryImpl implements PostsRepository {
                 resultSet.getTimestamp("post_date"),
                 resultSet.getTimestamp("post_date_gmt"),
                 new Content(resultSet.getString("post_content"), false),
-                resultSet.getString("post_title"),
-                resultSet.getString("post_excerpt"),
+                new Title(resultSet.getString("post_title")),
+                new Excerpt(resultSet.getString("post_excerpt"), false),
                 resultSet.getString("post_status"),
                 resultSet.getString("comment_status"),
                 resultSet.getString("ping_status"),
@@ -169,7 +172,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                 resultSet.getTimestamp("post_modified_gmt"),
                 resultSet.getString("post_content_filtered"),
                 resultSet.getLong("post_parent"),
-                resultSet.getString("guid"),
+                new Guid(resultSet.getString("guid")),
                 resultSet.getInt("menu_order"),
                 resultSet.getString("post_type"),
                 resultSet.getString("post_mime_type"),
