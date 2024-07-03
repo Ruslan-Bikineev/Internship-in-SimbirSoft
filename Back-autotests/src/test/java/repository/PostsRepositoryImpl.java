@@ -102,8 +102,7 @@ public class PostsRepositoryImpl implements PostsRepository {
     public void delete(long id) {
         String sqlQuery = "DELETE FROM wp_posts WHERE ID = " + id;
         try (Connection connection = dataSource.getConnection()) {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(sqlQuery);
+            connection.createStatement().executeUpdate(sqlQuery);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

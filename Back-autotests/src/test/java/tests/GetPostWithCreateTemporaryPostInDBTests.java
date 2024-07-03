@@ -49,10 +49,6 @@ public class GetPostWithCreateTemporaryPostInDBTests extends BaseTest {
     @Test
     public void testGetSpecificPostWithoutAuthorizationUserMethodGet() {
         Post responsePost = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(VALID_LOGIN, VALID_PASSWORD)
-                .when()
                 .get(GET_POST + post.getId())
                 .then()
                 .statusCode(200)

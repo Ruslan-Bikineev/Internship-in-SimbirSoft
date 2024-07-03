@@ -11,6 +11,7 @@
             <class name="tests.CRUDPostTests"/>
             <class name="tests.CRUDPostTestsWithCreateTemporaryPost"/>
             <class name="tests.GetPostWithCreateTemporaryPostInDBTests"/>
+            <class name="tests.GetUserWithCreateTemporaryUserInDBTests"/>
         </classes>
     </test>
 </suite>

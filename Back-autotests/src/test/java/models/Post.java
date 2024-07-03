@@ -20,8 +20,7 @@ import static data.TestData.CURRENT_TIMEZONE;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"postPassword", "format", "meta", "categories", "tags", "sticky", "template",
-        "toPing", "pinged", "postParent", "menuOrder", "postMimeType", "commentCount", "link", "_links"})
+@JsonIgnoreProperties({"format", "meta", "categories", "tags", "sticky", "template", "link", "_links"})
 public class Post {
     private long id;
     @JsonProperty("author")
