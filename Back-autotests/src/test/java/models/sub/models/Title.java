@@ -11,4 +11,8 @@ import lombok.NoArgsConstructor;
 public class Title {
     @JsonProperty("rendered")
     private String rendered;
+
+    public boolean isEqual(Title title) {
+        return this.rendered.equals(title.getRendered());
+    }
 }

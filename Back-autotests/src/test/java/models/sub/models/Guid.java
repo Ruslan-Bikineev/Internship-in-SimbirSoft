@@ -9,4 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Guid {
     private String rendered;
+
+    public boolean isEqual(Guid guid) {
+        return rendered.equals(guid.getRendered());
+    }
 }

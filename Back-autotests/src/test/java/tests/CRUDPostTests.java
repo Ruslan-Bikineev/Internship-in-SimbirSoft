@@ -42,7 +42,7 @@ public class CRUDPostTests extends BaseTest {
                 .then()
                 .assertThat().statusCode(201)
                 .body(matchesJsonSchemaInClasspath(
-                        "schemas/Create&EditPostSuccessfulResponses.json"))
+                        "schemas/Get&Create&EditPostSuccessfulResponses.json"))
                 .extract().jsonPath().getLong("id");
         Post postsRepositoryById = postsRepository.findById(responseId);
         Assert.assertNotNull(postsRepositoryById);

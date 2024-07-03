@@ -83,12 +83,12 @@ public class CRUDPostTestsWithCreateTemporaryPost extends BaseTest {
                 .then()
                 .assertThat().statusCode(200)
                 .body(matchesJsonSchemaInClasspath(
-                        "schemas/Create&EditPostSuccessfulResponses.json"))
+                        "schemas/Get&Create&EditPostSuccessfulResponses.json"))
                 .extract().jsonPath().getLong("id");
         Assert.assertEquals(responseId, preConditionPostId);
         Post postsRepositoryById = postsRepository.findById(preConditionPostId);
         Assert.assertNotNull(postsRepositoryById);
-        Assert.assertEquals(postsRepositoryById.getPostTitle(), "Change test title");
+        Assert.assertEquals(postsRepositoryById.getPostTitle().getRendered(), "Change test title");
     }
 
     @Test

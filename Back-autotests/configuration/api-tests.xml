@@ -10,6 +10,7 @@
         <classes>
             <class name="tests.CRUDPostTests"/>
             <class name="tests.CRUDPostTestsWithCreateTemporaryPost"/>
+            <class name="tests.GetPostWithCreateTemporaryPostInDBTests"/>
         </classes>
     </test>
 </suite>
