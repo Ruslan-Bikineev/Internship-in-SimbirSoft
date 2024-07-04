@@ -1,5 +1,10 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import models.Comment;
 import org.testng.Assert;
@@ -12,8 +17,11 @@ import repository.CommentRepositoryImpl;
 import static data.TestData.GET_COMMENT;
 import static data.TestData.VALID_LOGIN;
 import static data.TestData.VALID_PASSWORD;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
+@Epic(value = "Комментарий")
+@Feature(value = "Проверка GET запросов комментария через API")
 public class GetCommentWithCreateTemporaryCommentInDBTests extends BaseTest {
     Comment comment = Comment.getDefaultComment();
     CommentRepository commentRepository;
@@ -31,6 +39,10 @@ public class GetCommentWithCreateTemporaryCommentInDBTests extends BaseTest {
     }
 
     @Test
+    @Story(value = "Получение данных конкретного комментария заранее " +
+            "подготовленного в БД авторизованным пользователем (Вызов метода GET)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testGetSpecificCommentWithAuthorizationCommentMethodGet() {
         Comment responseComment = RestAssured.given()
                 .auth()
@@ -47,6 +59,10 @@ public class GetCommentWithCreateTemporaryCommentInDBTests extends BaseTest {
     }
 
     @Test
+    @Story(value = "Получение данных конкретного комментария заранее " +
+            "подготовленного в БД не авторизованным пользователем (Вызов метода GET)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testGetSpecificCommentWithoutAuthorizationUserMethodGet() {
         RestAssured.given()
                 .get(GET_COMMENT + comment.getId())

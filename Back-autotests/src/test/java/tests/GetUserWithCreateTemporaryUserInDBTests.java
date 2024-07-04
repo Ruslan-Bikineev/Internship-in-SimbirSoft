@@ -1,5 +1,10 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import models.User;
 import org.testng.Assert;
@@ -12,8 +17,11 @@ import repository.UserRepositoryImpl;
 import static data.TestData.GET_USER;
 import static data.TestData.VALID_LOGIN;
 import static data.TestData.VALID_PASSWORD;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
+@Epic(value = "Пользователь")
+@Feature(value = "Проверка GET запросов пользователя через API")
 public class GetUserWithCreateTemporaryUserInDBTests extends BaseTest {
     User user = User.getDefaultUser();
     UserRepository userRepository;
@@ -31,6 +39,10 @@ public class GetUserWithCreateTemporaryUserInDBTests extends BaseTest {
     }
 
     @Test
+    @Story(value = "Получение данных конкретного пользователя заранее " +
+            "подготовленного в БД авторизованным пользователем (Вызов метода GET)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testGetSpecificUserWithAuthorizationUserMethodGet() {
         User responseUser = RestAssured.given()
                 .auth()
@@ -47,6 +59,10 @@ public class GetUserWithCreateTemporaryUserInDBTests extends BaseTest {
     }
 
     @Test
+    @Story(value = "Получение данных конкретного пользователя заранее " +
+            "подготовленного в БД не авторизованным пользователем (Вызов метода GET)")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(CRITICAL)
     public void testGetSpecificUserWithoutAuthorizationUserMethodGet() {
         RestAssured.given()
                 .get(GET_USER + user.getId())

@@ -50,25 +50,12 @@ public class CommentRepositoryImpl implements CommentRepository {
             statement.execute(sqlQuery);
             ResultSet resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                comment.setId(resultSet.getLong("id"));
-                comment.setCommentPostId(resultSet.getLong("comment_post_id"));
-                comment.setCommentAuthor(resultSet.getString("comment_author"));
-                comment.setCommentAuthorEmail(resultSet.getString("comment_author_email"));
-                comment.setCommentAuthorUrl(resultSet.getString("comment_author_url"));
-                comment.setCommentAuthorIp(resultSet.getString("comment_author_ip"));
-                comment.setCommentDate(resultSet.getTimestamp("comment_date"));
-                comment.setCommentDateGmt(resultSet.getTimestamp("comment_date_gmt"));
-                comment.setCommentContent(new Content(resultSet.getString("comment_content")));
-                comment.setCommentKarma(resultSet.getInt("comment_karma"));
-                comment.setCommentApproved(resultSet.getString("comment_approved"));
-                comment.setCommentAgent(resultSet.getString("comment_agent"));
-                comment.setCommentType(resultSet.getString("comment_type"));
-                comment.setCommentParent(resultSet.getInt("comment_parent"));
+                comment = resultSetToComment(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return comment;
     }
 
     @Override
@@ -83,20 +70,7 @@ public class CommentRepositoryImpl implements CommentRepository {
                 "comment_agent, comment_type, comment_parent, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setLong(1, ((Comment) entity).getCommentPostId());
-            preparedStatement.setString(2, ((Comment) entity).getCommentAuthor());
-            preparedStatement.setString(3, ((Comment) entity).getCommentAuthorEmail());
-            preparedStatement.setString(4, ((Comment) entity).getCommentAuthorUrl());
-            preparedStatement.setString(5, ((Comment) entity).getCommentAuthorIp());
-            preparedStatement.setTimestamp(6, ((Comment) entity).getCommentDate());
-            preparedStatement.setTimestamp(7, ((Comment) entity).getCommentDateGmt());
-            preparedStatement.setString(8, ((Comment) entity).getCommentContent().getRendered());
-            preparedStatement.setInt(9, ((Comment) entity).getCommentKarma());
-            preparedStatement.setString(10, ((Comment) entity).getCommentApproved());
-            preparedStatement.setString(11, ((Comment) entity).getCommentAgent());
-            preparedStatement.setString(12, ((Comment) entity).getCommentType());
-            preparedStatement.setInt(13, ((Comment) entity).getCommentParent());
-            preparedStatement.setLong(14, ((Comment) entity).getUserId());
+            fillPreparedStatementInComment(preparedStatement, (Comment) entity);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -116,5 +90,41 @@ public class CommentRepositoryImpl implements CommentRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void fillPreparedStatementInComment(PreparedStatement preparedStatement, Comment comment) throws SQLException {
+        preparedStatement.setLong(1, comment.getCommentPostId());
+        preparedStatement.setString(2, comment.getCommentAuthor());
+        preparedStatement.setString(3, comment.getCommentAuthorEmail());
+        preparedStatement.setString(4, comment.getCommentAuthorUrl());
+        preparedStatement.setString(5, comment.getCommentAuthorIp());
+        preparedStatement.setTimestamp(6, comment.getCommentDate());
+        preparedStatement.setTimestamp(7, comment.getCommentDateGmt());
+        preparedStatement.setString(8, comment.getCommentContent().getRendered());
+        preparedStatement.setInt(9, comment.getCommentKarma());
+        preparedStatement.setString(10, comment.getCommentApproved());
+        preparedStatement.setString(11, comment.getCommentAgent());
+        preparedStatement.setString(12, comment.getCommentType());
+        preparedStatement.setInt(13, comment.getCommentParent());
+        preparedStatement.setLong(14, comment.getUserId());
+    }
+
+    private Comment resultSetToComment(ResultSet resultSet) throws SQLException {
+        return new Comment(
+                resultSet.getLong("id"),
+                resultSet.getLong("comment_post_id"),
+                resultSet.getString("comment_author"),
+                resultSet.getString("comment_author_email"),
+                resultSet.getString("comment_author_url"),
+                resultSet.getString("comment_author_ip"),
+                resultSet.getTimestamp("comment_date"),
+                resultSet.getTimestamp("comment_date_gmt"),
+                new Content(resultSet.getString("comment_content")),
+                resultSet.getInt("comment_karma"),
+                resultSet.getString("comment_approved"),
+                resultSet.getString("comment_agent"),
+                resultSet.getString("comment_type"),
+                resultSet.getInt("comment_parent"),
+                resultSet.getInt("user_id"));
     }
 }

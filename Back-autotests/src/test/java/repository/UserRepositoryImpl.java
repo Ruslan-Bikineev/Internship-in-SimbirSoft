@@ -31,18 +31,7 @@ public class UserRepositoryImpl implements UserRepository {
             statement.execute(sqlQuery);
             ResultSet resultSet = statement.getResultSet();
             if (resultSet.next()) {
-                user = new User(
-                        resultSet.getLong("ID"),
-                        resultSet.getString("user_login"),
-                        resultSet.getString("user_pass"),
-                        resultSet.getString("user_nicename"),
-                        resultSet.getString("user_email"),
-                        resultSet.getString("user_url"),
-                        resultSet.getTimestamp("user_registered"),
-                        resultSet.getString("user_activation_key"),
-                        resultSet.getInt("user_status"),
-                        resultSet.getString("display_name")
-                );
+                user = resultSetToUser(resultSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -62,16 +51,7 @@ public class UserRepositoryImpl implements UserRepository {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            User user = (User) entity;
-            preparedStatement.setString(1, user.getUserLogin());
-            preparedStatement.setString(2, user.getUserPass());
-            preparedStatement.setString(3, user.getUserNicename());
-            preparedStatement.setString(4, user.getUserEmail());
-            preparedStatement.setString(5, user.getUserUrl());
-            preparedStatement.setTimestamp(6, user.getUserRegistered());
-            preparedStatement.setString(7, user.getUserActivationKey());
-            preparedStatement.setInt(8, user.getUserStatus());
-            preparedStatement.setString(9, user.getDisplayName());
+            fillPreparedStatementInUser(preparedStatement, (User) entity);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -110,5 +90,32 @@ public class UserRepositoryImpl implements UserRepository {
             throw new RuntimeException(e);
         }
         return id;
+    }
+
+    private void fillPreparedStatementInUser(PreparedStatement preparedStatement, User user) throws SQLException {
+        preparedStatement.setString(1, user.getUserLogin());
+        preparedStatement.setString(2, user.getUserPass());
+        preparedStatement.setString(3, user.getUserNicename());
+        preparedStatement.setString(4, user.getUserEmail());
+        preparedStatement.setString(5, user.getUserUrl());
+        preparedStatement.setTimestamp(6, user.getUserRegistered());
+        preparedStatement.setString(7, user.getUserActivationKey());
+        preparedStatement.setInt(8, user.getUserStatus());
+        preparedStatement.setString(9, user.getDisplayName());
+    }
+
+    private User resultSetToUser(ResultSet resultSet) throws SQLException {
+        return new User(
+                resultSet.getLong("ID"),
+                resultSet.getString("user_login"),
+                resultSet.getString("user_pass"),
+                resultSet.getString("user_nicename"),
+                resultSet.getString("user_email"),
+                resultSet.getString("user_url"),
+                resultSet.getTimestamp("user_registered"),
+                resultSet.getString("user_activation_key"),
+                resultSet.getInt("user_status"),
+                resultSet.getString("display_name")
+        );
     }
 }
