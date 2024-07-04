@@ -43,7 +43,7 @@ public class GetCommentWithCreateTemporaryCommentInDBTests extends BaseTest {
             "подготовленного в БД авторизованным пользователем (Вызов метода GET)")
     @Owner(value = "Ruslan Bikineev")
     @Severity(CRITICAL)
-    public void testGetSpecificCommentWithAuthorizationCommentMethodGet() {
+    public void testGetSpecificCommentWithAuthorizationUserMethodGet() {
         Comment responseComment = RestAssured.given()
                 .auth()
                 .preemptive()
