@@ -37,6 +37,23 @@ public class AuthorizationTests extends BaseTest {
                         "schemas/AuthorizationSuccessfulResponses.json"));
     }
 
+    @Test
+    @Story(value = "Авторизация с корректным логином и пустым паролем")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(BLOCKER)
+    public void testAuthorizationWithValidLoginAndEmptyPassword() {
+        RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(VALID_LOGIN, "")
+                .when()
+                .get(GET_CURRENT_USER)
+                .then()
+                .assertThat().statusCode(500)
+                .body(matchesJsonSchemaInClasspath(
+                        "schemas/ServerErrorResponses.json"));
+    }
+
     @DataProvider(name = "DifferentIncorrectDataProvider")
     public Object[][] differentIncorrectDataProvider() {
         return new Object[][]{
