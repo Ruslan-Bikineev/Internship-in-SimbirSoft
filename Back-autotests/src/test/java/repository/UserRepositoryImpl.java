@@ -60,7 +60,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void update(Object entity) {
-
     }
 
     @Override

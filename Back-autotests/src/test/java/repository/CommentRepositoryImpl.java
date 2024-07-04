@@ -79,7 +79,6 @@ public class CommentRepositoryImpl implements CommentRepository {
 
     @Override
     public void update(Object entity) {
-
     }
 
     @Override
