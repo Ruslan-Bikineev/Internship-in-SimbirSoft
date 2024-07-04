@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "http://localhost:8000/index.php?rest_route=/wp/v2/users/{id}",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "post": {
+      "type": "integer"
+    },
+    "parent": {
+      "type": "integer"
+    },
+    "author": {
+      "type": "integer"
+    },
+    "author_name": {
+      "type": "string"
+    },
+    "author_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "date": {
+      "type": "string",
+      "format": "datetime"
+    },
+    "date_gmt": {
+      "type": "string",
+      "format": "datetime"
+    },
+    "content": {
+      "type": "object"
+    },
+    "link": {
+      "type": "string",
+      "format": "uri"
+    },
+    "status": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "author_avatar_urls": {
+      "type": "object"
+    },
+    "meta": {
+      "type": "array"
+    },
+    "_links": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "id"
+  ]
+}

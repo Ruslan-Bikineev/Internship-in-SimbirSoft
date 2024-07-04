@@ -66,7 +66,8 @@ public class Post {
     private long commentCount;
 
     public static Post getDefaultPost() {
-        Post post = new Post(0,
+        Post post = new Post(
+                0,
                 1,
                 new Timestamp(System.currentTimeMillis()),
                 new Timestamp(System.currentTimeMillis()),

@@ -14,6 +14,10 @@ public class Content {
     @JsonProperty("protected")
     private boolean isProtected;
 
+    public Content(String rendered) {
+        this.rendered = rendered;
+    }
+
     public void setRendered(String rendered) {
         this.rendered = rendered.replaceAll("<p>", "")
                 .replaceAll("</p>\n", "");
