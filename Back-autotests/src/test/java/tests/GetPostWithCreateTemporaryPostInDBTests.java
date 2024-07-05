@@ -1,5 +1,6 @@
 package tests;
 
+import helpers.Helper;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -23,7 +24,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 @Epic(value = "Пост")
 @Feature(value = "Проверка GET запросов поста через API")
 public class GetPostWithCreateTemporaryPostInDBTests extends BaseTest {
-    Post post = Post.getDefaultPost();
+    Post post = Helper.getDefaultPost();
     private PostsRepository postsRepository;
 
     @BeforeMethod

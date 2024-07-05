@@ -42,28 +42,6 @@ public class Comment {
     private int commentParent;
     private long userId;
 
-    public static Comment getDefaultComment() {
-        Comment comment = new Comment(
-                0,
-                1,
-                "test_comment_author",
-                "test_author_email",
-                "test_author_url",
-                "test_author_ip",
-                new Timestamp(System.currentTimeMillis()),
-                new Timestamp(System.currentTimeMillis()),
-                new Content("test_comment_content"),
-                0,
-                "comment_approved",
-                "test_comment_agent",
-                "test_comment_type",
-                0,
-                0);
-        comment.getCommentDate().setNanos(0);
-        comment.getCommentDateGmt().setNanos(0);
-        return comment;
-    }
-
     public boolean isEqual(Comment comment) {
         boolean result = false;
         if (commentPostId == comment.getCommentPostId() &&

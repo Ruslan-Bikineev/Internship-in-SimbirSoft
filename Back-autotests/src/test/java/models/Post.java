@@ -65,38 +65,6 @@ public class Post {
     private String postMimeType;
     private long commentCount;
 
-    public static Post getDefaultPost() {
-        Post post = new Post(
-                0,
-                1,
-                new Timestamp(System.currentTimeMillis()),
-                new Timestamp(System.currentTimeMillis()),
-                new Content("test_post_content", false),
-                new Title("test_post_title"),
-                new Excerpt("test_post_excerpt", false),
-                "publish",
-                "open",
-                "open",
-                "",
-                "test_post_name",
-                "",
-                "",
-                new Timestamp(System.currentTimeMillis()),
-                new Timestamp(System.currentTimeMillis()),
-                "0",
-                0,
-                new Guid("http://localhost:8000/?p=34"),
-                0,
-                "post",
-                "",
-                0);
-        post.getPostDate().setNanos(0);
-        post.getPostDateGmt().setNanos(0);
-        post.getPostModified().setNanos(0);
-        post.getPostModifiedGmt().setNanos(0);
-        return post;
-    }
-
     public static Map<String, String> getDefaultJsonBodyPost() {
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("status", "publish");

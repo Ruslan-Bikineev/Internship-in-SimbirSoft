@@ -28,22 +28,6 @@ public class User {
     @JsonProperty("name")
     private String displayName;
 
-    public static User getDefaultUser() {
-        User user = new User(
-                0,
-                "test_user_login",
-                "test_user_pass",
-                "test_use_nicename",
-                "test_user_email",
-                "test_user_url",
-                new Timestamp(System.currentTimeMillis()),
-                "test_user_activation_key",
-                0,
-                "test_display_name");
-        user.getUserRegistered().setNanos(0);
-        return user;
-    }
-
     public boolean isEqual(User user) {
         boolean result = false;
         if (getId() == user.getId() &&
