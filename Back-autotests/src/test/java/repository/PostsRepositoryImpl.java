@@ -3,6 +3,10 @@ package repository;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import models.Post;
+import models.sub.models.Content;
+import models.sub.models.Excerpt;
+import models.sub.models.Guid;
+import models.sub.models.Title;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -59,11 +63,31 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     @Override
     public void save(Object entity) {
-        String sqlQuery = "INSERT INTO wp_posts (post_author, post_date, post_date_gmt, post_content, " +
-                "post_title, post_excerpt, post_status, comment_status, ping_status, post_password, post_name, " +
-                "to_ping, pinged, post_modified, post_modified_gmt, post_content_filtered, post_parent, guid, " +
-                "menu_order, post_type, post_mime_type, comment_count) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sqlQuery =
+                "INSERT INTO wp_posts " +
+                        "(post_author, " +
+                        "post_date, " +
+                        "post_date_gmt, " +
+                        "post_content, " +
+                        "post_title, " +
+                        "post_excerpt, " +
+                        "post_status, " +
+                        "comment_status, " +
+                        "ping_status, " +
+                        "post_password, " +
+                        "post_name, " +
+                        "to_ping, " +
+                        "pinged, " +
+                        "post_modified, " +
+                        "post_modified_gmt, " +
+                        "post_content_filtered, " +
+                        "post_parent, " +
+                        "guid, " +
+                        "menu_order, " +
+                        "post_type, " +
+                        "post_mime_type, " +
+                        "comment_count) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, new String[]{"ID"});
             fillPreparedStatementInPost(preparedStatement, (Post) entity);
@@ -79,11 +103,31 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     @Override
     public void update(Object entity) {
-        String sqlQuery = "UPDATE wp_posts SET post_author = ?, post_date = ?, post_date_gmt = ?, " +
-                "post_content = ?, post_title = ?, post_excerpt = ?, post_status = ?, comment_status = ?, " +
-                "ping_status = ?, post_password = ?, post_name = ?, to_ping = ?, pinged = ?, post_modified = ?, " +
-                "post_modified_gmt = ?, post_content_filtered = ?, post_parent = ?, guid = ?, menu_order = ?, " +
-                "post_type = ?, post_mime_type = ?, comment_count = ? WHERE ID = ?";
+        String sqlQuery =
+                "UPDATE wp_posts SET " +
+                        "post_author = ?, " +
+                        "post_date = ?, " +
+                        "post_date_gmt = ?, " +
+                        "post_content = ?, " +
+                        "post_title = ?, " +
+                        "post_excerpt = ?, " +
+                        "post_status = ?, " +
+                        "comment_status = ?, " +
+                        "ping_status = ?, " +
+                        "post_password = ?, " +
+                        "post_name = ?, " +
+                        "to_ping = ?, " +
+                        "pinged = ?, " +
+                        "post_modified = ?, " +
+                        "post_modified_gmt = ?, " +
+                        "post_content_filtered = ?, " +
+                        "post_parent = ?, " +
+                        "guid = ?, " +
+                        "menu_order = ?, " +
+                        "post_type = ?, " +
+                        "post_mime_type = ?, " +
+                        "comment_count = ? " +
+                        "WHERE ID = ?";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             fillPreparedStatementInPost(preparedStatement, (Post) entity);
@@ -98,20 +142,38 @@ public class PostsRepositoryImpl implements PostsRepository {
     public void delete(long id) {
         String sqlQuery = "DELETE FROM wp_posts WHERE ID = " + id;
         try (Connection connection = dataSource.getConnection()) {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(sqlQuery);
+            connection.createStatement().executeUpdate(sqlQuery);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public long getLastInsertId() {
+        long id;
+        String sqlQuery = "SELECT LAST_INSERT_ID() as id";
+        try (Connection connection = dataSource.getConnection()) {
+            Statement statement = connection.createStatement();
+            statement.execute(sqlQuery);
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                id = resultSet.getLong("id");
+            } else {
+                throw new SQLException("Last insert id not found");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id;
     }
 
     private void fillPreparedStatementInPost(PreparedStatement preparedStatement, Post post) throws SQLException {
         preparedStatement.setLong(1, post.getPostAuthor());
         preparedStatement.setTimestamp(2, post.getPostDate());
         preparedStatement.setTimestamp(3, post.getPostDate());
-        preparedStatement.setString(4, post.getPostContent());
-        preparedStatement.setString(5, post.getPostTitle());
-        preparedStatement.setString(6, post.getPostExcerpt());
+        preparedStatement.setString(4, post.getPostContent().getRendered());
+        preparedStatement.setString(5, post.getPostTitle().getRendered());
+        preparedStatement.setString(6, post.getPostExcerpt().getRendered());
         preparedStatement.setString(7, post.getPostStatus());
         preparedStatement.setString(8, post.getCommentStatus());
         preparedStatement.setString(9, post.getPingStatus());
@@ -123,7 +185,7 @@ public class PostsRepositoryImpl implements PostsRepository {
         preparedStatement.setTimestamp(15, post.getPostModifiedGmt());
         preparedStatement.setString(16, post.getPostContentFiltered());
         preparedStatement.setLong(17, post.getPostParent());
-        preparedStatement.setString(18, post.getGuid());
+        preparedStatement.setString(18, post.getGuid().getRendered());
         preparedStatement.setInt(19, post.getMenuOrder());
         preparedStatement.setString(20, post.getPostType());
         preparedStatement.setString(21, post.getPostMimeType());
@@ -135,9 +197,9 @@ public class PostsRepositoryImpl implements PostsRepository {
                 resultSet.getLong("post_author"),
                 resultSet.getTimestamp("post_date"),
                 resultSet.getTimestamp("post_date_gmt"),
-                resultSet.getString("post_content"),
-                resultSet.getString("post_title"),
-                resultSet.getString("post_excerpt"),
+                new Content(resultSet.getString("post_content"), false),
+                new Title(resultSet.getString("post_title")),
+                new Excerpt(resultSet.getString("post_excerpt"), false),
                 resultSet.getString("post_status"),
                 resultSet.getString("comment_status"),
                 resultSet.getString("ping_status"),
@@ -149,7 +211,7 @@ public class PostsRepositoryImpl implements PostsRepository {
                 resultSet.getTimestamp("post_modified_gmt"),
                 resultSet.getString("post_content_filtered"),
                 resultSet.getLong("post_parent"),
-                resultSet.getString("guid"),
+                new Guid(resultSet.getString("guid")),
                 resultSet.getInt("menu_order"),
                 resultSet.getString("post_type"),
                 resultSet.getString("post_mime_type"),
