@@ -23,8 +23,8 @@ public class Content {
                 .replaceAll("</p>\n", "");
     }
 
-    public void setProtected(boolean aProtected) {
-        isProtected = aProtected;
+    public void setProtected(boolean isProtected) {
+        this.isProtected = isProtected;
     }
 
     public boolean isEqual(Content content) {
