@@ -46,9 +46,18 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void save(Object entity) {
-        String sqlQuery = "INSERT INTO wp_users (user_login, user_pass, user_nicename, user_email, " +
-                "user_url, user_registered, user_activation_key, user_status, display_name) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sqlQuery =
+                "INSERT INTO wp_users " +
+                        "(user_login, " +
+                        "user_pass, " +
+                        "user_nicename, " +
+                        "user_email, " +
+                        "user_url, " +
+                        "user_registered, " +
+                        "user_activation_key, " +
+                        "user_status, " +
+                        "display_name) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             fillPreparedStatementInUser(preparedStatement, (User) entity);

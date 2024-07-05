@@ -63,11 +63,31 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     @Override
     public void save(Object entity) {
-        String sqlQuery = "INSERT INTO wp_posts (post_author, post_date, post_date_gmt, post_content, " +
-                "post_title, post_excerpt, post_status, comment_status, ping_status, post_password, post_name, " +
-                "to_ping, pinged, post_modified, post_modified_gmt, post_content_filtered, post_parent, guid, " +
-                "menu_order, post_type, post_mime_type, comment_count) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sqlQuery =
+                "INSERT INTO wp_posts " +
+                        "(post_author, " +
+                        "post_date, " +
+                        "post_date_gmt, " +
+                        "post_content, " +
+                        "post_title, " +
+                        "post_excerpt, " +
+                        "post_status, " +
+                        "comment_status, " +
+                        "ping_status, " +
+                        "post_password, " +
+                        "post_name, " +
+                        "to_ping, " +
+                        "pinged, " +
+                        "post_modified, " +
+                        "post_modified_gmt, " +
+                        "post_content_filtered, " +
+                        "post_parent, " +
+                        "guid, " +
+                        "menu_order, " +
+                        "post_type, " +
+                        "post_mime_type, " +
+                        "comment_count) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, new String[]{"ID"});
             fillPreparedStatementInPost(preparedStatement, (Post) entity);
@@ -83,11 +103,31 @@ public class PostsRepositoryImpl implements PostsRepository {
 
     @Override
     public void update(Object entity) {
-        String sqlQuery = "UPDATE wp_posts SET post_author = ?, post_date = ?, post_date_gmt = ?, " +
-                "post_content = ?, post_title = ?, post_excerpt = ?, post_status = ?, comment_status = ?, " +
-                "ping_status = ?, post_password = ?, post_name = ?, to_ping = ?, pinged = ?, post_modified = ?, " +
-                "post_modified_gmt = ?, post_content_filtered = ?, post_parent = ?, guid = ?, menu_order = ?, " +
-                "post_type = ?, post_mime_type = ?, comment_count = ? WHERE ID = ?";
+        String sqlQuery =
+                "UPDATE wp_posts SET " +
+                        "post_author = ?, " +
+                        "post_date = ?, " +
+                        "post_date_gmt = ?, " +
+                        "post_content = ?, " +
+                        "post_title = ?, " +
+                        "post_excerpt = ?, " +
+                        "post_status = ?, " +
+                        "comment_status = ?, " +
+                        "ping_status = ?, " +
+                        "post_password = ?, " +
+                        "post_name = ?, " +
+                        "to_ping = ?, " +
+                        "pinged = ?, " +
+                        "post_modified = ?, " +
+                        "post_modified_gmt = ?, " +
+                        "post_content_filtered = ?, " +
+                        "post_parent = ?, " +
+                        "guid = ?, " +
+                        "menu_order = ?, " +
+                        "post_type = ?, " +
+                        "post_mime_type = ?, " +
+                        "comment_count = ? " +
+                        "WHERE ID = ?";
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             fillPreparedStatementInPost(preparedStatement, (Post) entity);
