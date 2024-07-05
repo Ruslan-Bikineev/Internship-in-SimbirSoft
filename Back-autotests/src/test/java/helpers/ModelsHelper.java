@@ -10,7 +10,7 @@ import models.sub.models.Title;
 
 import java.sql.Timestamp;
 
-public class Helper {
+public class ModelsHelper {
     public static Comment getDefaultComment() {
         Comment comment = new Comment(
                 0,

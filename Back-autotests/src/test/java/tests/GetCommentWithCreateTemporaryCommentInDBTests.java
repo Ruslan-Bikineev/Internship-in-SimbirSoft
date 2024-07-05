@@ -1,6 +1,6 @@
 package tests;
 
-import helpers.Helper;
+import helpers.ModelsHelper;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -24,7 +24,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 @Epic(value = "Комментарий")
 @Feature(value = "Проверка GET запросов комментария через API")
 public class GetCommentWithCreateTemporaryCommentInDBTests extends BaseTest {
-    Comment comment = Helper.getDefaultComment();
+    Comment comment = ModelsHelper.getDefaultComment();
     CommentRepository commentRepository;
 
     @BeforeMethod

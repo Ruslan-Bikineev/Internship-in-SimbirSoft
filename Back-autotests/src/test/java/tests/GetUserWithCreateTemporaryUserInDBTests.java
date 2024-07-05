@@ -1,6 +1,6 @@
 package tests;
 
-import helpers.Helper;
+import helpers.ModelsHelper;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -24,7 +24,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 @Epic(value = "Пользователь")
 @Feature(value = "Проверка GET запросов пользователя через API")
 public class GetUserWithCreateTemporaryUserInDBTests extends BaseTest {
-    User user = Helper.getDefaultUser();
+    User user = ModelsHelper.getDefaultUser();
     UserRepository userRepository;
 
     @BeforeMethod
