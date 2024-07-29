@@ -2,7 +2,6 @@ package tests.driver.factory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -16,12 +15,10 @@ public class RemoteSelenoidWebDriverFactory implements DriverFactory {
     public WebDriver createDriver(String browser) {
         WebDriver driver;
         try {
-            URL gridHubUrl = new URL("http://localhost:4444/wd/hub");
+            URL gridHubUrl = new URL("http://selenoid:4444/wd/hub");
             driver = switch (browser) {
                 case "Chrome" -> new RemoteWebDriver(gridHubUrl, getChromeOptions());
                 case "Firefox" -> new RemoteWebDriver(gridHubUrl, getFirefoxOptions());
-                case "Edge" -> new RemoteWebDriver(gridHubUrl, new EdgeOptions());
-                case "IE" -> new RemoteWebDriver(gridHubUrl, internetExplorerOptions());
                 default -> throw new IllegalArgumentException("Unexpected value: " + browser);
             };
         } catch (MalformedURLException | IllegalArgumentException e) {

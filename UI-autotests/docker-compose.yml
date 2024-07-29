@@ -22,6 +22,7 @@ services:
 #  tests:
 #    build: .
 #    network_mode: bridge
+#    container_name: tests
 #    links:
 #      - selenoid
 #      - selenoid-ui
