@@ -1,35 +1,30 @@
 version: "3"
-
 services:
   selenoid:
-    build: selenoid
+    build: selenoid/.
     container_name: selenoid
     ports:
       - "4444:4444"
     network_mode: bridge
-    #    networks:
-    #      - selenoid_net
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
   selenoid-ui:
-    image: "aerokube/selenoid-ui"
+    image: aerokube/selenoid-ui:latest
     container_name: selenoid-ui
     ports:
       - "90:8080"
     network_mode: bridge
-    #    networks:
-    #      - selenoid_net
+    links:
+      - selenoid
     command: [ "--selenoid-uri", "http://selenoid:4444" ]
     depends_on:
       - selenoid
 #  tests:
-#    container_name: tests
 #    build: .
 #    network_mode: bridge
+#    links:
+#      - selenoid
+#      - selenoid-ui
 #    depends_on:
 #      - selenoid
 #      - selenoid-ui
-#
-networks:
-  selenoid_net:
-    driver: bridge
