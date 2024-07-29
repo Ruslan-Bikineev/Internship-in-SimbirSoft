@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Authorization Tests Suite" parallel="tests" thread-count="2">
+<!--<suite name="Authorization Tests Suite">-->
+    <listeners>
+        <listener class-name="helpers.MyListener"></listener>
+    </listeners>
+    <parameter name="remote" value="Selenoid"></parameter>
+    <test name="Login Page Tests Chrome browser">
+        <parameter name="browser" value="Chrome"></parameter>
+        <classes>
+            <class name="tests.way2automation.LoginPageTests"></class>
+        </classes>
+    </test>
+    <parameter name="browser" value="Firefox"></parameter>
+    <test name="Login Page Tests Firefox browser">
+        <parameter name="browser" value="Firefox"></parameter>
+        <classes>
+            <class name="tests.way2automation.LoginPageTests"></class>
+        </classes>
+    </test>
+</suite>

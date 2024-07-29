@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -22,6 +22,43 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--==================================================================-->
     </properties>
+    <profiles>
+        <!--    Профиль для запуска тестов через файл cucumberlogintests.xml    -->
+        <profile>
+            <id>run-cucumber-tests</id>
+            <properties>
+                <suiteXmlFile>configuration/cucumberlogintests.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <!--        Профиль для запуска тестов через файл logintests.xml        -->
+        <profile>
+            <id>run-tests</id>
+            <properties>
+                <suiteXmlFile>configuration/logintests.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <!--    Профиль для запуска тестов через файл loginparalleltests.xml    -->
+        <profile>
+            <id>run-parallel-tests</id>
+            <properties>
+                <suiteXmlFile>configuration/loginparalleltests.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <!--      Профиль для запуска тестов через файл selenoidtests.xml       -->
+        <profile>
+            <id>run-selenoid-tests</id>
+            <properties>
+                <suiteXmlFile>configuration/selenoidtests.xml</suiteXmlFile>
+            </properties>
+        </profile>
+        <!--      Профиль для запуска тестов через файл testng-failed.xml       -->
+        <profile>
+            <id>retry-failed-tests</id>
+            <properties>
+                <suiteXmlFile>target/surefire-reports/testng-failed.xml</suiteXmlFile>
+            </properties>
+        </profile>
+    </profiles>
     <!-- Add allure-bom to dependency management to ensure correct versions of all the dependencies are used -->
     <dependencyManagement>
         <dependencies>
@@ -92,36 +129,6 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-    <profiles>
-        <!--    Профиль для запуска тестов через файл cucumberlogintests.xml    -->
-        <profile>
-            <id>run-cucumber-tests</id>
-            <properties>
-                <suiteXmlFile>configuration/cucumberlogintests.xml</suiteXmlFile>
-            </properties>
-        </profile>
-        <!--        Профиль для запуска тестов через файл logintests.xml        -->
-        <profile>
-            <id>run-tests</id>
-            <properties>
-                <suiteXmlFile>configuration/logintests.xml</suiteXmlFile>
-            </properties>
-        </profile>
-        <!--    Профиль для запуска тестов через файл loginparalleltests.xml    -->
-        <profile>
-            <id>run-parallel-tests</id>
-            <properties>
-                <suiteXmlFile>configuration/loginparalleltests.xml</suiteXmlFile>
-            </properties>
-        </profile>
-        <!--      Профиль для запуска тестов через файл testng-failed.xml       -->
-        <profile>
-            <id>retry-failed-tests</id>
-            <properties>
-                <suiteXmlFile>target/surefire-reports/testng-failed.xml</suiteXmlFile>
-            </properties>
-        </profile>
-    </profiles>
     <!--================================================================-->
     <build>
         <plugins>
