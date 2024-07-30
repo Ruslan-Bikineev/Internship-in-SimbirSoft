@@ -27,14 +27,12 @@ services:
       - selenoid_net
     volumes:
       - maven-repo:/root/.m2
-      - tests-report:/app/target
+      - ./target:/app/target
     depends_on:
       - selenoid
       - selenoid-ui
 volumes:
   maven-repo:
-    external: true
-  tests-report:
     external: true
 networks:
   selenoid_net:
