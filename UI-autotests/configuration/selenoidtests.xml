@@ -4,17 +4,17 @@
         <listener class-name="helpers.MyListener"></listener>
     </listeners>
     <parameter name="remote" value="Selenoid"></parameter>
-    <test name="Login Page Tests Chrome browser" parallel="classes" thread-count="2">
+    <test name="Login Page Tests Chrome browser">
         <parameter name="browser" value="Chrome"></parameter>
-        <packages>
-            <package name="tests.*"></package>
-        </packages>
+        <classes>
+            <class name="tests.way2automation.LoginPageTests"></class>
+        </classes>
     </test>
     <parameter name="browser" value="Firefox"></parameter>
-    <test name="Login Page Tests Firefox browser" parallel="classes" thread-count="2">
+    <test name="Login Page Tests Firefox browser">
         <parameter name="browser" value="Firefox"></parameter>
-        <packages>
-            <package name="tests.*"></package>
-        </packages>
+        <classes>
+            <class name="tests.way2automation.LoginPageTests"></class>
+        </classes>
     </test>
 </suite>
