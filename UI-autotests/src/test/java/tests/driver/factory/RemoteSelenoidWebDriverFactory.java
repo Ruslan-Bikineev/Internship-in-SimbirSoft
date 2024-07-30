@@ -56,7 +56,7 @@ public class RemoteSelenoidWebDriverFactory implements DriverFactory {
             put("labels", new HashMap<String, Object>() {{
                 put("manual", "true");
             }});
-            put("enableVideo", true);
+            put("enableVideo", false);
         }});
         return options;
     }
