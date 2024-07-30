@@ -35,5 +35,4 @@ volumes:
     external: true
 networks:
   selenoid_net:
-    external:
-      name: selenoid_net
+    external: true
