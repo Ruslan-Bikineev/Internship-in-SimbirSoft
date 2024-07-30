@@ -5,7 +5,7 @@ RUN apk update \
 
 WORKDIR /etc/selenoid
 
-COPY browsers.json .
+COPY /browsers.json .
 
 EXPOSE 4444
 
