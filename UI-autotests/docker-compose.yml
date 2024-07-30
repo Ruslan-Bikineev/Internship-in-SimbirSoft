@@ -5,27 +5,38 @@ services:
     container_name: selenoid
     ports:
       - "4444:4444"
-    network_mode: bridge
+    networks:
+      - selenoid_net
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+    command: [ "-container-network", "selenoid_net" ]
   selenoid-ui:
     image: aerokube/selenoid-ui:latest
     container_name: selenoid-ui
     ports:
       - "90:8080"
-    network_mode: bridge
-    links:
-      - selenoid
+    networks:
+      - selenoid_net
     command: [ "--selenoid-uri", "http://selenoid:4444" ]
     depends_on:
       - selenoid
-#  tests:
-#    build: .
-#    network_mode: bridge
-#    container_name: tests
-#    links:
-#      - selenoid
-#      - selenoid-ui
-#    depends_on:
-#      - selenoid
-#      - selenoid-ui
+  tests:
+    build: .
+    container_name: tests
+    networks:
+      - selenoid_net
+    volumes:
+      - maven-repo:/root/.m2
+      - tests-report:/app/target
+    depends_on:
+      - selenoid
+      - selenoid-ui
+volumes:
+  maven-repo:
+    external: true
+  tests-report:
+    external: true
+networks:
+  selenoid_net:
+    external:
+      name: selenoid_net

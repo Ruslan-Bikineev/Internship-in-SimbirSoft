@@ -15,7 +15,7 @@ public class RemoteSelenoidWebDriverFactory implements DriverFactory {
     public WebDriver createDriver(String browser) {
         WebDriver driver;
         try {
-            URL gridHubUrl = new URL("http://localhost:4444/wd/hub");
+            URL gridHubUrl = new URL("http://selenoid:4444/wd/hub");
             driver = switch (browser) {
                 case "Chrome" -> new RemoteWebDriver(gridHubUrl, getChromeOptions());
                 case "Firefox" -> new RemoteWebDriver(gridHubUrl, getFirefoxOptions());
