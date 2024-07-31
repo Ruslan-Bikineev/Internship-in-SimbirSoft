@@ -3,7 +3,7 @@
     <listeners>
         <listener class-name="helpers.MyListener"></listener>
     </listeners>
-    <parameter name="remote" value="false"></parameter>
+    <parameter name="remote" value="Local"></parameter>
     <test name="Login Page Tests Chrome browser">
         <parameter name="browser" value="Chrome"></parameter>
         <packages>

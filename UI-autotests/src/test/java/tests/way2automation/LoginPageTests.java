@@ -22,7 +22,6 @@ import static io.qameta.allure.SeverityLevel.MINOR;
 
 @Epic(value = "Страница авторизации пользователя")
 public class LoginPageTests extends BaseTest {
-
     @DataProvider(name = "LoginDataOfDifferentTypesProvider")
     public Object[][] loginDataOfDifferentTypes() {
         return new Object[][]{

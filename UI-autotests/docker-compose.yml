@@ -1,0 +1,38 @@
+services:
+  selenoid:
+    build: selenoid/.
+    container_name: selenoid
+    ports:
+      - "4444:4444"
+    networks:
+      - selenoid_net
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: [ "-container-network", "selenoid_net" ]
+  selenoid-ui:
+    image: aerokube/selenoid-ui:latest
+    container_name: selenoid-ui
+    ports:
+      - "90:8080"
+    networks:
+      - selenoid_net
+    command: [ "--selenoid-uri", "http://selenoid:4444" ]
+    depends_on:
+      - selenoid
+  tests:
+    build: .
+    container_name: tests
+    networks:
+      - selenoid_net
+    volumes:
+      - maven-repo:/root/.m2
+      - ./target:/app/target
+    depends_on:
+      - selenoid
+      - selenoid-ui
+volumes:
+  maven-repo:
+    external: true
+networks:
+  selenoid_net:
+    external: true

@@ -3,7 +3,7 @@
     <listeners>
         <listener class-name="helpers.MyListener"></listener>
     </listeners>
-    <parameter name="remote" value="true"></parameter>
+    <parameter name="remote" value="SeleniumGRID"></parameter>
     <test name="Login Page Tests Chrome browser" parallel="classes" thread-count="6">
         <parameter name="browser" value="Chrome"></parameter>
         <packages>
