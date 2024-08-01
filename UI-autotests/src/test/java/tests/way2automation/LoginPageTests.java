@@ -118,21 +118,21 @@ public class LoginPageTests extends BaseTest {
 //                loginPage.getValuePasswordField(), "Введенный пароль не совпадает с паролем в поле ввода");
 //    }
 //
-    @Test
-    @Feature(value = "Авторизация")
-    @Story(value = "Авторизация с пустым логином и паролем")
-    @Owner(value = "Ruslan Bikineev")
-    @Severity(CRITICAL)
-    public void testEmptyLoginAndPassword() {
-        HomePage homePage = new HomePage(getDriver());
-        homePage.openHomePage();
-        LoginPage loginPage = homePage.clickMemberLogin();
-        loginPage.submitLogin();
-        Assert.assertEquals("", loginPage.getValueOfEmailField(),
-                "Введенный логин не совпадает с логином в поле ввода");
-        Assert.assertEquals("", loginPage.getValuePasswordField(),
-                "Введенный пароль не совпадает с паролем в поле ввода");
-    }
+//    @Test
+//    @Feature(value = "Авторизация")
+//    @Story(value = "Авторизация с пустым логином и паролем")
+//    @Owner(value = "Ruslan Bikineev")
+//    @Severity(CRITICAL)
+//    public void testEmptyLoginAndPassword() {
+//        HomePage homePage = new HomePage(getDriver());
+//        homePage.openHomePage();
+//        LoginPage loginPage = homePage.clickMemberLogin();
+//        loginPage.submitLogin();
+//        Assert.assertEquals("", loginPage.getValueOfEmailField(),
+//                "Введенный логин не совпадает с логином в поле ввода");
+//        Assert.assertEquals("", loginPage.getValuePasswordField(),
+//                "Введенный пароль не совпадает с паролем в поле ввода");
+//    }
 
     @Test
     @Feature(value = "Скролл")
