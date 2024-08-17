@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    tools {
+        maven "maven"
+    }
+
+    stages {
+        stage('Clone project') {
+            steps {
+                git branch: 'Task-Z2', url: 'https://github.com/Ruslan-Bikineev/Internship-in-SimbirSoft.git'
+            }
+        }
+        stage('Install volume, network and browsers images') {
+            steps {
+                catchError(buildResult: 'SUCCESS') {
+                    sh 'docker network create selenoid_net'
+                    sh 'docker volume create maven-repo'
+                    sh 'docker pull selenoid/chrome:126.0'
+                    sh 'docker pull selenoid/firefox:125.0'
+                }
+            }
+        }
+        stage('Up docker compose and run tests') {
+            steps {
+                dir('UI-autotests') {
+                    sh 'docker compose up -d'
+                    sh 'docker wait tests'
+                }
+            }
+        }
+        stage('Stop containers, delete containers and images') {
+            steps {
+                sh 'docker stop selenoid-ui selenoid'
+                sh 'docker rm selenoid-ui selenoid tests'
+                sh 'docker rmi ui-autotests-tests ui-autotests-selenoid aerokube/selenoid-ui'
+            }
+        }
+    }
+    post {
+        success {
+            allure includeProperties: false, jdk: '', results: [[path: 'UI-autotests/target/allure-results']]
+        }
+    }
+}
