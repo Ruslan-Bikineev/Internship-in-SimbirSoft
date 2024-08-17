@@ -10,7 +10,6 @@
             <package name="tests.*"></package>
         </packages>
     </test>
-    <parameter name="browser" value="Firefox"></parameter>
     <test name="Login Page Tests Firefox browser" parallel="classes" thread-count="2">
         <parameter name="browser" value="Firefox"></parameter>
         <packages>
