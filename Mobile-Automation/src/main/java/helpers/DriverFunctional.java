@@ -1,5 +1,6 @@
 package helpers;
 
+import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import tests.BaseTest;
@@ -24,6 +25,17 @@ public class DriverFunctional {
             Allure.attachment("Screenshot", inputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Close keyboard if keyboard is shown
+     *
+     * @param androidDriver instance of BaseTest
+     */
+    public static void closeKeyBoard(AndroidDriver androidDriver) {
+        if (androidDriver.isKeyboardShown()) {
+            androidDriver.hideKeyboard();
         }
     }
 }
