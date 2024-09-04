@@ -24,8 +24,9 @@ public abstract class BaseTest {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("automationName", "UiAutomator2");
         capabilities.setCapability("app-wait-activity", "activity-to-wait-for");
+        capabilities.setCapability("fullReset", "true");
         driver = new AndroidDriver(new URI("http://127.0.0.1:4723/wd/hub").toURL(), capabilities);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @AfterClass

@@ -22,6 +22,8 @@ public class LogInPage {
     private WebElement passwordSignInButton;
     @FindBy(xpath = "//android.widget.TextView[@resource-id=\"field:input-passwd:hint\"]")
     private WebElement passwordHint;
+    @FindBy(xpath = "//android.widget.ImageButton[@resource-id=\"ru.beru.android:id/closeButton\"]")
+    private WebElement widgetCloseButton;
 
     public LogInPage(AndroidDriver driver) {
         this.driver = driver;
@@ -38,6 +40,7 @@ public class LogInPage {
         passwordField.sendKeys(password);
         DriverFunctional.closeKeyBoard(driver);
         passwordSignInButton.click();
+        widgetCloseButton.click();
         return this;
     }
 
