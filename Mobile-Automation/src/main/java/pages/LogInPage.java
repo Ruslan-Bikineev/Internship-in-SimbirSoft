@@ -2,6 +2,7 @@ package pages;
 
 import helpers.DriverFunctional;
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -22,35 +23,35 @@ public class LogInPage {
     private WebElement passwordSignInButton;
     @FindBy(xpath = "//android.widget.TextView[@resource-id=\"field:input-passwd:hint\"]")
     private WebElement passwordHint;
-    @FindBy(xpath = "//android.widget.ImageButton[@resource-id=\"ru.beru.android:id/closeButton\"]")
-    private WebElement widgetCloseButton;
 
     public LogInPage(AndroidDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
+    @Step("Заполняем поле логин: {login}")
     public LogInPage setLogin(String login) {
         loginField.sendKeys(login);
         signInButton.click();
         return this;
     }
 
+    @Step("Заполняем поле пароль: {password}")
     public LogInPage setPassword(String password) {
         passwordField.sendKeys(password);
         DriverFunctional.closeKeyBoard(driver);
         passwordSignInButton.click();
-        widgetCloseButton.click();
         return this;
     }
 
+    @Step("Получаем сообщение о некорректном пароле")
     public String getPasswordHint() {
         return passwordHint.getText();
     }
 
-    public LogInPage authorization(String login, String password) {
+    public HomePage authorization(String login, String password) {
         setLogin(login);
         setPassword(password);
-        return this;
+        return new HomePage(driver);
     }
 }
