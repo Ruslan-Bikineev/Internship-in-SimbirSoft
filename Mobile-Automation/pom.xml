@@ -12,7 +12,7 @@
         <!--==================================================================-->
         <testng.version>7.10.1</testng.version>
         <allure.version>2.27.0</allure.version>
-        <aspectj.version>1.9.22</aspectj.version>
+        <aspectj.version>1.9.22.1</aspectj.version>
         <selenium.version>3.141.59</selenium.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <!--==================================================================-->
@@ -71,6 +71,17 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-java-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.12</version>
         </dependency>
     </dependencies>
     <!--================================================================-->

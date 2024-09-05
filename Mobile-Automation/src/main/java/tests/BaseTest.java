@@ -1,29 +1,36 @@
 package tests;
 
+import config.ConfigReader;
 import io.appium.java_client.android.AndroidDriver;
 import lombok.Getter;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
-import java.net.URL;
+import java.io.File;
+import java.net.URI;
+import java.util.concurrent.TimeUnit;
 
 @Getter
 public abstract class BaseTest {
-    private AndroidDriver<WebElement> driver;
+    private AndroidDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() throws Exception {
+        File app = new File(System.getProperty("user.dir"), ConfigReader.emulatorConfig.app());
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "Nexus 5");
-        capabilities.setCapability("avd", "Nexus_5_API_35");
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("automationName", "UiAutomator2");
-        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        capabilities.setCapability("deviceName", ConfigReader.emulatorConfig.deviceName());
+        capabilities.setCapability("avd", ConfigReader.emulatorConfig.avd());
+        capabilities.setCapability("platformName", ConfigReader.emulatorConfig.platformName());
+        capabilities.setCapability("app", app.getAbsolutePath());
+        capabilities.setCapability("automationName", ConfigReader.emulatorConfig.automationName());
+        capabilities.setCapability("app-wait-activity", ConfigReader.emulatorConfig.appWaitActivity());
+        capabilities.setCapability("fullReset", ConfigReader.emulatorConfig.fullReset());
+        driver = new AndroidDriver(new URI(ConfigReader.emulatorConfig.remoteURL()).toURL(), capabilities);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
