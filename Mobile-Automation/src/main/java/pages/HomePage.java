@@ -10,13 +10,15 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class HomePage {
     private AndroidDriver driver;
-    @FindBy(xpath = "//android.widget.ImageButton[@resource-id=\"ru.beru.android:id/closeButton\"]")
+    @FindBy(id = "ru.beru.android:id/closeButton")
     private WebElement widgetCloseButton;
-    @FindBy(xpath = "//android.widget.Button[@resource-id=\"ru.beru.android:id/negativeButton\"]")
+    @FindBy(id = "ru.beru.android:id/negativeButton")
     private WebElement skipCookieFilesButton;
     @FindBy(xpath = "//android.widget.GridView[@resource-id=\"ru.beru.android:id/flexsdk_recycler_view_id\"]" +
             "/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup\n")
     private WebElement menu;
+    @FindBy(id = "ru.beru.android:id/nav_profile")
+    private WebElement profileButton;
 
     public HomePage(AndroidDriver driver) {
         this.driver = driver;
@@ -37,5 +39,11 @@ public class HomePage {
             skipCookieFilesButton.click();
         }
         return this;
+    }
+
+    @Step("Переходимация на страницу профиля")
+    public ProfilePage moveToProfilePage() {
+        profileButton.click();
+        return new ProfilePage(driver);
     }
 }
