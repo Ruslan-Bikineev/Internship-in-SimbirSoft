@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SettingsPage {
     private AndroidDriver androidDriver;
-    @FindBy(xpath = "//android.widget.TextView[@text=\"Уведомления\"]")
+    @FindBy(xpath = "//*[@text=\"Уведомления\"]")
     private WebElement notificationsButton;
 
     public SettingsPage(AndroidDriver androidDriver) {

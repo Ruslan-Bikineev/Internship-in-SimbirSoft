@@ -17,7 +17,7 @@ public class ProfilePage {
     private AndroidDriver androidDriver;
     @FindBy(id = "ru.beru.android:id/slideIndicatorView")
     private WebElement slideFavoriteCategories;
-    @FindBy(xpath = "//android.widget.TextView[@text=\"Настройки\"]")
+    @FindBy(xpath = "//*[@text=\"Настройки\"]")
     private WebElement settingsButton;
 
     public ProfilePage(AndroidDriver androidDriver) {

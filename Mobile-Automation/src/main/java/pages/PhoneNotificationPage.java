@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PhoneNotificationPage {
     private AndroidDriver androidDriver;
-    @FindBy(xpath = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]")
+    @FindBy(xpath = "//*[@content-desc=\"Navigate up\"]")
     private WebElement navigateUpButton;
     @FindBy(id = "android:id/switch_widget")
     private WebElement enableAllMarketNotificationsSwitch;

@@ -14,8 +14,7 @@ public class HomePage {
     private WebElement widgetCloseButton;
     @FindBy(id = "ru.beru.android:id/negativeButton")
     private WebElement skipCookieFilesButton;
-    @FindBy(xpath = "//android.widget.GridView[@resource-id=\"ru.beru.android:id/flexsdk_recycler_view_id\"]" +
-            "/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup\n")
+    @FindBy(xpath = "//*[@resource-id=\"ru.beru.android:id/flexsdk_recycler_view_id\"]/android.view.ViewGroup[2]/*/.")
     private WebElement menu;
     @FindBy(id = "ru.beru.android:id/nav_profile")
     private WebElement profileButton;

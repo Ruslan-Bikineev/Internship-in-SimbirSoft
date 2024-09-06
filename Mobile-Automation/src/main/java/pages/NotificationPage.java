@@ -7,11 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class NotificationPage {
     private AndroidDriver androidDriver;
-    @FindBy(xpath = "//android.widget.TextView[@text=\"Включить всё\"]")
+    @FindBy(xpath = "//*[@text=\"Включить всё\"]")
     private WebElement enableAllNotificationsButton;
-    @FindBy(xpath = "//android.widget.GridView[@resource-id=\"ru.beru.android:id/flexsdk_recycler_view_id\"]" +
-            "/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]" +
-            "/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup\n")
+    @FindBy(xpath = "//android.view.ViewGroup[2]/android.view.ViewGroup[2]" +
+            "/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup")
     private WebElement promotionsAndSalesSwitcher;
 
     public NotificationPage(AndroidDriver androidDriver) {

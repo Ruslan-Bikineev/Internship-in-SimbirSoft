@@ -13,15 +13,15 @@ import org.openqa.selenium.support.PageFactory;
 @AllArgsConstructor
 public class LogInPage {
     private AndroidDriver androidDriver;
-    @FindBy(xpath = "//android.widget.EditText[@resource-id=\"passp-field-login\"]")
+    @FindBy(xpath = "//*[@resource-id=\"passp-field-login\"]")
     private WebElement loginField;
-    @FindBy(xpath = "//android.widget.Button[@resource-id=\"passp:sign-in\"]")
+    @FindBy(xpath = "//*[@resource-id=\"passp:sign-in\"]")
     private WebElement signInButton;
-    @FindBy(xpath = "//android.widget.EditText[@resource-id=\"passp-field-passwd\"]")
+    @FindBy(xpath = "//*[@resource-id=\"passp-field-passwd\"]")
     private WebElement passwordField;
-    @FindBy(xpath = "//android.widget.Button[@resource-id=\"passp:sign-in\"]")
+    @FindBy(xpath = "//*[@resource-id=\"passp:sign-in\"]")
     private WebElement passwordSignInButton;
-    @FindBy(xpath = "//android.widget.TextView[@resource-id=\"field:input-passwd:hint\"]")
+    @FindBy(xpath = "//*[@resource-id=\"field:input-passwd:hint\"]")
     private WebElement passwordHint;
 
     public LogInPage(AndroidDriver driver) {
