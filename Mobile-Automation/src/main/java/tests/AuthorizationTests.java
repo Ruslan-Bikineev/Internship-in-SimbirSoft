@@ -28,7 +28,7 @@ public class AuthorizationTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(BLOCKER)
     public void logInWithInvalidCredentialsTest() {
-        LogInPage logInPage = new LogInPage(getDriver());
+        LogInPage logInPage = new LogInPage(getAndroidDriver());
         logInPage.authorization(INVALID_LOGIN, INVALID_PASSWORD);
         Assert.assertEquals(Normalizer.normalize(logInPage.getPasswordHint(), Normalizer.Form.NFC),
                 Normalizer.normalize(INCORRECT_PASSWORD_MESSAGE, Normalizer.Form.NFC),
@@ -41,10 +41,10 @@ public class AuthorizationTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(BLOCKER)
     public void logInWithValidCredentialsTest() {
-        HomePage homePage = new LogInPage(getDriver())
+        HomePage homePage = new LogInPage(getAndroidDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
                 .closeWidget()
                 .skipCookieFiles();
-        Assert.assertEquals(getDriver().currentActivity(), ACTIVITY_AFTER_SUCCESS_LOGIN);
+        Assert.assertEquals(getAndroidDriver().currentActivity(), ACTIVITY_AFTER_SUCCESS_LOGIN);
     }
 }

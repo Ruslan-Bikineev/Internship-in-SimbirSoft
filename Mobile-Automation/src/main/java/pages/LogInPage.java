@@ -12,20 +12,20 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 @AllArgsConstructor
 public class LogInPage {
-    private AndroidDriver driver;
-    @FindBy(xpath = "//android.widget.EditText[@resource-id=\"passp-field-login\"]")
+    private AndroidDriver androidDriver;
+    @FindBy(xpath = "//*[@resource-id=\"passp-field-login\"]")
     private WebElement loginField;
-    @FindBy(xpath = "//android.widget.Button[@resource-id=\"passp:sign-in\"]")
+    @FindBy(xpath = "//*[@resource-id=\"passp:sign-in\"]")
     private WebElement signInButton;
-    @FindBy(xpath = "//android.widget.EditText[@resource-id=\"passp-field-passwd\"]")
+    @FindBy(xpath = "//*[@resource-id=\"passp-field-passwd\"]")
     private WebElement passwordField;
-    @FindBy(xpath = "//android.widget.Button[@resource-id=\"passp:sign-in\"]")
+    @FindBy(xpath = "//*[@resource-id=\"passp:sign-in\"]")
     private WebElement passwordSignInButton;
-    @FindBy(xpath = "//android.widget.TextView[@resource-id=\"field:input-passwd:hint\"]")
+    @FindBy(xpath = "//*[@resource-id=\"field:input-passwd:hint\"]")
     private WebElement passwordHint;
 
     public LogInPage(AndroidDriver driver) {
-        this.driver = driver;
+        this.androidDriver = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -39,7 +39,7 @@ public class LogInPage {
     @Step("Заполняем поле пароль: {password}")
     public LogInPage setPassword(String password) {
         passwordField.sendKeys(password);
-        DriverFunctional.closeKeyBoard(driver);
+        DriverFunctional.closeKeyBoard(androidDriver);
         passwordSignInButton.click();
         return this;
     }
@@ -52,6 +52,6 @@ public class LogInPage {
     public HomePage authorization(String login, String password) {
         setLogin(login);
         setPassword(password);
-        return new HomePage(driver);
+        return new HomePage(androidDriver);
     }
 }
