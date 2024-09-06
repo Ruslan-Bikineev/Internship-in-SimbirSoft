@@ -18,7 +18,7 @@ public class PhoneNotificationPage {
         PageFactory.initElements(androidDriver, this);
     }
 
-    @Step("Включаем все уведомления")
+    @Step("Включаем все уведомления приложения в настройках телефона")
     public PhoneNotificationPage enableAllNotifications() {
         if (!enableAllMarketNotificationsSwitch.isSelected()) {
             enableAllMarketNotificationsSwitch.click();

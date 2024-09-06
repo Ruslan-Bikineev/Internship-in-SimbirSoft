@@ -24,7 +24,7 @@ public class DriverFunctional {
      * @param baseTest instance of BaseTest
      */
     public static void takeAndAttachToAllureScreenshot(BaseTest baseTest) {
-        File file = baseTest.getDriver().getScreenshotAs(OutputType.FILE);
+        File file = baseTest.getAndroidDriver().getScreenshotAs(OutputType.FILE);
         try {
             InputStream inputStream = Files.newInputStream(Paths.get(file.getAbsolutePath()));
             Allure.attachment("Screenshot", inputStream);

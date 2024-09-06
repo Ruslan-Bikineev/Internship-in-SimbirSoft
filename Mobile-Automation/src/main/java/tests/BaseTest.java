@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @Getter
 public abstract class BaseTest {
-    private AndroidDriver driver;
+    private AndroidDriver androidDriver;
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -26,12 +26,12 @@ public abstract class BaseTest {
         capabilities.setCapability("automationName", ConfigReader.emulatorConfig.automationName());
         capabilities.setCapability("app-wait-activity", ConfigReader.emulatorConfig.appWaitActivity());
         capabilities.setCapability("fullReset", ConfigReader.emulatorConfig.fullReset());
-        driver = new AndroidDriver(new URI(ConfigReader.emulatorConfig.remoteURL()).toURL(), capabilities);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        androidDriver = new AndroidDriver(new URI(ConfigReader.emulatorConfig.remoteURL()).toURL(), capabilities);
+        androidDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+        androidDriver.quit();
     }
 }

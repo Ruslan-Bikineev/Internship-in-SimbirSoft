@@ -5,13 +5,8 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 import pages.LogInPage;
-import pages.NotificationPage;
-import pages.ProfilePage;
-
-import java.util.Map;
 
 import static data.TestsData.VALID_LOGIN;
 import static data.TestsData.VALID_PASSWORD;
@@ -25,22 +20,17 @@ public class NotificationTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void enableAllNotifications() {
-        ProfilePage profilePage = new LogInPage(getDriver())
+        new LogInPage(getAndroidDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
                 .closeWidget()
                 .skipCookieFiles()
-                .moveToProfilePage();
-        ((JavascriptExecutor) getDriver()).executeScript("mobile: swipeGesture", Map.of(
-                "left", 100, "top", 100, "width", 200, "height", 200,
-                "direction", "down",
-                "percent", 0.75
-        ));
-        NotificationPage notificationPage = profilePage.moveToSettingsPage()
+                .moveToProfilePage()
+                .swipeDownSlideIndicatorView()
+                .moveToSettingsPage()
                 .moveToNotificationPage()
                 .moveToPhoneNotificationPage()
                 .enableAllNotifications()
                 .moveToNotificationPage();
-//        Assert.assertTrue(notificationPage.isPromotionsAndSalesSwitcherSelected());
     }
 }
 

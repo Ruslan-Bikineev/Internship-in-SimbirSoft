@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public class HomePage {
-    private AndroidDriver driver;
+    private AndroidDriver androidDriver;
     @FindBy(id = "ru.beru.android:id/closeButton")
     private WebElement widgetCloseButton;
     @FindBy(id = "ru.beru.android:id/negativeButton")
@@ -21,7 +21,7 @@ public class HomePage {
     private WebElement profileButton;
 
     public HomePage(AndroidDriver driver) {
-        this.driver = driver;
+        this.androidDriver = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -44,6 +44,6 @@ public class HomePage {
     @Step("Переходимация на страницу профиля")
     public ProfilePage moveToProfilePage() {
         profileButton.click();
-        return new ProfilePage(driver);
+        return new ProfilePage(androidDriver);
     }
 }
