@@ -5,8 +5,10 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LogInPage;
+import pages.NotificationPage;
 
 import static data.TestsData.VALID_LOGIN;
 import static data.TestsData.VALID_PASSWORD;
@@ -20,7 +22,7 @@ public class NotificationTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void enableAllNotifications() {
-        new LogInPage(getAndroidDriver())
+        NotificationPage notificationPage = new LogInPage(getAndroidDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
                 .closeWidget()
                 .skipCookieFiles()
@@ -31,6 +33,7 @@ public class NotificationTests extends BaseTest {
                 .moveToPhoneNotificationPage()
                 .enableAllNotifications()
                 .moveToNotificationPage();
+        Assert.assertTrue(notificationPage.isPromotionsAndSalesSwitcherSelected());
     }
 }
 
