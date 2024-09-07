@@ -7,4 +7,5 @@ public class TestsData {
     public static final String INVALID_PASSWORD = "invalidPassword";
     public static final String INCORRECT_PASSWORD_MESSAGE = "Неверный пароль";
     public static final String ACTIVITY_AFTER_SUCCESS_LOGIN = "ru.yandex.market.ui.splash.MarketSplashActivity";
+    public static final String MESSAGE_AFTER_SUCCESS_CHOOSE_FAVORITE_CATEGORIES = "Как вам подборка категорий в этом месяце?";
 }

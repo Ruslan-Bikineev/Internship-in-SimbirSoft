@@ -19,6 +19,9 @@ public class ProfilePage {
     private WebElement slideFavoriteCategories;
     @FindBy(xpath = "//*[@text=\"Настройки\"]")
     private WebElement settingsButton;
+    @FindBy(xpath = "//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup")
+    private WebElement chooseFavoriteCategoriesButton;
+
 
     public ProfilePage(AndroidDriver androidDriver) {
         this.androidDriver = androidDriver;
@@ -40,5 +43,11 @@ public class ProfilePage {
                 "percent", 1.0
         ));
         return this;
+    }
+
+    @Step("Открываем вкладку с выбором любимых категорий")
+    public ChooseFavoriteCategoriesPage openChooseFavoriteCategoriesPage() {
+        chooseFavoriteCategoriesButton.click();
+        return new ChooseFavoriteCategoriesPage(androidDriver);
     }
 }
