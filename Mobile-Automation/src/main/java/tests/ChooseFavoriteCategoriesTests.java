@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
@@ -14,10 +15,11 @@ import static data.TestsData.VALID_LOGIN;
 import static data.TestsData.VALID_PASSWORD;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 
+@Epic(value = "Выбор любимых категорий")
 public class ChooseFavoriteCategoriesTests extends BaseTest {
     @Test
-    @Feature(value = "Каталог")
-    @Story(value = "Проверка отображения вкладки \"оборудования\" на странице каталога")
+    @Feature(value = "Автоматическое появление окна выбора любимых категорий при переходе в профиль")
+    @Story(value = "Выбор четырех рандомных любимых категорий")
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void chooseFourChooseFavoriteCategoriesTest() {
