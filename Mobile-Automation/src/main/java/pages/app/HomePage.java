@@ -1,11 +1,13 @@
-package pages;
+package pages.app;
 
+import helpers.Waiters;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Getter
 public class HomePage {
@@ -18,6 +20,8 @@ public class HomePage {
     private WebElement menu;
     @FindBy(id = "ru.beru.android:id/nav_profile")
     private WebElement profileButton;
+    @FindBy(xpath = "//*[@content-desc=\"плюс\"]")
+    private WebElement yandexPlusButton;
 
     public HomePage(AndroidDriver driver) {
         this.androidDriver = driver;
@@ -44,5 +48,12 @@ public class HomePage {
     public ProfilePage moveToProfilePage() {
         profileButton.click();
         return new ProfilePage(androidDriver);
+    }
+
+    @Step("Переход на страницу Яндекс Плюс")
+    public YandexPlusPage moveToYandexPlusPage() {
+        Waiters.elementToBeDisplayed(new WebDriverWait(androidDriver, 10), yandexPlusButton);
+        yandexPlusButton.click();
+        return new YandexPlusPage(androidDriver);
     }
 }

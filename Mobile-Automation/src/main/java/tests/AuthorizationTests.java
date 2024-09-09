@@ -7,8 +7,8 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
-import pages.LogInPage;
+import pages.app.HomePage;
+import pages.app.LogInPage;
 
 import java.text.Normalizer;
 
