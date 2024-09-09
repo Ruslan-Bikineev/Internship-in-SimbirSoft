@@ -7,8 +7,8 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.ChooseFavoriteCategoriesPage;
-import pages.LogInPage;
+import pages.app.ChooseFavoriteCategoriesPage;
+import pages.app.LogInPage;
 
 import static data.TestsData.MESSAGE_AFTER_SUCCESS_CHOOSE_FAVORITE_CATEGORIES;
 import static data.TestsData.VALID_LOGIN;

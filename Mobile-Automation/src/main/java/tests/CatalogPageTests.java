@@ -6,7 +6,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
-import pages.LogInPage;
+import pages.app.LogInPage;
 
 import static data.TestsData.VALID_LOGIN;
 import static data.TestsData.VALID_PASSWORD;

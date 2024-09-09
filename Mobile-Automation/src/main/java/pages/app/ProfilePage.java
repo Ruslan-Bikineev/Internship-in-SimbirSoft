@@ -1,4 +1,4 @@
-package pages;
+package pages.app;
 
 import helpers.Waiters;
 import io.appium.java_client.android.AndroidDriver;

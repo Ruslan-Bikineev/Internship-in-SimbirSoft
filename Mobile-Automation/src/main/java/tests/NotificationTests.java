@@ -7,8 +7,8 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.LogInPage;
-import pages.NotificationPage;
+import pages.app.LogInPage;
+import pages.app.NotificationPage;
 
 import static data.TestsData.VALID_LOGIN;
 import static data.TestsData.VALID_PASSWORD;
