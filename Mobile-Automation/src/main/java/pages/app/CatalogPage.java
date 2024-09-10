@@ -1,5 +1,6 @@
 package pages.app;
 
+import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -18,8 +19,9 @@ public class CatalogPage {
     }
 
     public CatalogPage scrollToEquipment() {
-        androidDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)" +
-                ".instance(0)).scrollIntoView(new UiSelector().textContains(\"Оборудование\").instance(0))");
+        androidDriver.executeScript("mobile:scroll",
+                ImmutableMap.of("strategy", "-android uiautomator",
+                        "selector", "new UiSelector().text(\"Оборудование\")"));
         return this;
     }
 }
