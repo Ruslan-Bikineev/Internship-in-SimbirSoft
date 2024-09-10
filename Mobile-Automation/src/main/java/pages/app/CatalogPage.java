@@ -2,6 +2,7 @@ package pages.app;
 
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.android.AndroidDriver;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,7 @@ public class CatalogPage {
         PageFactory.initElements(androidDriver, this);
     }
 
+    @Step("Скролл до вкладки \"Оборудование\"")
     public CatalogPage scrollToEquipment() {
         androidDriver.executeScript("mobile:scroll",
                 ImmutableMap.of("strategy", "-android uiautomator",
