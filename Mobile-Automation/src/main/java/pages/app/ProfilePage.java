@@ -12,12 +12,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Map;
 
+import static data.TestsData.SETTINGS;
+
 @Getter
 public class ProfilePage {
     private AndroidDriver androidDriver;
     @FindBy(id = "ru.beru.android:id/slideIndicatorView")
     private WebElement slideFavoriteCategories;
-    @FindBy(xpath = "//*[@text=\"Настройки\"]")
+    @FindBy(xpath = "//*[@text=\"" + SETTINGS + "\"]")
     private WebElement settingsButton;
     @FindBy(xpath = "//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup")
     private WebElement chooseFavoriteCategoriesButton;
