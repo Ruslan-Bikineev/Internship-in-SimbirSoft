@@ -8,6 +8,7 @@ import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.app.LogInPage;
+import pages.app.LogInPage;
 import pages.app.NotificationPage;
 
 import static data.TestsData.VALID_LOGIN;
