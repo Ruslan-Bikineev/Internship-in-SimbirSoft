@@ -1,4 +1,4 @@
-package pages;
+package pages.app;
 
 import helpers.DriverFunctional;
 import io.appium.java_client.android.AndroidDriver;

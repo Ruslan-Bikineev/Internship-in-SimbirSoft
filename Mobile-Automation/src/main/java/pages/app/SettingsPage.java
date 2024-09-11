@@ -1,4 +1,4 @@
-package pages;
+package pages.app;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;

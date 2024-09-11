@@ -1,4 +1,4 @@
-package pages;
+package pages.app;
 
 import helpers.Waiters;
 import io.appium.java_client.android.AndroidDriver;
@@ -12,13 +12,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Map;
 
+import static data.TestsData.SETTINGS;
+
 @Getter
 public class ProfilePage {
     private AndroidDriver androidDriver;
     @FindBy(id = "ru.beru.android:id/slideIndicatorView")
     private WebElement slideFavoriteCategories;
-    @FindBy(xpath = "//*[@text=\"Настройки\"]")
+    @FindBy(xpath = "//*[@text=\"" + SETTINGS + "\"]")
     private WebElement settingsButton;
+    @FindBy(xpath = "//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup")
+    private WebElement chooseFavoriteCategoriesButton;
+
 
     public ProfilePage(AndroidDriver androidDriver) {
         this.androidDriver = androidDriver;
@@ -40,5 +45,11 @@ public class ProfilePage {
                 "percent", 1.0
         ));
         return this;
+    }
+
+    @Step("Открываем вкладку с выбором любимых категорий")
+    public ChooseFavoriteCategoriesPage openChooseFavoriteCategoriesPage() {
+        chooseFavoriteCategoriesButton.click();
+        return new ChooseFavoriteCategoriesPage(androidDriver);
     }
 }

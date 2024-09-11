@@ -1,4 +1,4 @@
-package pages;
+package pages.app;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
@@ -18,6 +18,8 @@ public class HomePage {
     private WebElement menu;
     @FindBy(id = "ru.beru.android:id/nav_profile")
     private WebElement profileButton;
+    @FindBy(id = "ru.beru.android:id/nav_catalog")
+    private WebElement catalogButton;
 
     public HomePage(AndroidDriver driver) {
         this.androidDriver = driver;
@@ -44,5 +46,11 @@ public class HomePage {
     public ProfilePage moveToProfilePage() {
         profileButton.click();
         return new ProfilePage(androidDriver);
+    }
+
+    @Step("Переходим на страницу с каталогами")
+    public CatalogPage moveToCatalogPage() {
+        catalogButton.click();
+        return new CatalogPage(androidDriver);
     }
 }
