@@ -26,4 +26,9 @@ public class CatalogPage {
                         "selector", "new UiSelector().text(\"Оборудование\")"));
         return this;
     }
+
+    @Step("Проверяем отображается ли вкладка \"Оборудование\"")
+    public boolean isEquipmentButtonDisplayed() {
+        return equipmentButton.isDisplayed();
+    }
 }

@@ -7,7 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ChooseFavoriteCategoriesPage {
     private AndroidDriver androidDriver;
@@ -23,11 +25,10 @@ public class ChooseFavoriteCategoriesPage {
 
     @Step("Выбираем 4 рандомных категорий")
     public ChooseFavoriteCategoriesPage chooseFourRandomCategories() {
-        LinkedList<WebElement> list = new LinkedList<>();
-        for (int i = 1; i <= 7; i++) {
-            list.add(androidDriver.findElement(
-                    By.xpath("//*[@content-desc=\"Выбрать категории\"])[" + i + "]")));
-        }
+        List<WebElement> list = IntStream.rangeClosed(1, 7)
+                .mapToObj(i -> androidDriver.findElement(
+                        By.xpath("//*[@content-desc=\"Выбрать категории\"][" + i + "]")))
+                .collect(Collectors.toList());
         for (int i = 0; i < 4; i++) {
             int random = (int) (Math.random() * list.size());
             list.get(random).click();

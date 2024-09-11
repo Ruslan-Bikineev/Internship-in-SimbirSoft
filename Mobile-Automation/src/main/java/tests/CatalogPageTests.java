@@ -5,7 +5,9 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import io.qameta.allure.Story;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.app.CatalogPage;
 import pages.app.LogInPage;
 
 import static data.TestsData.VALID_LOGIN;
@@ -20,11 +22,13 @@ public class CatalogPageTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void searchEquipmentTest() {
-        new LogInPage(getAndroidDriver())
+        CatalogPage catalogPage = new LogInPage(getAndroidDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
                 .closeWidget()
                 .skipCookieFiles()
                 .moveToCatalogPage()
                 .scrollToEquipment();
+        Assert.assertTrue(catalogPage.isEquipmentButtonDisplayed(),
+                "Не отображается вкладка \"Оборудование\"");
     }
 }
