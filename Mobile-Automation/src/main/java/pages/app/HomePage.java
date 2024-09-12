@@ -24,8 +24,6 @@ public class HomePage {
     private WebElement catalogButton;
     @FindBy(xpath = "//*[@content-desc=\"плюс\"]")
     private WebElement yandexPlusButton;
-    @FindBy(xpath = "//*[@content-desc=\"плюс\"]")
-    private WebElement yandexPlusButton;
 
     public HomePage(AndroidDriver driver) {
         this.androidDriver = driver;

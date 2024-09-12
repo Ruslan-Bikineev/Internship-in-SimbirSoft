@@ -1,6 +1,8 @@
 package helpers;
 
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
@@ -15,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Set;
 
 public class DriverFunctional {
 
@@ -36,7 +39,7 @@ public class DriverFunctional {
     /**
      * Close keyboard if keyboard is shown
      *
-     * @param androidDriver instance of BaseTest
+     * @param androidDriver instance of AndroidDriver
      */
     public static void closeKeyBoard(AndroidDriver androidDriver) {
         if (androidDriver.isKeyboardShown()) {
@@ -45,9 +48,36 @@ public class DriverFunctional {
     }
 
     /**
+     * Move to webview context
+     *
+     * @param androidDriver instance of AndroidDriver
+     */
+    public static void moveToWebViewContext(AndroidDriver androidDriver) {
+        Set<String> contextNames = androidDriver.getContextHandles();
+        for (String contextName : contextNames) {
+            if (contextName.contains("WEBVIEW")) {
+                androidDriver.context(contextName);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Tap to coordinates
+     *
+     * @param androidDriver instance of AndroidDriver
+     * @param x             x coordinate
+     * @param y             y coordinate
+     */
+    public static void tapToCoordinates(AndroidDriver androidDriver, int x, int y) {
+        TouchAction touchAction = new TouchAction(androidDriver);
+        touchAction.tap(PointOption.point(x, y)).perform();
+    }
+
+    /**
      * Swipe webElement
      *
-     * @param androidDriver instance of BaseTest
+     * @param androidDriver instance of AndroidDriver
      * @param direction     swipe direction
      * @param webElement    WebElement
      */

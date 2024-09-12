@@ -1,5 +1,10 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.app.LogInPage;
@@ -7,9 +12,15 @@ import pages.app.LogInPage;
 import static data.TestsData.VALID_LOGIN;
 import static data.TestsData.VALID_PASSWORD;
 import static data.TestsData.YANDEX_PLUS_CONDITIONS_LINK;
+import static io.qameta.allure.SeverityLevel.NORMAL;
 
+@Epic("Яндекс Плюс с приложения Яндекс Маркет")
 public class YandexPlusTests extends BaseTest {
     @Test
+    @Feature(value = "Яндекс Плюс при авторизации")
+    @Story(value = "Проверка работы ссылки на условия подключения")
+    @Owner(value = "Ruslan Bikineev")
+    @Severity(NORMAL)
     public void openYandexPlusConditionsTest() {
         new LogInPage(getAndroidDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
@@ -17,8 +28,8 @@ public class YandexPlusTests extends BaseTest {
                 .skipCookieFiles()
                 .moveToYandexPlusPage()
                 .moveToConnectPlus()
+                .scrollToConditionsLink()
                 .openYandexPlusConditions();
-        System.out.println(getAndroidDriver().currentActivity());
         Assert.assertEquals(getAndroidDriver().getCurrentUrl(), YANDEX_PLUS_CONDITIONS_LINK);
     }
 }

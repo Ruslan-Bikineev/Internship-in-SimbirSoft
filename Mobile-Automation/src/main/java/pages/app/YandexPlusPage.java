@@ -1,5 +1,7 @@
 package pages.app;
 
+import com.google.common.collect.ImmutableMap;
+import helpers.DriverFunctional;
 import helpers.Waiters;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
@@ -9,8 +11,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.browser.YandexPlusConditionsPage;
-
-import java.util.Set;
 
 @Getter
 public class YandexPlusPage {
@@ -32,23 +32,18 @@ public class YandexPlusPage {
         return this;
     }
 
+    @Step("Скролл до ссылкы с условиями Яндекс Плюс")
+    public YandexPlusPage scrollToConditionsLink() {
+        androidDriver.executeScript("mobile:scroll",
+                ImmutableMap.of("strategy", "-android uiautomator",
+                        "selector", String.format("new UiSelector().text(\"%s\")",
+                                "Нажимая кнопку, вы принимаете Условия подписки.")));
+        return this;
+    }
+
     @Step("Открываем ссылку в браузере с условиями Яндекс Плюс")
     public YandexPlusConditionsPage openYandexPlusConditions() {
-        Set<String> contextNames = androidDriver.getContextHandles();
-        System.out.println(contextNames);
-        for (String context : contextNames) {
-            if (context.contains("WEBVIEW")) {
-                System.out.println("Context Name is " + context);
-                androidDriver.context(context);
-                break;
-            }
-        }
-//        androidDriver.context("NATIVE_APP");
-//        Optional webViewOptional = contextNames.stream().filter(contextName -> contextName.contains("WEBVIEW")).findFirst();
-//        if (webViewOptional.isPresent()) {
-//            androidDriver.context(webViewOptional.get().toString());
-//            openYandexPlusConditionsLink.click();
-//        }
+        DriverFunctional.tapToCoordinates(androidDriver, 770, 1214);
         return new YandexPlusConditionsPage(androidDriver);
     }
 }
