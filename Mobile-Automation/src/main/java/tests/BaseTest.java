@@ -30,7 +30,6 @@ public abstract class BaseTest {
         capabilities.setCapability("fullReset", ConfigReader.emulatorConfig.fullReset());
         androidDriver = new AndroidDriver(new URI(ConfigReader.emulatorConfig.remoteURL()).toURL(), capabilities);
         androidDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        androidDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
     @AfterMethod

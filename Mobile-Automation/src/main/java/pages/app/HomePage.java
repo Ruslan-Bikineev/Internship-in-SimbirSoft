@@ -54,7 +54,7 @@ public class HomePage {
 
     @Step("Переход на страницу Яндекс Плюс")
     public YandexPlusPage moveToYandexPlusPage() {
-        Waiters.elementToBeDisplayed(new WebDriverWait(androidDriver, 10), yandexPlusButton);
+        Waiters.elementToBeDisplayed(new WebDriverWait(androidDriver, 15), yandexPlusButton);
         yandexPlusButton.click();
         return new YandexPlusPage(androidDriver);
     }
