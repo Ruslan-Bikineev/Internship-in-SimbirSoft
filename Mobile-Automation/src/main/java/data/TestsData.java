@@ -12,4 +12,5 @@ public class TestsData {
     public static final String SETTINGS = "Настройки";
     public static final String EQUIPMENT = "Оборудование";
     public static final String MESSAGE_AFTER_SUCCESS_CHOOSE_FAVORITE_CATEGORIES = "Как вам подборка категорий в этом месяце?";
+    public static final String YANDEX_PLUS_CONDITION_LINK_TEXT = "Нажимая кнопку, вы принимаете Условия подписки.";
 }

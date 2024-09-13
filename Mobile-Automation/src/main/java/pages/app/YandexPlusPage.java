@@ -12,6 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.browser.YandexPlusConditionsPage;
 
+import static data.TestsData.YANDEX_PLUS_CONDITION_LINK_TEXT;
+
 @Getter
 public class YandexPlusPage {
     private AndroidDriver androidDriver;
@@ -37,7 +39,7 @@ public class YandexPlusPage {
         androidDriver.executeScript("mobile:scroll",
                 ImmutableMap.of("strategy", "-android uiautomator",
                         "selector", String.format("new UiSelector().text(\"%s\")",
-                                "Нажимая кнопку, вы принимаете Условия подписки.")));
+                                YANDEX_PLUS_CONDITION_LINK_TEXT)));
         return this;
     }
 
