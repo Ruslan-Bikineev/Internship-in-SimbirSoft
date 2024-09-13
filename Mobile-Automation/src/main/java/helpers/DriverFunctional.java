@@ -5,6 +5,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
@@ -18,6 +19,9 @@ import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Set;
+
+import static data.TestsData.BASE_SCREEN_HEIGHT;
+import static data.TestsData.BASE_SCREEN_WIDTH;
 
 public class DriverFunctional {
 
@@ -66,12 +70,26 @@ public class DriverFunctional {
      * Tap to coordinates
      *
      * @param androidDriver instance of AndroidDriver
-     * @param x             x coordinate
-     * @param y             y coordinate
+     * @param point         coordinates of tap
      */
-    public static void tapToCoordinates(AndroidDriver androidDriver, int x, int y) {
+    public static void tapToCoordinates(AndroidDriver androidDriver, Point point) {
         TouchAction touchAction = new TouchAction(androidDriver);
-        touchAction.tap(PointOption.point(x, y)).perform();
+        touchAction.tap(calculatePointOption(androidDriver, point)).perform();
+    }
+
+    /**
+     * Calculate point option on emulator screen size, default screen size set in TestsData class
+     *
+     * @param androidDriver instance of AndroidDriver
+     * @param point         point coordinate
+     * @return PointOption point option after calculation
+     */
+    public static PointOption calculatePointOption(AndroidDriver androidDriver, Point point) {
+        int emulatorWidth = androidDriver.manage().window().getSize().width;
+        int emulatorHeight = androidDriver.manage().window().getSize().height;
+        int xCoordinate = point.getX() * emulatorWidth / BASE_SCREEN_WIDTH;
+        int yCoordinate = point.getY() * emulatorHeight / BASE_SCREEN_HEIGHT;
+        return PointOption.point(xCoordinate, yCoordinate);
     }
 
     /**

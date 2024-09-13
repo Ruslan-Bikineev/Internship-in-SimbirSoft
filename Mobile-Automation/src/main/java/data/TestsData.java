@@ -1,5 +1,7 @@
 package data;
 
+import org.openqa.selenium.Point;
+
 public class TestsData {
     public static final String VALID_LOGIN = "test-account2025@mail.ru";
     public static final String VALID_PASSWORD = "K7DGj7DHz47RcD-";
@@ -13,4 +15,7 @@ public class TestsData {
     public static final String EQUIPMENT = "Оборудование";
     public static final String MESSAGE_AFTER_SUCCESS_CHOOSE_FAVORITE_CATEGORIES = "Как вам подборка категорий в этом месяце?";
     public static final String YANDEX_PLUS_CONDITION_LINK_TEXT = "Нажимая кнопку, вы принимаете Условия подписки.";
+    public static final int BASE_SCREEN_WIDTH = 1080;
+    public static final int BASE_SCREEN_HEIGHT = 1920;
+    public static final Point YANDEX_PLUS_CONDITION_LINK_COORDINATES = new Point(770, 1214);
 }

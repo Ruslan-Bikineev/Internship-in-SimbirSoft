@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.browser.YandexPlusConditionsPage;
 
+import static data.TestsData.YANDEX_PLUS_CONDITION_LINK_COORDINATES;
 import static data.TestsData.YANDEX_PLUS_CONDITION_LINK_TEXT;
 
 @Getter
@@ -45,7 +46,7 @@ public class YandexPlusPage {
 
     @Step("Открываем ссылку в браузере с условиями Яндекс Плюс")
     public YandexPlusConditionsPage openYandexPlusConditions() {
-        DriverFunctional.tapToCoordinates(androidDriver, 770, 1214);
+        DriverFunctional.tapToCoordinates(androidDriver, YANDEX_PLUS_CONDITION_LINK_COORDINATES);
         return new YandexPlusConditionsPage(androidDriver);
     }
 }
