@@ -14,7 +14,7 @@ import static data.TestsData.VALID_PASSWORD;
 import static data.TestsData.YANDEX_PLUS_CONDITIONS_LINK;
 import static io.qameta.allure.SeverityLevel.NORMAL;
 
-@Epic("Яндекс Плюс с приложения Яндекс Маркет")
+@Epic("Усправление Яндекс Плюс с приложения Яндекс Маркет")
 public class YandexPlusTests extends BaseTest {
     @Test
     @Feature(value = "Яндекс Плюс при авторизации")
