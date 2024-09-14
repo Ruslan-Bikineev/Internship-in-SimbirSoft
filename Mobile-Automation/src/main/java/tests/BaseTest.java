@@ -25,6 +25,8 @@ public abstract class BaseTest {
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("automationName", ConfigReader.emulatorConfig.automationName());
         capabilities.setCapability("app-wait-activity", ConfigReader.emulatorConfig.appWaitActivity());
+        capabilities.setCapability("chromedriverExecutable",
+                System.getProperty("user.dir") + ConfigReader.emulatorConfig.chromedriverExecutable());
         capabilities.setCapability("fullReset", ConfigReader.emulatorConfig.fullReset());
         androidDriver = new AndroidDriver(new URI(ConfigReader.emulatorConfig.remoteURL()).toURL(), capabilities);
         androidDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

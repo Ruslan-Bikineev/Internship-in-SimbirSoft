@@ -27,4 +27,7 @@ public interface EmulatorConfig extends Config {
 
     @Key("app")
     String app();
+
+    @Key("chromedriverExecutable")
+    String chromedriverExecutable();
 }
