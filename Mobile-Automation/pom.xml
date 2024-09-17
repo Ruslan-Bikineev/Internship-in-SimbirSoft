@@ -36,7 +36,7 @@
                 <argumentLine>
                     -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                 </argumentLine>
-                <argLine>dddd</argLine>
+                <argumentLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argumentLine>
             </properties>
         </profile>
     </profiles>
