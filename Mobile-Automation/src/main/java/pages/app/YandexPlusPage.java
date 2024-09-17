@@ -3,7 +3,7 @@ package pages.app;
 import com.google.common.collect.ImmutableMap;
 import helpers.DriverFunctional;
 import helpers.Waiters;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -17,27 +17,27 @@ import static data.TestsData.YANDEX_PLUS_CONDITION_LINK_TEXT;
 
 @Getter
 public class YandexPlusPage {
-    private AndroidDriver androidDriver;
+    private AppiumDriver appiumDriver;
     @FindBy(id = "ru.beru.android:id/plus_sdk_native_pay_button")
     private WebElement connectPlusButton;
     @FindBy(id = "ru.beru.android:id/checkout_legals_text")
     private WebElement openYandexPlusConditionsLink;
 
-    public YandexPlusPage(AndroidDriver androidDriver) {
-        this.androidDriver = androidDriver;
-        PageFactory.initElements(androidDriver, this);
+    public YandexPlusPage(AppiumDriver appiumDriver) {
+        this.appiumDriver = appiumDriver;
+        PageFactory.initElements(appiumDriver, this);
     }
 
     @Step("Переход в Яндекс Плюс")
     public YandexPlusPage moveToConnectPlus() {
-        Waiters.elementToBeDisplayed(new WebDriverWait(androidDriver, 60), connectPlusButton);
+        Waiters.elementToBeDisplayed(new WebDriverWait(appiumDriver, 60), connectPlusButton);
         connectPlusButton.click();
         return this;
     }
 
     @Step("Скролл до ссылкы с условиями Яндекс Плюс")
     public YandexPlusPage scrollToConditionsLink() {
-        androidDriver.executeScript("mobile:scroll",
+        appiumDriver.executeScript("mobile:scroll",
                 ImmutableMap.of("strategy", "-android uiautomator",
                         "selector", String.format("new UiSelector().text(\"%s\")",
                                 YANDEX_PLUS_CONDITION_LINK_TEXT)));
@@ -46,7 +46,7 @@ public class YandexPlusPage {
 
     @Step("Открываем ссылку в браузере с условиями Яндекс Плюс")
     public YandexPlusConditionsPage openYandexPlusConditions() {
-        DriverFunctional.tapToCoordinates(androidDriver, YANDEX_PLUS_CONDITION_LINK_COORDINATES);
-        return new YandexPlusConditionsPage(androidDriver);
+        DriverFunctional.tapToCoordinates(appiumDriver, YANDEX_PLUS_CONDITION_LINK_COORDINATES);
+        return new YandexPlusConditionsPage(appiumDriver);
     }
 }

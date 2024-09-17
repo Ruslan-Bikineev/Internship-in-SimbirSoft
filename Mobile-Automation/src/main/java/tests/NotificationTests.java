@@ -22,7 +22,7 @@ public class NotificationTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void enableAllNotifications() {
-        NotificationPage notificationPage = new LogInPage(getAndroidDriver())
+        NotificationPage notificationPage = new LogInPage(getAppiumDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
                 .closeWidget()
                 .skipCookieFiles()

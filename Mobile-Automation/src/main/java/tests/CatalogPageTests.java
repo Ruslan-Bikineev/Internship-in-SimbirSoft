@@ -22,7 +22,7 @@ public class CatalogPageTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void searchEquipmentTest() {
-        CatalogPage catalogPage = new LogInPage(getAndroidDriver())
+        CatalogPage catalogPage = new LogInPage(getAppiumDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
                 .closeWidget()
                 .skipCookieFiles()

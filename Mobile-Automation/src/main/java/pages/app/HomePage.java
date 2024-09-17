@@ -1,7 +1,7 @@
 package pages.app;
 
 import helpers.Waiters;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Getter
 public class HomePage {
-    private AndroidDriver androidDriver;
+    private AppiumDriver appiumDriver;
     @FindBy(id = "ru.beru.android:id/closeButton")
     private WebElement widgetCloseButton;
     @FindBy(id = "ru.beru.android:id/negativeButton")
@@ -25,9 +25,9 @@ public class HomePage {
     @FindBy(xpath = "//*[@content-desc=\"плюс\"]")
     private WebElement yandexPlusButton;
 
-    public HomePage(AndroidDriver driver) {
-        this.androidDriver = driver;
-        PageFactory.initElements(driver, this);
+    public HomePage(AppiumDriver appiumDriver) {
+        this.appiumDriver = appiumDriver;
+        PageFactory.initElements(appiumDriver, this);
     }
 
     @Step("Закрываем открывшееся всплывающее окно")
@@ -49,19 +49,19 @@ public class HomePage {
     @Step("Переходимация на страницу профиля")
     public ProfilePage moveToProfilePage() {
         profileButton.click();
-        return new ProfilePage(androidDriver);
+        return new ProfilePage(appiumDriver);
     }
 
     @Step("Переход на страницу Яндекс Плюс")
     public YandexPlusPage moveToYandexPlusPage() {
-        Waiters.elementToBeDisplayed(new WebDriverWait(androidDriver, 15), yandexPlusButton);
+        Waiters.elementToBeDisplayed(new WebDriverWait(appiumDriver, 15), yandexPlusButton);
         yandexPlusButton.click();
-        return new YandexPlusPage(androidDriver);
+        return new YandexPlusPage(appiumDriver);
     }
 
     @Step("Переходим на страницу с каталогами")
     public CatalogPage moveToCatalogPage() {
         catalogButton.click();
-        return new CatalogPage(androidDriver);
+        return new CatalogPage(appiumDriver);
     }
 }

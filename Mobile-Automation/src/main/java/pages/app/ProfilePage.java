@@ -1,7 +1,7 @@
 package pages.app;
 
 import helpers.Waiters;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,7 +16,7 @@ import static data.TestsData.SETTINGS;
 
 @Getter
 public class ProfilePage {
-    private AndroidDriver androidDriver;
+    private AppiumDriver appiumDriver;
     @FindBy(id = "ru.beru.android:id/slideIndicatorView")
     private WebElement slideFavoriteCategories;
     @FindBy(xpath = "//*[@text=\"" + SETTINGS + "\"]")
@@ -25,21 +25,21 @@ public class ProfilePage {
     private WebElement chooseFavoriteCategoriesButton;
 
 
-    public ProfilePage(AndroidDriver androidDriver) {
-        this.androidDriver = androidDriver;
-        PageFactory.initElements(androidDriver, this);
+    public ProfilePage(AppiumDriver appiumDriver) {
+        this.appiumDriver = appiumDriver;
+        PageFactory.initElements(appiumDriver, this);
     }
 
     @Step("Переход на страницу настройки")
     public SettingsPage moveToSettingsPage() {
         settingsButton.click();
-        return new SettingsPage(androidDriver);
+        return new SettingsPage(appiumDriver);
     }
 
     @Step("Свайпаем вниз окно слайдера \"Любимые категории\"")
     public ProfilePage swipeDownSlideIndicatorView() {
-        Waiters.elementToBeDisplayed(new WebDriverWait(androidDriver, 15), slideFavoriteCategories);
-        ((JavascriptExecutor) androidDriver).executeScript("mobile: swipeGesture", Map.of(
+        Waiters.elementToBeDisplayed(new WebDriverWait(appiumDriver, 15), slideFavoriteCategories);
+        ((JavascriptExecutor) appiumDriver).executeScript("mobile: swipeGesture", Map.of(
                 "left", 456, "top", 168, "width", 168, "height", 1752,
                 "direction", "down",
                 "percent", 1.0
@@ -50,6 +50,6 @@ public class ProfilePage {
     @Step("Открываем вкладку с выбором любимых категорий")
     public ChooseFavoriteCategoriesPage openChooseFavoriteCategoriesPage() {
         chooseFavoriteCategoriesButton.click();
-        return new ChooseFavoriteCategoriesPage(androidDriver);
+        return new ChooseFavoriteCategoriesPage(appiumDriver);
     }
 }
