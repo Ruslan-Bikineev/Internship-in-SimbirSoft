@@ -23,20 +23,17 @@
     </properties>
     <profiles>
         <profile>
-            <id>run-tests</id>
             <properties>
                 <suiteXmlFile>configuration/run-tests.xml</suiteXmlFile>
-                <argumentLine>-javaagent:$"{com.browserstack:browserstack-java-sdk:jar}"</argumentLine>
+                <argumentLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argumentLine>
             </properties>
+            <id>run-tests</id>
         </profile>
         <profile>
             <id>run-bstack-tests.xml</id>
             <properties>
                 <suiteXmlFile>configuration/run-bstack-tests.xml</suiteXmlFile>
-                <argumentLine>
-                    -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                </argumentLine>
-                <argLine>dddd</argLine>
+                <argumentLine>-javaagent:${com.browserstack:browserstack-java-sdk:jar}</argumentLine>
             </properties>
         </profile>
     </profiles>
