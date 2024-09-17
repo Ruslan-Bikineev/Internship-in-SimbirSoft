@@ -23,11 +23,11 @@
     </properties>
     <profiles>
         <profile>
+            <id>run-tests</id>
             <properties>
                 <suiteXmlFile>configuration/run-tests.xml</suiteXmlFile>
                 <argumentLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argumentLine>
             </properties>
-            <id>run-tests</id>
         </profile>
         <profile>
             <id>run-bstack-tests.xml</id>
