@@ -22,7 +22,7 @@ public class YandexPlusTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void openYandexPlusConditionsTest() {
-        new LogInPage(getAndroidDriver())
+        new LogInPage(getAppiumDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
                 .closeWidget()
                 .skipCookieFiles()
@@ -30,6 +30,6 @@ public class YandexPlusTests extends BaseTest {
                 .moveToConnectPlus()
                 .scrollToConditionsLink()
                 .openYandexPlusConditions();
-        Assert.assertEquals(getAndroidDriver().getCurrentUrl(), YANDEX_PLUS_CONDITIONS_LINK);
+        Assert.assertEquals(getAppiumDriver().getCurrentUrl(), YANDEX_PLUS_CONDITIONS_LINK);
     }
 }

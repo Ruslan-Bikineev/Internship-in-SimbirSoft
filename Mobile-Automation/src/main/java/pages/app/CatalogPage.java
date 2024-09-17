@@ -1,7 +1,7 @@
 package pages.app;
 
 import com.google.common.collect.ImmutableMap;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -12,18 +12,18 @@ import static data.TestsData.EQUIPMENT;
 
 @Getter
 public class CatalogPage {
-    private AndroidDriver androidDriver;
+    private AppiumDriver appiumDriver;
     @FindBy(xpath = "//*[@text=\"" + EQUIPMENT + "\"]")
     private WebElement equipmentButton;
 
-    public CatalogPage(AndroidDriver androidDriver) {
-        this.androidDriver = androidDriver;
-        PageFactory.initElements(androidDriver, this);
+    public CatalogPage(AppiumDriver appiumDriver) {
+        this.appiumDriver = appiumDriver;
+        PageFactory.initElements(appiumDriver, this);
     }
 
     @Step("Скролл до вкладки \"Оборудование\"")
     public CatalogPage scrollToEquipment() {
-        androidDriver.executeScript("mobile:scroll",
+        appiumDriver.executeScript("mobile:scroll",
                 ImmutableMap.of("strategy", "-android uiautomator",
                         "selector", String.format("new UiSelector().text(\"%s\")", EQUIPMENT)));
         return this;

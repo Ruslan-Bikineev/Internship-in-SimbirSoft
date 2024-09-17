@@ -1,0 +1,16 @@
+userName: bsuser_9iSsqd
+accessKey: FgNZykvWrEmu57qu3VyH
+framework: testng
+app: bs://86588e9c2bec84bb8e7eea4c519239ba9ab53c5e
+platforms:
+  - platformName: android
+    deviceName: Google Pixel 6
+    platformVersion: 12.0
+parallelsPerPlatform: 1
+browserstackLocal: false
+buildName: yandex mobile tests
+buildIdentifier: ${BUILD_NUMBER}
+projectName: BrowserStack Mobile
+testObservability: true
+debug: true
+networkLogs: true

@@ -23,7 +23,7 @@ public class ChooseFavoriteCategoriesTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void chooseFourChooseFavoriteCategoriesTest() {
-        ChooseFavoriteCategoriesPage chooseFavoriteCategoriesPage = new LogInPage(getAndroidDriver())
+        ChooseFavoriteCategoriesPage chooseFavoriteCategoriesPage = new LogInPage(getAppiumDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
                 .closeWidget()
                 .skipCookieFiles()

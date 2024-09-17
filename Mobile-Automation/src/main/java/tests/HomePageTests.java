@@ -23,10 +23,10 @@ public class HomePageTests extends BaseTest {
     @Owner(value = "Ruslan Bikineev")
     @Severity(NORMAL)
     public void homePageTest() {
-        HomePage homePage = new LogInPage(getAndroidDriver())
+        HomePage homePage = new LogInPage(getAppiumDriver())
                 .authorization(VALID_LOGIN, VALID_PASSWORD)
                 .closeWidget()
                 .skipCookieFiles();
-        DriverFunctional.swipe(getAndroidDriver(), SWIPE_LEFT, homePage.getMenu());
+        DriverFunctional.swipe(getAppiumDriver(), SWIPE_LEFT, homePage.getMenu());
     }
 }

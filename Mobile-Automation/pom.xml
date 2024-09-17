@@ -28,6 +28,13 @@
                 <suiteXmlFile>configuration/run-tests.xml</suiteXmlFile>
             </properties>
         </profile>
+        <profile>
+            <id>run-bstack-tests.xml</id>
+            <properties>
+                <suiteXmlFile>configuration/run-bstack-tests.xml</suiteXmlFile>
+                <argLine>dddd</argLine>
+            </properties>
+        </profile>
     </profiles>
     <dependencyManagement>
         <dependencies>
@@ -83,21 +90,43 @@
             <artifactId>owner</artifactId>
             <version>1.0.12</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.browserstack</groupId>
+            <artifactId>browserstack-java-sdk</artifactId>
+            <version>1.23.4</version>
+        </dependency>
     </dependencies>
     <!--================================================================-->
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>getClasspathFilenames</id>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <!--                    <argLine>-javaagent:${com.browserstack:browserstack-java-sdk:jar}</argLine>-->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>configuration/run-tests.xml</suiteXmlFile>
-                    </suiteXmlFiles>
                 </configuration>
                 <dependencies>
                     <dependency>

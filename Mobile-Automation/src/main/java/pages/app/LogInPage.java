@@ -1,7 +1,7 @@
 package pages.app;
 
 import helpers.DriverFunctional;
-import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 @AllArgsConstructor
 public class LogInPage {
-    private AndroidDriver androidDriver;
+    private AppiumDriver appiumDriver;
     @FindBy(xpath = "//*[@resource-id=\"passp-field-login\"]")
     private WebElement loginField;
     @FindBy(xpath = "//*[@resource-id=\"passp:sign-in\"]")
@@ -24,9 +24,9 @@ public class LogInPage {
     @FindBy(xpath = "//*[@resource-id=\"field:input-passwd:hint\"]")
     private WebElement passwordHint;
 
-    public LogInPage(AndroidDriver driver) {
-        this.androidDriver = driver;
-        PageFactory.initElements(driver, this);
+    public LogInPage(AppiumDriver appiumDriver) {
+        this.appiumDriver = appiumDriver;
+        PageFactory.initElements(appiumDriver, this);
     }
 
     @Step("Заполняем поле логин: {login}")
@@ -39,7 +39,7 @@ public class LogInPage {
     @Step("Заполняем поле пароль: {password}")
     public LogInPage setPassword(String password) {
         passwordField.sendKeys(password);
-        DriverFunctional.closeKeyBoard(androidDriver);
+        DriverFunctional.closeKeyBoard(appiumDriver);
         passwordSignInButton.click();
         return this;
     }
@@ -52,6 +52,6 @@ public class LogInPage {
     public HomePage authorization(String login, String password) {
         setLogin(login);
         setPassword(password);
-        return new HomePage(androidDriver);
+        return new HomePage(appiumDriver);
     }
 }

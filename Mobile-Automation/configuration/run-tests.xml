@@ -5,6 +5,7 @@
         <listener class-name="helpers.MyListener"></listener>
     </listeners>
     <test name="Mobile-Automation tests">
+        <parameter name="config" value="local"></parameter>
         <packages>
             <package name="tests.*"></package>
         </packages>
