@@ -33,6 +33,7 @@
             <id>run-bstack-tests.xml</id>
             <properties>
                 <suiteXmlFile>configuration/run-bstack-tests.xml</suiteXmlFile>
+                <!--suppress UnresolvedMavenProperty -->
                 <argumentLine>-javaagent:${com.browserstack:browserstack-java-sdk:jar}</argumentLine>
             </properties>
         </profile>
