@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 
 public class EmptyAndroidDriver implements DriverFactory {
     @Override
-    public AppiumDriver createDriver() {
+    public AppiumDriver createDriver(String platformType, String platformVersion, String uuid, String avd, String systemPort, String deviceName) {
         AppiumDriver appiumDriver;
         DesiredCapabilities capabilities = new DesiredCapabilities();
         try {

@@ -6,6 +6,7 @@
     </listeners>
     <test name="Mobile-Automation tests">
         <parameter name="config" value="local"></parameter>
+        <parameter name="systemPort" value="4723"></parameter>
         <packages>
             <package name="tests.*"></package>
         </packages>

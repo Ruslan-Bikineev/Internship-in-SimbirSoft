@@ -10,15 +10,17 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class LocalAndroidDriver implements DriverFactory {
+public class ParallelAndroidDriver implements DriverFactory {
     @Override
     public AppiumDriver createDriver(String platformType, String platformVersion, String uuid, String avd, String systemPort, String deviceName) {
         AppiumDriver appiumDriver;
         File app = new File(System.getProperty("user.dir"), ConfigReader.emulatorConfig.app());
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", ConfigReader.emulatorConfig.deviceName());
-        capabilities.setCapability("platformName", ConfigReader.emulatorConfig.platformName());
-        capabilities.setCapability("avd", ConfigReader.emulatorConfig.avd());
+        capabilities.setCapability("deviceName", deviceName);
+        capabilities.setCapability("avd", avd);
+        capabilities.setCapability("platformName", platformType);
+        capabilities.setCapability("platformVersion", platformVersion);
+        capabilities.setCapability("uuid", uuid);
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("automationName", ConfigReader.emulatorConfig.automationName());
         capabilities.setCapability("app-wait-activity", ConfigReader.emulatorConfig.appWaitActivity());

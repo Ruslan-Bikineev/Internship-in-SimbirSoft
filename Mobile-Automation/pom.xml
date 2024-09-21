@@ -30,6 +30,13 @@
             </properties>
         </profile>
         <profile>
+            <id>run-parallel-tests</id>
+            <properties>
+                <suiteXmlFile>configuration/run-parallel-tests.xml</suiteXmlFile>
+                <argumentLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argumentLine>
+            </properties>
+        </profile>
+        <profile>
             <id>run-bstack-tests.xml</id>
             <properties>
                 <suiteXmlFile>configuration/run-bstack-tests.xml</suiteXmlFile>
