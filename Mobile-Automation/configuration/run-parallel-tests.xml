@@ -13,27 +13,19 @@
         <parameter name="systemPort" value="4723"></parameter>
         <parameter name="deviceName" value="Nexus 5"></parameter>
         <classes>
-            <class name="tests.AuthorizationTests">
-                <methods>
-                    <include name="logInWithValidCredentialsTest"></include>
-                </methods>
-            </class>
+            <class name="tests.AuthorizationTests"></class>
         </classes>
     </test>
-    <test name="Mobile-Automation tests Nexus_5_API_34">
+    <test name="Mobile-Automation tests Nexus_6a_API_35">
         <parameter name="config" value="parallel"></parameter>
-        <parameter name="platformVersion" value="14"></parameter>
+        <parameter name="platformVersion" value="15"></parameter>
         <parameter name="platformType" value="Android"></parameter>
         <parameter name="uuid" value=""></parameter>
-        <parameter name="avd" value="Nexus_5_API_34"></parameter>
+        <parameter name="avd" value="Pixel_6a_API_35"></parameter>
         <parameter name="systemPort" value="4724"></parameter>
-        <parameter name="deviceName" value="Nexus 5"></parameter>
+        <parameter name="deviceName" value="Pixel 6a"></parameter>
         <classes>
-            <class name="tests.AuthorizationTests">
-                <methods>
-                    <include name="logInWithValidCredentialsTest"></include>
-                </methods>
-            </class>
+            <class name="tests.AuthorizationTests"></class>
         </classes>
     </test>
 </suite>
