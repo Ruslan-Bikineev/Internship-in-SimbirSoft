@@ -3,7 +3,8 @@ package tests.driver.factory;
 import io.appium.java_client.AppiumDriver;
 
 public class AppiumDriverFactory {
-    public static AppiumDriver getDriver(String config, String platformType, String platformVersion, String uuid, String avd, String systemPort, String deviceName) {
+    public static AppiumDriver getDriver(String config, String platformType, String platformVersion,
+                                         String uuid, String avd, String systemPort, String deviceName) {
         DriverFactory driverFactory = null;
         if (config.equals("local")) {
             driverFactory = new LocalAndroidDriver();

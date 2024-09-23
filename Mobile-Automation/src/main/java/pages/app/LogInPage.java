@@ -13,15 +13,15 @@ import org.openqa.selenium.support.PageFactory;
 @AllArgsConstructor
 public class LogInPage {
     private AppiumDriver appiumDriver;
-    @FindBy(xpath = "//*[@resource-id=\"passp-field-login\"]")
+    @FindBy(xpath = "//android.widget.EditText")
     private WebElement loginField;
-    @FindBy(xpath = "//*[@resource-id=\"passp:sign-in\"]")
+    @FindBy(xpath = "//*[@text=\"Войти\"]")
     private WebElement signInButton;
-    @FindBy(xpath = "//*[@resource-id=\"passp-field-passwd\"]")
+    @FindBy(xpath = "//android.widget.EditText")
     private WebElement passwordField;
-    @FindBy(xpath = "//*[@resource-id=\"passp:sign-in\"]")
+    @FindBy(xpath = "//*[@text=\"Продолжить\"]")
     private WebElement passwordSignInButton;
-    @FindBy(xpath = "//*[@resource-id=\"field:input-passwd:hint\"]")
+    @FindBy(xpath = "//*[@text=\"Неверный пароль\"]")
     private WebElement passwordHint;
 
     public LogInPage(AppiumDriver appiumDriver) {

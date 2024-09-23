@@ -12,7 +12,8 @@ import java.net.URISyntaxException;
 
 public class ParallelAndroidDriver implements DriverFactory {
     @Override
-    public AppiumDriver createDriver(String platformType, String platformVersion, String uuid, String avd, String systemPort, String deviceName) {
+    public AppiumDriver createDriver(String platformType, String platformVersion,
+                                     String uuid, String avd, String systemPort, String deviceName) {
         AppiumDriver appiumDriver;
         File app = new File(System.getProperty("user.dir"), ConfigReader.emulatorConfig.app());
         DesiredCapabilities capabilities = new DesiredCapabilities();
