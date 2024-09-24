@@ -14,7 +14,7 @@ public class ParallelAndroidDriver implements DriverFactory {
     @Override
     public AppiumDriver createDriver(String platformType, String platformVersion,
                                      String uuid, String avd, String systemPort, String deviceName) {
-        AppiumDriver appiumDriver;
+        ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
         File app = new File(System.getProperty("user.dir"), ConfigReader.emulatorConfig.app());
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", deviceName);
@@ -29,12 +29,12 @@ public class ParallelAndroidDriver implements DriverFactory {
                 System.getProperty("user.dir") + ConfigReader.emulatorConfig.chromedriverExecutable());
         capabilities.setCapability("fullReset", ConfigReader.emulatorConfig.fullReset());
         try {
-            appiumDriver = new AndroidDriver(
+            appiumDriverThreadLocal.set(new AndroidDriver(
                     new URI(ConfigReader.emulatorConfig.remoteURL().replace("port", systemPort)).toURL(),
-                    capabilities);
+                    capabilities));
         } catch (MalformedURLException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        return appiumDriver;
+        return appiumDriverThreadLocal.get();
     }
 }
