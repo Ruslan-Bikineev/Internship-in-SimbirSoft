@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone project') {
+            steps {
+                git branch: 'Task-W7', url: 'https://github.com/Ruslan-Bikineev/Internship-in-SimbirSoft.git'
+            }
+        }
+        stage('Run tests') {
+            steps {
+            dir('Mobile-Automation') {
+                    bat 'mvn test -P run-parallel-tests'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            allure includeProperties: false, jdk: '', results: [[path: 'Mobile-Automation/target/allure-results']]
+        }
+   }
+}

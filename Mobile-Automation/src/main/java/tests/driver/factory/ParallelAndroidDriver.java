@@ -15,7 +15,6 @@ public class ParallelAndroidDriver implements DriverFactory {
     public AppiumDriver createDriver(String platformType, String platformVersion,
                                      String uuid, String avd, String systemPort, String deviceName) {
         ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
-//        File app = new File(System.getProperty("user.dir"), ConfigReader.emulatorConfig.app());
         File app = new File(System.getProperty("user.dir"), "..//../apps/YandexMarket.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", deviceName);
@@ -25,8 +24,6 @@ public class ParallelAndroidDriver implements DriverFactory {
         capabilities.setCapability("uuid", uuid);
         capabilities.setCapability("automationName", ConfigReader.emulatorConfig.automationName());
         capabilities.setCapability("app-wait-activity", ConfigReader.emulatorConfig.appWaitActivity());
-        capabilities.setCapability("chromedriverExecutable",
-                System.getProperty("user.dir") + ConfigReader.emulatorConfig.chromedriverExecutable());
         capabilities.setCapability("fullReset", ConfigReader.emulatorConfig.fullReset());
         try {
             capabilities.setCapability("app", app.getCanonicalPath());
