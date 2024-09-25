@@ -15,7 +15,8 @@ public class ParallelAndroidDriver implements DriverFactory {
     public AppiumDriver createDriver(String platformType, String platformVersion,
                                      String uuid, String avd, String systemPort, String deviceName) {
         ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
-        File app = new File(System.getProperty("user.dir"), ConfigReader.emulatorConfig.app());
+//        File app = new File(System.getProperty("user.dir"), ConfigReader.emulatorConfig.app());
+        File app = new File(System.getProperty("user.dir"), "../apps/YandexMarket.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("avd", avd);
