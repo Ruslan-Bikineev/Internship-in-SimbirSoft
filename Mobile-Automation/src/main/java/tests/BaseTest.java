@@ -14,10 +14,11 @@ public abstract class BaseTest {
     private AppiumDriver appiumDriver;
 
     @BeforeMethod
-    @Parameters(value = {"config"})
-    public void setUp(String config) {
-        appiumDriver = AppiumDriverFactory.getDriver(config);
-        appiumDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    @Parameters(value = {"config", "platformType", "platformVersion", "uuid", "avd", "systemPort", "deviceName"})
+    public void setUp(String config, String platformType, String platformVersion,
+                      String uuid, String avd, String systemPort, String deviceName) {
+        appiumDriver = AppiumDriverFactory.getDriver(config, platformType, platformVersion, uuid, avd, systemPort, deviceName);
+        appiumDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     }
 
     @AfterMethod
