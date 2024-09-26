@@ -18,7 +18,7 @@ public abstract class BaseTest {
     public void setUp(String config, String platformType, String platformVersion,
                       String uuid, String avd, String systemPort, String deviceName) {
         appiumDriver = AppiumDriverFactory.getDriver(config, platformType, platformVersion, uuid, avd, systemPort, deviceName);
-        appiumDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        appiumDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     }
 
     @AfterMethod

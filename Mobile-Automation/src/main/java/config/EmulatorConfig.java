@@ -4,15 +4,6 @@ import org.aeonbits.owner.Config;
 
 @Config.Sources("file:src/main/resources/configs/emulator.properties")
 public interface EmulatorConfig extends Config {
-    @Key("deviceName")
-    String deviceName();
-
-    @Key("platformName")
-    String platformName();
-
-    @Key("avd")
-    String avd();
-
     @Key("automationName")
     String automationName();
 

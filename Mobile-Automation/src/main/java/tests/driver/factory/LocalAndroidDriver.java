@@ -17,9 +17,10 @@ public class LocalAndroidDriver implements DriverFactory {
         AppiumDriver appiumDriver;
         File app = new File(System.getProperty("user.dir"), ConfigReader.emulatorConfig.app());
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", ConfigReader.emulatorConfig.deviceName());
-        capabilities.setCapability("platformName", ConfigReader.emulatorConfig.platformName());
-        capabilities.setCapability("avd", ConfigReader.emulatorConfig.avd());
+        capabilities.setCapability("avd", avd);
+        capabilities.setCapability("uuid", uuid);
+        capabilities.setCapability("deviceName", deviceName);
+        capabilities.setCapability("platformName", platformType);
         capabilities.setCapability("app", app.getAbsolutePath());
         capabilities.setCapability("automationName", ConfigReader.emulatorConfig.automationName());
         capabilities.setCapability("app-wait-activity", ConfigReader.emulatorConfig.appWaitActivity());
