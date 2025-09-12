@@ -9,7 +9,10 @@
 [http://localhost:8000/index.php?rest_route=/](http://localhost:8000/index.php?rest_route=/)
 
 ## Тест-кейсы для тестирования API и БД которые будут автоматизированы в данном проекте: 
-https://docs.google.com/spreadsheets/d/1EKZtW9pT6DV10WF0yfvRN0bYiQLSgoJL9jPaykVgHO4/edit?usp=sharing
+
+Находятся в файле: [data-samples/WordPress API Test Cases.xlsx](data-samples/WordPress API Test Cases.xlsx)
+
+
 ## Инструкция по развертыванию проекта
 
 1. Установить docker - [ссылка на скачивание docker для Windows](https://www.docker.com/docker-windows)
